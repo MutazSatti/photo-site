@@ -1,0 +1,261 @@
+@import 'tailwindcss';
+
+@source '../views';
+@source '../../app/Livewire';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ==========================================================================
+   خط Almarai — محمّل محليًا من public/fonts/almarai
+   ========================================================================== */
+
+@font-face {
+    font-family: 'Almarai';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('/fonts/almarai/almarai-300-arabic.woff2') format('woff2');
+    unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF,
+        U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+@font-face {
+    font-family: 'Almarai';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('/fonts/almarai/almarai-300-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+        U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Almarai';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/almarai/almarai-400-arabic.woff2') format('woff2');
+    unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF,
+        U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+@font-face {
+    font-family: 'Almarai';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/almarai/almarai-400-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+        U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Almarai';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/almarai/almarai-700-arabic.woff2') format('woff2');
+    unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF,
+        U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+@font-face {
+    font-family: 'Almarai';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/almarai/almarai-700-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+        U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Almarai';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('/fonts/almarai/almarai-800-arabic.woff2') format('woff2');
+    unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF,
+        U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+@font-face {
+    font-family: 'Almarai';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('/fonts/almarai/almarai-800-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+        U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ==========================================================================
+   نظام التصميم
+   ========================================================================== */
+
+@theme {
+    --font-sans: 'Almarai', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Almarai', ui-sans-serif, system-ui, sans-serif;
+
+    /* لون العلامة — ذهبي دافئ يليق بالتصوير الفوتوغرافي */
+    --color-brand-50: #fdf8ed;
+    --color-brand-100: #f9eccd;
+    --color-brand-200: #f3d798;
+    --color-brand-300: #ecbc5d;
+    --color-brand-400: #e6a333;
+    --color-brand-500: #d9861c;
+    --color-brand-600: #c06915;
+    --color-brand-700: #9f4d15;
+    --color-brand-800: #813e18;
+    --color-brand-900: #6b3417;
+    --color-brand-950: #3d1a09;
+
+    /* رمادي محايد دافئ */
+    --color-ink-50: #f7f7f6;
+    --color-ink-100: #e6e5e3;
+    --color-ink-200: #cdcbc7;
+    --color-ink-300: #aba8a2;
+    --color-ink-400: #88847d;
+    --color-ink-500: #6d6963;
+    --color-ink-600: #57544f;
+    --color-ink-700: #474441;
+    --color-ink-800: #302e2c;
+    --color-ink-900: #1c1b1a;
+    --color-ink-950: #111110;
+
+    --radius-card: 1rem;
+
+    --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-ink-200);
+    }
+
+    .dark *,
+    .dark ::after,
+    .dark ::before,
+    .dark ::backdrop,
+    .dark ::file-selector-button {
+        border-color: var(--color-ink-800);
+    }
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        font-feature-settings: 'kern';
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* الأرقام تبقى لاتينية داخل النص العربي لسهولة القراءة */
+    [dir='rtl'] {
+        font-variant-numeric: lining-nums;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+
+    ::selection {
+        background-color: var(--color-brand-300);
+        color: var(--color-ink-950);
+    }
+}
+
+@layer components {
+    /* شريط تقدّم التنقّل الخاص بـ wire:navigate */
+    .nav-progress {
+        background: linear-gradient(
+            90deg,
+            var(--color-brand-500),
+            var(--color-brand-300)
+        );
+    }
+
+    /* تدرّج يغطي أسفل الصور لإظهار النص فوقها */
+    .img-scrim {
+        background: linear-gradient(
+            to top,
+            rgb(17 17 16 / 0.85) 0%,
+            rgb(17 17 16 / 0.45) 35%,
+            rgb(17 17 16 / 0) 70%
+        );
+    }
+
+    /* تنسيق المحتوى الغني في المقالات */
+    .prose-ar {
+        line-height: 2;
+    }
+
+    .prose-ar h2 {
+        @apply mt-10 mb-4 text-2xl font-extrabold text-ink-900 dark:text-ink-50;
+    }
+
+    .prose-ar h3 {
+        @apply mt-8 mb-3 text-xl font-bold text-ink-900 dark:text-ink-100;
+    }
+
+    .prose-ar p {
+        @apply mb-5 text-ink-700 dark:text-ink-300;
+    }
+
+    .prose-ar ul {
+        @apply mb-5 space-y-2 ps-5 list-disc text-ink-700 dark:text-ink-300;
+    }
+
+    .prose-ar ol {
+        @apply mb-5 space-y-2 ps-5 list-decimal text-ink-700 dark:text-ink-300;
+    }
+
+    .prose-ar a {
+        @apply font-bold underline text-brand-600 dark:text-brand-400 underline-offset-4;
+    }
+
+    .prose-ar blockquote {
+        @apply py-2 my-6 italic border-s-4 ps-5 border-brand-400 text-ink-600 dark:text-ink-400;
+    }
+
+    .prose-ar img {
+        @apply my-6 w-full rounded-2xl;
+    }
+}
+
+@layer utilities {
+    /* إخفاء شريط التمرير مع بقاء التمرير فعّالًا */
+    .scrollbar-none {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .scrollbar-none::-webkit-scrollbar {
+        display: none;
+    }
+
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

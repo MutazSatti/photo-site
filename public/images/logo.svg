@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" width="240" height="64" role="img" aria-label="معتز ساتي — مصور فوتوغرافي">
+  <rect x="0" y="12" width="40" height="40" rx="10" fill="#d9861c"/>
+  <g fill="none" stroke="#111110" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(8 20) scale(1)">
+    <circle cx="12" cy="12" r="10"/>
+    <path d="m14.31 8 5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16 3.95 6.06M14.31 16H2.83m13.79-4-5.74 9.94"/>
+  </g>
+  <text x="54" y="32" font-family="Almarai, sans-serif" font-size="19" font-weight="800" fill="#1c1b1a">معتز ساتي</text>
+  <text x="54" y="48" font-family="Almarai, sans-serif" font-size="11" font-weight="400" fill="#6d6963">مصور فوتوغرافي — جدة</text>
+</svg>

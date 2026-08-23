@@ -1,0 +1,25 @@
+{
+    "name": "معتز ساتي — مصور فوتوغرافي في جدة",
+    "short_name": "معتز ساتي",
+    "description": "مصور فوتوغرافي محترف في جدة: تصوير المناسبات والفعاليات والمؤتمرات والمعارض والعقارات، وورش تدريبية في التصوير.",
+    "lang": "ar",
+    "dir": "rtl",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#111110",
+    "theme_color": "#d9861c",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        }
+    ]
+}
