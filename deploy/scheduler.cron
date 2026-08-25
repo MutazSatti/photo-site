@@ -1,0 +1,3 @@
+# مجدول Laravel — أضفه لـ www-data:
+#   sudo crontab -u www-data -e
+* * * * * cd /var/www/html/mutazsatti.com && php artisan schedule:run >> /dev/null 2>&1

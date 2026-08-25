@@ -1,0 +1,24 @@
+# /etc/systemd/system/mutazsatti-queue.service
+# عامل الطوابير — مطلوب لأن QUEUE_CONNECTION=database
+# التفعيل:
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now mutazsatti-queue
+
+[Unit]
+Description=Queue worker — mutazsatti.com
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+Restart=always
+RestartSec=5
+WorkingDirectory=/var/www/html/mutazsatti.com
+ExecStart=/usr/bin/php /var/www/html/mutazsatti.com/artisan queue:work \
+    --sleep=3 --tries=3 --max-time=3600 --timeout=90
+StandardOutput=append:/var/log/mutazsatti-queue.log
+StandardError=append:/var/log/mutazsatti-queue.log
+
+[Install]
+WantedBy=multi-user.target
