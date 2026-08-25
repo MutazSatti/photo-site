@@ -227,10 +227,16 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
         $this->validate([
             'logoOpts.logo_max_height' => ['required', 'integer', 'min:16', 'max:200'],
             'logoOpts.logo_base_color' => ['required', 'in:black,white'],
+            'logoOpts.brand_name' => ['nullable', 'string', 'max:60'],
+            'logoOpts.brand_tagline' => ['nullable', 'string', 'max:80'],
+            'logoOpts.brand_text_header' => ['required', 'in:both,name,none'],
+            'logoOpts.brand_text_footer' => ['required', 'in:both,name,none'],
         ], [
             'logoOpts.logo_max_height.required' => 'حدّد الارتفاع الأقصى.',
             'logoOpts.logo_max_height.min' => 'الارتفاع الأدنى 16 بكسل.',
             'logoOpts.logo_max_height.max' => 'الارتفاع الأقصى 200 بكسل.',
+            'logoOpts.brand_name.max' => 'الاسم طويل — 60 حرفًا كحد أقصى.',
+            'logoOpts.brand_tagline.max' => 'الوصف طويل — 80 حرفًا كحد أقصى.',
         ]);
 
         // مربّع الاختيار يعيد boolean، وبقية الحقول نصوصًا.
@@ -501,6 +507,43 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
                                 </span>
                             </span>
                         </label>
+
+                        {{-- النص بجانب الشعار --}}
+                        <div class="pt-6 mt-6 border-t border-ink-200 dark:border-ink-800">
+                            <h3 class="mb-4 text-sm font-bold text-ink-900 dark:text-ink-100">النص بجانب الشعار</h3>
+
+                            <div class="grid gap-5 sm:grid-cols-2">
+                                <x-ui.field label="الاسم" hint="اتركه فارغًا لإخفاء النص كليًا."
+                                    :error="$errors->first('logoOpts.brand_name')">
+                                    <x-ui.input wire:model="logoOpts.brand_name"
+                                        :invalid="$errors->has('logoOpts.brand_name')" />
+                                </x-ui.field>
+
+                                <x-ui.field label="الوصف تحت الاسم"
+                                    :error="$errors->first('logoOpts.brand_tagline')">
+                                    <x-ui.input wire:model="logoOpts.brand_tagline"
+                                        :invalid="$errors->has('logoOpts.brand_tagline')" />
+                                </x-ui.field>
+
+                                <x-ui.field label="ما يظهر في الترويسة">
+                                    <select wire:model="logoOpts.brand_text_header"
+                                        class="w-full px-4 py-2.5 text-sm font-bold transition-colors border rounded-xl border-ink-300 bg-white text-ink-900 focus:border-brand-500 focus:outline-none dark:border-ink-700 dark:bg-ink-900 dark:text-ink-100">
+                                        <option value="both">الاسم والوصف</option>
+                                        <option value="name">الاسم فقط</option>
+                                        <option value="none">بلا نص — الشعار وحده</option>
+                                    </select>
+                                </x-ui.field>
+
+                                <x-ui.field label="ما يظهر في التذييل">
+                                    <select wire:model="logoOpts.brand_text_footer"
+                                        class="w-full px-4 py-2.5 text-sm font-bold transition-colors border rounded-xl border-ink-300 bg-white text-ink-900 focus:border-brand-500 focus:outline-none dark:border-ink-700 dark:bg-ink-900 dark:text-ink-100">
+                                        <option value="both">الاسم والوصف</option>
+                                        <option value="name">الاسم فقط</option>
+                                        <option value="none">بلا نص — الشعار وحده</option>
+                                    </select>
+                                </x-ui.field>
+                            </div>
+                        </div>
 
                         <div class="mt-5">
                             <x-ui.button wire:click="saveLogoOptions" icon="check" wire:loading.attr="disabled">

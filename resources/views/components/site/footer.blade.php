@@ -21,7 +21,7 @@
             <div class="lg:col-span-4">
                 <div class="flex items-center gap-2.5">
                     <x-site.brand-mark :icon="20" />
-                    <span class="text-base font-extrabold text-ink-900 dark:text-ink-50">{{ config('site.owner_name') }}</span>
+                    <x-site.brand-text place="footer" />
                 </div>
 
                 <p class="mt-4 max-w-sm text-sm leading-7 text-ink-600 dark:text-ink-400">

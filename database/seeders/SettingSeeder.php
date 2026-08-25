@@ -38,6 +38,13 @@ class SettingSeeder extends Seeder
             ['key' => 'logo_adapt_dark', 'group' => 'logo', 'type' => 'boolean', 'label' => 'تكييف الشعار مع الوضع الداكن', 'sort_order' => 2, 'value' => '0'],
             ['key' => 'logo_base_color', 'group' => 'logo', 'type' => 'select', 'label' => 'لون الشعار الأصلي', 'sort_order' => 3, 'value' => 'black'],
 
+            // ---------- النص بجانب الشعار ----------
+            ['key' => 'brand_name', 'group' => 'logo', 'type' => 'text', 'label' => 'الاسم بجانب الشعار', 'sort_order' => 4, 'value' => $owner],
+            ['key' => 'brand_tagline', 'group' => 'logo', 'type' => 'text', 'label' => 'الوصف تحت الاسم', 'sort_order' => 5,
+                'value' => "مصور فوتوغرافي — {$city}"],
+            ['key' => 'brand_text_header', 'group' => 'logo', 'type' => 'select', 'label' => 'النص في الترويسة', 'sort_order' => 6, 'value' => 'both'],
+            ['key' => 'brand_text_footer', 'group' => 'logo', 'type' => 'select', 'label' => 'النص في التذييل', 'sort_order' => 7, 'value' => 'name'],
+
             // ---------- التواصل ----------
             ['key' => 'contact_phone', 'group' => 'contact', 'type' => 'text', 'label' => 'رقم الجوال', 'sort_order' => 1,
                 'value' => config('site.phone_local')],
