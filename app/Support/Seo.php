@@ -130,11 +130,38 @@ class Seo
             return $this->image;
         }
 
-        $fallback = Media::whereIn('usage', ['hero', 'owner_portrait'])
-            ->orderByRaw("CASE usage WHEN 'hero' THEN 0 ELSE 1 END")
+        // الترتيب مقصود: صورة المشاركة المرفوعة خصيصًا تسبق أي بديل،
+        // لأنها الوحيدة المؤطَّرة لتُقرأ مصغَّرة في واتساب وتويتر.
+        $fallback = Media::whereIn('usage', ['og_default', 'hero', 'owner_portrait'])
+            ->orderByRaw("CASE usage WHEN 'og_default' THEN 0 WHEN 'hero' THEN 1 ELSE 2 END")
             ->first();
 
         return $fallback?->url('lg') ?: url('/images/og-default.png');
+    }
+
+    /**
+     * أبعاد صورة المشاركة ونوعها، أو null إن كانت رابطًا خارجيًا أو ملفًا ثابتًا.
+     *
+     * واتساب وتيليجرام يعرضان مصغَّرًا صغيرًا حين تغيب أبعاد الصورة عن
+     * الوسوم، لأنهما لا ينتظران تحميلها ليقيساها بأنفسهما.
+     *
+     * @return array{width: int, height: int, type: string}|null
+     */
+    public function socialImageDimensions(): ?array
+    {
+        if ($this->image) {
+            return null; // صورة مُمرَّرة يدويًا — أبعادها غير معروفة هنا
+        }
+
+        $media = Media::whereIn('usage', ['og_default', 'hero', 'owner_portrait'])
+            ->orderByRaw("CASE usage WHEN 'og_default' THEN 0 WHEN 'hero' THEN 1 ELSE 2 END")
+            ->first();
+
+        if (! $media || ! $media->width || ! $media->height) {
+            return null;
+        }
+
+        return ['width' => $media->width, 'height' => $media->height, 'type' => 'image/webp'];
     }
 
     /**

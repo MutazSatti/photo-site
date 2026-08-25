@@ -40,8 +40,8 @@ new class extends Component
 
         seo()
             ->set(
-                title: 'التواصل والحجز',
-                description: "تواصل مع {$owner} لحجز تصوير في {$city}. الجوال والواتساب ".config('site.phone_local')." — البريد ".config('site.email').". الرد سريع عبر الواتساب.",
+                title: setting('seo_contact_title', 'التواصل والحجز'),
+                description: setting('seo_contact_description', "تواصل مع {$owner} لحجز تصوير في {$city}. الجوال والواتساب ".config('site.phone_local')." — البريد ".config('site.email').". الرد سريع عبر الواتساب."),
             )
             ->breadcrumbs([['label' => 'التواصل والحجز', 'url' => route('contact')]])
             ->addGraph(Schema::contactPage());

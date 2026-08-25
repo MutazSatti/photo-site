@@ -27,6 +27,14 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
 
     public $favicon = null;
 
+    public $ogImage = null;
+
+    /** الصفحة الجاري تحرير سيو‌ها في تبويب السيو. */
+    public string $seoPage = 'home';
+
+    /** @var array<string, string> */
+    public array $seoValues = [];
+
     /** خيارات مظهر الشعار — مجموعة logo، تُصيَّر داخل بطاقة الشعار. */
     public array $logoOpts = [];
 
@@ -42,10 +50,105 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
     {
         $this->loadValues();
         $this->loadLogoOptions();
+        $this->loadSeoValues();
     }
 
     /** المفاتيح التي يمثّلها مربّع اختيار، فتحتاج boolean لا نصًّا. */
     private const BOOL_OPTIONS = ['logo_adapt_dark'];
+
+    /** الصفحات الثابتة القابلة للتحرير، ومفاتيحها ومساراتها. */
+    public function seoPages(): array
+    {
+        return [
+            'home' => ['label' => 'الرئيسية', 'route' => 'home', 'icon' => 'home'],
+            'portfolio' => ['label' => 'المعرض', 'route' => 'portfolio', 'icon' => 'images'],
+            'about' => ['label' => 'النبذة', 'route' => 'about', 'icon' => 'user'],
+            'contact' => ['label' => 'التواصل', 'route' => 'contact', 'icon' => 'phone'],
+            'faq' => ['label' => 'الأسئلة', 'route' => 'faq', 'icon' => 'help'],
+        ];
+    }
+
+    /** مفاتيح الإعدادات لصفحة ما — الرئيسية تستخدم المفاتيح العامة. */
+    private function seoKeys(string $page): array
+    {
+        return $page === 'home'
+            ? ['title' => 'seo_title', 'description' => 'seo_description']
+            : ['title' => "seo_{$page}_title", 'description' => "seo_{$page}_description"];
+    }
+
+    private function loadSeoValues(): void
+    {
+        $keys = $this->seoKeys($this->seoPage);
+
+        $this->seoValues = [
+            'title' => (string) Setting::get($keys['title'], ''),
+            'description' => (string) Setting::get($keys['description'], ''),
+        ];
+    }
+
+    public function updatedSeoPage(): void
+    {
+        $this->loadSeoValues();
+        $this->resetErrorBag();
+    }
+
+    public function saveSeoPage(): void
+    {
+        $this->validate([
+            'seoValues.title' => ['nullable', 'string', 'max:120'],
+            'seoValues.description' => ['nullable', 'string', 'max:320'],
+        ], [
+            'seoValues.title.max' => 'العنوان طويل — 120 حرفًا كحد أقصى.',
+            'seoValues.description.max' => 'الوصف طويل — 320 حرفًا كحد أقصى.',
+        ]);
+
+        $keys = $this->seoKeys($this->seoPage);
+
+        Setting::put($keys['title'], $this->seoValues['title'] ?? '');
+        Setting::put($keys['description'], $this->seoValues['description'] ?? '');
+
+        $this->flushCaches();
+
+        $this->dispatch('notify', message: 'حُفظ سيو الصفحة.');
+    }
+
+    #[Computed]
+    public function ogImageMedia(): ?Media
+    {
+        return Media::where('usage', 'og_default')->first();
+    }
+
+    public function saveOgImage(ImageService $images): void
+    {
+        $this->validate([
+            'ogImage' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.config('site.images.max_upload_kb')],
+        ], [
+            'ogImage.required' => 'اختر صورة أولًا.',
+            'ogImage.image' => 'الملف يجب أن يكون صورة.',
+        ]);
+
+        $images->replaceForUsage(
+            file: $this->ogImage,
+            usage: 'og_default',
+            alt: config('site.owner_name').' — صورة المشاركة',
+        );
+
+        $this->reset('ogImage');
+        unset($this->ogImageMedia);
+        $this->flushCaches();
+
+        $this->dispatch('notify', message: 'حُدّثت صورة المشاركة.');
+    }
+
+    public function deleteOgImage(): void
+    {
+        Media::where('usage', 'og_default')->get()->each->delete();
+
+        unset($this->ogImageMedia);
+        $this->flushCaches();
+
+        $this->dispatch('notify', message: 'حُذفت صورة المشاركة.');
+    }
 
     private function loadLogoOptions(): void
     {
@@ -721,6 +824,114 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
 
             {{-- ================= ملفات الفهرسة ================= --}}
             @if ($tab === 'seo')
+                <x-admin.card
+                    title="سيو الصفحات"
+                    description="العنوان والوصف اللذان يظهران في نتائج البحث وعند مشاركة الرابط. المعاينة تتحدّث مع كتابتك."
+                >
+                    {{-- اختيار الصفحة --}}
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        @foreach ($this->seoPages() as $key => $meta)
+                            <button type="button" wire:click="$set('seoPage', '{{ $key }}')"
+                                @class([
+                                    'flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition-colors',
+                                    'bg-brand-500 text-ink-950' => $seoPage === $key,
+                                    'bg-ink-100 text-ink-700 hover:bg-ink-150 dark:bg-ink-800 dark:text-ink-300' => $seoPage !== $key,
+                                ])>
+                                <x-icon :name="$meta['icon']" :size="15" />
+                                {{ $meta['label'] }}
+                            </button>
+                        @endforeach
+                    </div>
+
+                    <div class="grid gap-5 mb-6">
+                        <x-ui.field label="عنوان الصفحة"
+                            hint="يظهر في تبويب المتصفح وكعنوان أزرق في نتائج البحث."
+                            :error="$errors->first('seoValues.title')">
+                            <x-ui.input wire:model.live.debounce.400ms="seoValues.title"
+                                :invalid="$errors->has('seoValues.title')" />
+                        </x-ui.field>
+
+                        <x-ui.field label="وصف الصفحة"
+                            hint="السطران تحت العنوان. اجعله جملة مكتملة تُغري بالنقر."
+                            :error="$errors->first('seoValues.description')">
+                            <x-ui.textarea wire:model.live.debounce.400ms="seoValues.description" rows="3"
+                                :invalid="$errors->has('seoValues.description')" />
+                        </x-ui.field>
+                    </div>
+
+                    {{-- المعاينات --}}
+                    <x-admin.seo-preview
+                        :title="$seoValues['title'] ?? ''"
+                        :description="$seoValues['description'] ?? ''"
+                        :url="route($this->seoPages()[$seoPage]['route'])"
+                        :image="$this->ogImageMedia?->url('md')"
+                        :siteName="setting('brand_name', config('site.owner_name'))"
+                    />
+
+                    <div class="mt-6">
+                        <x-ui.button wire:click="saveSeoPage" icon="check" wire:loading.attr="disabled">
+                            <span wire:loading.remove wire:target="saveSeoPage">حفظ سيو الصفحة</span>
+                            <span wire:loading wire:target="saveSeoPage">جارٍ الحفظ…</span>
+                        </x-ui.button>
+                    </div>
+                </x-admin.card>
+
+                {{-- ================= صورة المشاركة ================= --}}
+                <x-admin.card
+                    title="صورة المشاركة"
+                    description="تظهر حين يُشارَك رابط الموقع في واتساب أو فيسبوك أو تويتر. المقاس المثالي 1200×630 بنسبة 1.91:1."
+                >
+                    <div class="flex flex-wrap items-start gap-6">
+                        <div class="w-64 overflow-hidden border rounded-xl border-ink-200 dark:border-ink-800">
+                            @if ($this->ogImageMedia)
+                                <img src="{{ $this->ogImageMedia->url('md') }}" alt="صورة المشاركة"
+                                    class="object-cover w-full aspect-[1.91/1]">
+                            @else
+                                <div class="flex flex-col items-center justify-center gap-2 w-full aspect-[1.91/1] bg-ink-100 dark:bg-ink-800">
+                                    <x-icon name="image" :size="26" class="text-ink-400" />
+                                    <span class="text-[11px] text-ink-500">تُستخدم صورة الواجهة حاليًا</span>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="grow basis-64">
+                            <label class="flex flex-col items-center justify-center px-6 py-8 transition-colors border border-dashed cursor-pointer rounded-2xl border-ink-300 hover:border-brand-400 dark:border-ink-700">
+                                <input type="file" wire:model="ogImage" accept="image/*" class="sr-only">
+                                <span class="mb-2 text-ink-500 dark:text-ink-400"><x-icon name="upload" :size="22" /></span>
+                                <span class="text-sm font-bold text-ink-800 dark:text-ink-200">اختر صورة</span>
+                                <span class="mt-1 text-xs text-ink-500 dark:text-ink-400">1200×630 بكسل</span>
+                            </label>
+
+                            @error('ogImage')
+                                <p class="mt-2 text-sm font-bold text-red-600 dark:text-red-400">{{ $message }}</p>
+                            @enderror
+
+                            <div wire:loading wire:target="ogImage" class="mt-2 text-sm text-ink-500">جارٍ الرفع…</div>
+
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                @if ($ogImage)
+                                    <x-ui.button wire:click="saveOgImage" icon="check" wire:loading.attr="disabled">
+                                        <span wire:loading.remove wire:target="saveOgImage">حوّل واحفظ</span>
+                                        <span wire:loading wire:target="saveOgImage">جارٍ التحويل…</span>
+                                    </x-ui.button>
+                                @endif
+
+                                @if ($this->ogImageMedia)
+                                    <x-ui.button wire:click="deleteOgImage" wire:confirm="حذف صورة المشاركة؟"
+                                        variant="ghost" icon="trash" class="text-red-600 dark:text-red-400">
+                                        حذف
+                                    </x-ui.button>
+                                @endif
+                            </div>
+
+                            <p class="mt-4 text-xs leading-6 text-ink-500 dark:text-ink-400">
+                                واتساب وفيسبوك يحتفظان بالصورة في ذاكرتهما لأيام. بعد التغيير قد يظل
+                                القديم يظهر عند مشاركة الرابط نفسه — جرّب رابطًا بمعامل مختلف للتأكّد.
+                            </p>
+                        </div>
+                    </div>
+                </x-admin.card>
+
                 <x-admin.card
                     title="ملفات الزواحف"
                     description="تُولَّد تلقائيًا من محتوى الموقع. افتحها للتأكّد من صحتها بعد أي تعديل كبير."

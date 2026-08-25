@@ -31,6 +31,28 @@ class SettingSeeder extends Seeder
             ['key' => 'stat_clients', 'group' => 'general', 'type' => 'number', 'label' => 'عدد العملاء', 'sort_order' => 5, 'value' => '180'],
             ['key' => 'stat_workshops', 'group' => 'general', 'type' => 'number', 'label' => 'عدد الورش', 'sort_order' => 6, 'value' => '35'],
 
+            // ---------- سيو الصفحات الداخلية ----------
+            // مجموعة منفصلة: تُصيَّر في محرّر مخصّص بمعاينات، لا كحقول عادية.
+            ['key' => 'seo_portfolio_title', 'group' => 'seo_pages', 'type' => 'text', 'label' => 'المعرض — العنوان', 'sort_order' => 1,
+                'value' => 'معرض الأعمال'],
+            ['key' => 'seo_portfolio_description', 'group' => 'seo_pages', 'type' => 'textarea', 'label' => 'المعرض — الوصف', 'sort_order' => 2,
+                'value' => "معرض أعمال التصوير الفوتوغرافي في {$city}: تغطيات المناسبات والفعاليات والمؤتمرات والمعارض والتصوير العقاري، إضافة إلى الورش التدريبية والمقالات."],
+
+            ['key' => 'seo_about_title', 'group' => 'seo_pages', 'type' => 'text', 'label' => 'النبذة — العنوان', 'sort_order' => 3,
+                'value' => "نبذة عن {$owner}"],
+            ['key' => 'seo_about_description', 'group' => 'seo_pages', 'type' => 'textarea', 'label' => 'النبذة — الوصف', 'sort_order' => 4,
+                'value' => "تعرّف على {$owner}، مصور فوتوغرافي محترف في {$city} بخبرة في تصوير المناسبات والفعاليات والمؤتمرات والمعارض والعقارات، ومدرّب في ورش التصوير الفوتوغرافي."],
+
+            ['key' => 'seo_contact_title', 'group' => 'seo_pages', 'type' => 'text', 'label' => 'التواصل — العنوان', 'sort_order' => 5,
+                'value' => 'التواصل والحجز'],
+            ['key' => 'seo_contact_description', 'group' => 'seo_pages', 'type' => 'textarea', 'label' => 'التواصل — الوصف', 'sort_order' => 6,
+                'value' => "تواصل مع {$owner} لحجز تصوير في {$city}. الرد سريع عبر الواتساب."],
+
+            ['key' => 'seo_faq_title', 'group' => 'seo_pages', 'type' => 'text', 'label' => 'الأسئلة — العنوان', 'sort_order' => 7,
+                'value' => 'الأسئلة الشائعة'],
+            ['key' => 'seo_faq_description', 'group' => 'seo_pages', 'type' => 'textarea', 'label' => 'الأسئلة — الوصف', 'sort_order' => 8,
+                'value' => "إجابات مباشرة عن أكثر ما يُسأل عنه قبل حجز مصور في {$city}: الأسعار، مدة التسليم، أنواع التصوير، نطاق التغطية، وطريقة الحجز مع {$owner}."],
+
             // ---------- الشعار ----------
             // مجموعة منفصلة لا تظهر في تبويبات الإعدادات، لأن هذه الخيارات
             // تُصيَّر يدويًا داخل بطاقة الشعار بجوار المعاينة.
@@ -72,12 +94,15 @@ class SettingSeeder extends Seeder
                 'value' => config('site.social.snapchat.url')],
 
             // ---------- السيو ----------
-            ['key' => 'seo_title', 'group' => 'seo', 'type' => 'text', 'label' => 'عنوان الموقع', 'sort_order' => 1,
+            ['key' => 'seo_title', 'group' => 'seo', 'type' => 'text', 'label' => 'عنوان الصفحة الرئيسية', 'sort_order' => 1,
+                'hint' => 'يظهر في تبويب المتصفح وفي نتائج البحث. الأمثل 50-60 حرفًا.',
                 'value' => "{$owner} | مصور فوتوغرافي محترف في {$city}"],
-            ['key' => 'seo_description', 'group' => 'seo', 'type' => 'textarea', 'label' => 'وصف الموقع', 'sort_order' => 2,
-                'value' => "{$owner} مصور فوتوغرافي محترف في {$city}، متخصص في تصوير المناسبات والفعاليات والمؤتمرات والمعارض والعقارات، ويقدّم ورشًا تدريبية في التصوير. للحجز: ".config('site.phone_local')],
+            ['key' => 'seo_description', 'group' => 'seo', 'type' => 'textarea', 'label' => 'وصف الصفحة الرئيسية', 'sort_order' => 2,
+                'hint' => 'السطران تحت العنوان في نتائج البحث. الأمثل 120-155 حرفًا.',
+                'value' => "{$owner} مصور فوتوغرافي محترف في {$city}، متخصص في تصوير المناسبات والفعاليات والمؤتمرات والمعارض والعقارات، ويقدّم ورشًا تدريبية في التصوير."],
             ['key' => 'seo_keywords', 'group' => 'seo', 'type' => 'textarea', 'label' => 'الكلمات المفتاحية', 'sort_order' => 3,
-                'value' => "مصور {$city}، مصور فوتوغرافي، تصوير مناسبات، تصوير فعاليات، مصور فعاليات، تصوير مؤتمرات، تصوير معارض، تصوير عقارات، ورش تصوير، مصور محترف السعودية، {$owner}"],
+                'hint' => 'مفصولة بفواصل. أثرها محدود اليوم لكنها لا تضر.',
+                'value' => "مصور فوتوغرافي {$city}, تصوير مناسبات, تصوير فعاليات, تصوير عقاري, ورش تصوير"],
         ];
 
         foreach ($settings as $data) {

@@ -14,8 +14,8 @@ new class extends Component
 
         seo()
             ->set(
-                title: 'الأسئلة الشائعة',
-                description: "إجابات مباشرة عن أكثر ما يُسأل عنه قبل حجز مصور في {$city}: الأسعار، مدة التسليم، أنواع التصوير، نطاق التغطية، وطريقة الحجز مع {$owner}.",
+                title: setting('seo_faq_title', 'الأسئلة الشائعة'),
+                description: setting('seo_faq_description', "إجابات مباشرة عن أكثر ما يُسأل عنه قبل حجز مصور في {$city}: الأسعار، مدة التسليم، أنواع التصوير، نطاق التغطية، وطريقة الحجز مع {$owner}."),
             )
             ->breadcrumbs([['label' => 'الأسئلة الشائعة', 'url' => route('faq')]])
             ->addGraph(

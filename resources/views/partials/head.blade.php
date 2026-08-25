@@ -32,12 +32,19 @@
 <meta property="og:url" content="{{ $seo->canonicalUrl() }}">
 <meta property="og:image" content="{{ $seo->socialImage() }}">
 <meta property="og:image:alt" content="{{ $seo->title ?: $ownerName }}">
+@if ($ogSize = $seo->socialImageDimensions())
+    {{-- واتساب وتيليجرام يعرضان مصغَّرًا صغيرًا بلا هذه الأبعاد --}}
+    <meta property="og:image:width" content="{{ $ogSize['width'] }}">
+    <meta property="og:image:height" content="{{ $ogSize['height'] }}">
+    <meta property="og:image:type" content="{{ $ogSize['type'] }}">
+@endif
 
 {{-- Twitter / X --}}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ $seo->fullTitle() }}">
 <meta name="twitter:description" content="{{ $seo->metaDescription() }}">
 <meta name="twitter:image" content="{{ $seo->socialImage() }}">
+<meta name="twitter:image:alt" content="{{ $seo->title ?: $ownerName }}">
 
 {{-- أيقونة الموقع: المرفوعة من لوحة التحكم إن وُجدت، وإلا الملفات الثابتة --}}
 @if ($favicon = \App\Models\Media::favicon())

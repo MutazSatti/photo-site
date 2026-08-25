@@ -28,8 +28,8 @@ new class extends Component
 
         seo()
             ->set(
-                title: 'معرض الأعمال',
-                description: "معرض أعمال التصوير الفوتوغرافي في {$city}: تغطيات المناسبات والفعاليات والمؤتمرات والمعارض والتصوير العقاري، إضافة إلى الورش التدريبية والمقالات.",
+                title: setting('seo_portfolio_title', 'معرض الأعمال'),
+                description: setting('seo_portfolio_description', "معرض أعمال التصوير الفوتوغرافي في {$city}: تغطيات المناسبات والفعاليات والمؤتمرات والمعارض والتصوير العقاري، إضافة إلى الورش التدريبية والمقالات."),
             )
             ->breadcrumbs([['label' => 'المعرض', 'url' => route('portfolio')]])
             ->addGraph([
