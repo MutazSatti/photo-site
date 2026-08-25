@@ -85,6 +85,44 @@ class Media extends Model
         return self::$faviconMemo;
     }
 
+    /**
+     * هل في الصورة شفافية فعلية؟ يُفحص بأخذ عيّنة من الزوايا الأربع.
+     *
+     * الشعار ذو الخلفية الصلبة يبدو سليمًا على خلفية بلونها، ويظهر
+     * مربّعًا على غيرها — ويتحوّل إلى مربّع صلب إن فُعّل قلب الألوان.
+     * يُستعمل هذا في لوحة التحكم للتحذير قبل وقوع المفاجأة.
+     */
+    public function hasTransparency(): bool
+    {
+        $path = Storage::disk($this->disk)->path($this->path);
+
+        if (! is_file($path) || ! function_exists('imagecreatefromwebp')) {
+            return true; // لا نحذّر بلا يقين
+        }
+
+        $image = @imagecreatefromwebp($path);
+
+        if (! $image) {
+            return true;
+        }
+
+        $w = imagesx($image);
+        $h = imagesy($image);
+        $corners = [[1, 1], [$w - 2, 1], [1, $h - 2], [$w - 2, $h - 2]];
+
+        foreach ($corners as [$x, $y]) {
+            if (((imagecolorat($image, $x, $y) >> 24) & 0x7F) > 100) {
+                imagedestroy($image);
+
+                return true;
+            }
+        }
+
+        imagedestroy($image);
+
+        return false;
+    }
+
     /** يُستدعى بعد كل تغيير على الشعار أو الأيقونة. */
     public static function forgetLogo(): void
     {

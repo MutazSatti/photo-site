@@ -499,6 +499,20 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
                             </x-ui.field>
                         </div>
 
+                        @if ($this->logoMedia && ! $this->logoMedia->hasTransparency())
+                            <div class="flex items-start gap-3 p-4 mt-5 border rounded-xl border-amber-300 bg-amber-50 dark:border-amber-800/60 dark:bg-amber-950/30">
+                                <span class="mt-0.5 shrink-0 text-amber-600 dark:text-amber-400"><x-icon name="alert" :size="18" /></span>
+                                <div>
+                                    <p class="text-sm font-bold text-amber-900 dark:text-amber-200">شعارك بخلفية صلبة لا شفافة</p>
+                                    <p class="mt-1 text-xs leading-6 text-amber-800 dark:text-amber-300">
+                                        سيظهر مربّعًا على أي خلفية تخالف لون خلفيته، ويتحوّل إلى مربّع صلب
+                                        إن فعّلت التكييف مع الوضع الداكن أدناه. ارفع نسخة بصيغة PNG أو SVG
+                                        بخلفية شفافة ليظهر الشعار وحده.
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
+
                         <label class="flex items-start gap-3 p-4 mt-5 cursor-pointer rounded-xl bg-ink-50 dark:bg-ink-900">
                             <input type="checkbox" wire:model="logoOpts.logo_adapt_dark" value="1"
                                 class="mt-0.5 size-4 rounded border-ink-300 text-brand-500 focus:ring-brand-500 dark:border-ink-600">
