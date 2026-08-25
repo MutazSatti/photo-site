@@ -44,11 +44,17 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
         $this->loadLogoOptions();
     }
 
+    /** المفاتيح التي يمثّلها مربّع اختيار، فتحتاج boolean لا نصًّا. */
+    private const BOOL_OPTIONS = ['logo_adapt_dark'];
+
     private function loadLogoOptions(): void
     {
         $this->logoOpts = Setting::query()
             ->where('group', 'logo')
             ->pluck('value', 'key')
+            ->map(fn ($value, $key) => in_array($key, self::BOOL_OPTIONS, true)
+                ? $value === '1'
+                : (string) $value)
             ->all();
     }
 
@@ -514,7 +520,7 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
                         @endif
 
                         <label class="flex items-start gap-3 p-4 mt-5 cursor-pointer rounded-xl bg-ink-50 dark:bg-ink-900">
-                            <input type="checkbox" wire:model="logoOpts.logo_adapt_dark" value="1"
+                            <input type="checkbox" wire:model="logoOpts.logo_adapt_dark"
                                 class="mt-0.5 size-4 rounded border-ink-300 text-brand-500 focus:ring-brand-500 dark:border-ink-600">
                             <span>
                                 <span class="block text-sm font-bold text-ink-900 dark:text-ink-100">تكييف الشعار مع الوضع الداكن</span>
