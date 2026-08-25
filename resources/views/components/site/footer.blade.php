@@ -20,9 +20,7 @@
             {{-- التعريف --}}
             <div class="lg:col-span-4">
                 <div class="flex items-center gap-2.5">
-                    <span class="flex items-center justify-center rounded-xl size-9 bg-brand-500 text-ink-950">
-                        <x-icon name="aperture" :size="20" :stroke="2" />
-                    </span>
+                    <x-site.brand-mark :size="36" :icon="20" />
                     <span class="text-base font-extrabold text-ink-900 dark:text-ink-50">{{ config('site.owner_name') }}</span>
                 </div>
 

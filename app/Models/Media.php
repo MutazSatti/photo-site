@@ -45,6 +45,35 @@ class Media extends Model
     }
 
     /** @return BelongsTo<Post, $this> */
+    /** الشعار محمَّل لهذا الطلب — يُطلب في الترويسة والتذييل معًا. */
+    private static ?self $logoMemo = null;
+
+    private static bool $logoLoaded = false;
+
+    /**
+     * شعار الموقع، أو null إن لم يُرفع شعار فتُعرض الأيقونة الافتراضية.
+     *
+     * محفوظ داخل الطلب فقط: تخزين كائن Eloquent في الكاش المشترك يتطلب
+     * تسلسله، وفكّه قبل تحميل الصنف يعطي __PHP_Incomplete_Class.
+     * والاستعلام نفسه سطر واحد على فهرس usage.
+     */
+    public static function logo(): ?self
+    {
+        if (! self::$logoLoaded) {
+            self::$logoMemo = static::where('usage', 'logo')->first();
+            self::$logoLoaded = true;
+        }
+
+        return self::$logoMemo;
+    }
+
+    /** يُستدعى بعد كل تغيير على الشعار. */
+    public static function forgetLogo(): void
+    {
+        self::$logoMemo = null;
+        self::$logoLoaded = false;
+    }
+
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);

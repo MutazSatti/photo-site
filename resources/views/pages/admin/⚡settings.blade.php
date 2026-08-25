@@ -23,6 +23,8 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
 
     public $hero = null;
 
+    public $logo = null;
+
     public array $tabs = [
         'home' => ['label' => 'الصفحة الرئيسية', 'icon' => 'home'],
         'general' => ['label' => 'نبذة وأرقام', 'icon' => 'user'],
@@ -68,6 +70,12 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
     public function heroMedia(): ?Media
     {
         return Media::where('usage', 'hero')->first();
+    }
+
+    #[Computed]
+    public function logoMedia(): ?Media
+    {
+        return Media::where('usage', 'logo')->first();
     }
 
     public function save(): void
@@ -162,8 +170,41 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
         $this->dispatch('notify', message: 'حُذفت الصورة الشخصية.');
     }
 
+    public function saveLogo(ImageService $images): void
+    {
+        $this->validate([
+            'logo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:'.config('site.images.max_upload_kb')],
+        ], [
+            'logo.required' => 'اختر صورة أولًا.',
+            'logo.image' => 'الملف يجب أن يكون صورة.',
+        ]);
+
+        $images->replaceForUsage(
+            file: $this->logo,
+            usage: 'logo',
+            alt: config('site.owner_name').' — شعار الموقع',
+        );
+
+        $this->reset('logo');
+        unset($this->logoMedia);
+        $this->flushCaches();
+
+        $this->dispatch('notify', message: 'حُدّث الشعار.');
+    }
+
+    public function deleteLogo(): void
+    {
+        Media::where('usage', 'logo')->get()->each->delete();
+
+        unset($this->logoMedia);
+        $this->flushCaches();
+
+        $this->dispatch('notify', message: 'حُذف الشعار — عادت الأيقونة الافتراضية.');
+    }
+
     private function flushCaches(): void
     {
+        Media::forgetLogo();
         cache()->forget('sync.payload');
         cache()->forget('sync.manifest');
         cache()->forget('feed.llms');
@@ -301,6 +342,58 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
                     @enderror
 
                     <div wire:loading wire:target="hero" class="mt-3 text-sm text-ink-500">جارٍ الرفع…</div>
+                </x-admin.card>
+            @endif
+
+            {{-- ================= شعار الموقع ================= --}}
+            @if ($tab === 'general')
+                <x-admin.card
+                    title="شعار الموقع"
+                    description="يظهر في ترويسة كل صفحة وفي التذييل. يُفضّل صورة مربّعة بخلفية شفافة (PNG أو SVG). عند حذفه تعود أيقونة العدسة الافتراضية."
+                >
+                    <div class="flex flex-wrap items-start gap-6">
+                        <div class="flex items-center justify-center border size-40 rounded-2xl border-ink-200 bg-ink-50 dark:border-ink-800 dark:bg-ink-900">
+                            @if ($this->logoMedia)
+                                <img src="{{ $this->logoMedia->url('thumb') }}" alt="{{ $this->logoMedia->altText() }}"
+                                    class="object-contain size-28">
+                            @else
+                                <span class="flex items-center justify-center size-16 rounded-2xl bg-brand-500 text-ink-950">
+                                    <x-icon name="aperture" :size="32" :stroke="2" />
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="grow basis-64">
+                            <label class="flex flex-col items-center justify-center px-6 py-8 transition-colors border border-dashed cursor-pointer rounded-2xl border-ink-300 hover:border-brand-400 dark:border-ink-700">
+                                <input type="file" wire:model="logo" accept="image/*" class="sr-only">
+                                <span class="mb-2 text-ink-500 dark:text-ink-400"><x-icon name="upload" :size="22" /></span>
+                                <span class="text-sm font-bold text-ink-800 dark:text-ink-200">اختر شعارًا</span>
+                                <span class="mt-1 text-xs text-ink-500 dark:text-ink-400">مربّع، بخلفية شفافة</span>
+                            </label>
+
+                            @error('logo')
+                                <p class="mt-2 text-sm font-bold text-red-600 dark:text-red-400">{{ $message }}</p>
+                            @enderror
+
+                            <div wire:loading wire:target="logo" class="mt-2 text-sm text-ink-500">جارٍ الرفع…</div>
+
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                @if ($logo)
+                                    <x-ui.button wire:click="saveLogo" icon="check" wire:loading.attr="disabled">
+                                        <span wire:loading.remove wire:target="saveLogo">حوّل واحفظ</span>
+                                        <span wire:loading wire:target="saveLogo">جارٍ التحويل…</span>
+                                    </x-ui.button>
+                                @endif
+
+                                @if ($this->logoMedia)
+                                    <x-ui.button wire:click="deleteLogo" wire:confirm="حذف الشعار والعودة للأيقونة الافتراضية؟"
+                                        variant="ghost" icon="trash" class="text-red-600 dark:text-red-400">
+                                        حذف الشعار
+                                    </x-ui.button>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </x-admin.card>
             @endif
 
