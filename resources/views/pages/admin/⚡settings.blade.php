@@ -25,6 +25,11 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
 
     public $logo = null;
 
+    public $favicon = null;
+
+    /** خيارات مظهر الشعار — مجموعة logo، تُصيَّر داخل بطاقة الشعار. */
+    public array $logoOpts = [];
+
     public array $tabs = [
         'home' => ['label' => 'الصفحة الرئيسية', 'icon' => 'home'],
         'general' => ['label' => 'نبذة وأرقام', 'icon' => 'user'],
@@ -36,6 +41,15 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
     public function mount(): void
     {
         $this->loadValues();
+        $this->loadLogoOptions();
+    }
+
+    private function loadLogoOptions(): void
+    {
+        $this->logoOpts = Setting::query()
+            ->where('group', 'logo')
+            ->pluck('value', 'key')
+            ->all();
     }
 
     private function loadValues(): void
@@ -76,6 +90,12 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
     public function logoMedia(): ?Media
     {
         return Media::where('usage', 'logo')->first();
+    }
+
+    #[Computed]
+    public function faviconMedia(): ?Media
+    {
+        return Media::where('usage', 'favicon')->first();
     }
 
     public function save(): void
@@ -200,6 +220,60 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
         $this->flushCaches();
 
         $this->dispatch('notify', message: 'حُذف الشعار — عادت الأيقونة الافتراضية.');
+    }
+
+    public function saveLogoOptions(): void
+    {
+        $this->validate([
+            'logoOpts.logo_max_height' => ['required', 'integer', 'min:16', 'max:200'],
+            'logoOpts.logo_base_color' => ['required', 'in:black,white'],
+        ], [
+            'logoOpts.logo_max_height.required' => 'حدّد الارتفاع الأقصى.',
+            'logoOpts.logo_max_height.min' => 'الارتفاع الأدنى 16 بكسل.',
+            'logoOpts.logo_max_height.max' => 'الارتفاع الأقصى 200 بكسل.',
+        ]);
+
+        // مربّع الاختيار يعيد boolean، وبقية الحقول نصوصًا.
+        // التخزين موحَّد كنص ليقرأه Setting::get بلا تحويل.
+        foreach ($this->logoOpts as $key => $value) {
+            Setting::put($key, is_bool($value) ? ($value ? '1' : '0') : (string) $value);
+        }
+
+        $this->flushCaches();
+
+        $this->dispatch('notify', message: 'حُفظت خيارات الشعار.');
+    }
+
+    public function saveFavicon(ImageService $images): void
+    {
+        $this->validate([
+            'favicon' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.config('site.images.max_upload_kb')],
+        ], [
+            'favicon.required' => 'اختر صورة أولًا.',
+            'favicon.image' => 'الملف يجب أن يكون صورة.',
+        ]);
+
+        $images->replaceForUsage(
+            file: $this->favicon,
+            usage: 'favicon',
+            alt: config('site.owner_name').' — أيقونة الموقع',
+        );
+
+        $this->reset('favicon');
+        unset($this->faviconMedia);
+        $this->flushCaches();
+
+        $this->dispatch('notify', message: 'حُدّثت أيقونة الموقع.');
+    }
+
+    public function deleteFavicon(): void
+    {
+        Media::where('usage', 'favicon')->get()->each->delete();
+
+        unset($this->faviconMedia);
+        $this->flushCaches();
+
+        $this->dispatch('notify', message: 'حُذفت الأيقونة — عادت الأيقونة الافتراضية.');
     }
 
     private function flushCaches(): void
@@ -392,6 +466,107 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
                                     </x-ui.button>
                                 @endif
                             </div>
+                        </div>
+                    </div>
+
+                    {{-- خيارات المظهر --}}
+                    <div class="pt-6 mt-6 border-t border-ink-200 dark:border-ink-800">
+                        <h3 class="mb-4 text-sm font-bold text-ink-900 dark:text-ink-100">مظهر الشعار</h3>
+
+                        <div class="grid gap-5 sm:grid-cols-2">
+                            <x-ui.field label="أقصى ارتفاع (بكسل)"
+                                hint="يُعرض الشعار بنسبته الطبيعية مقيَّدًا بهذا الارتفاع."
+                                :error="$errors->first('logoOpts.logo_max_height')">
+                                <x-ui.input wire:model="logoOpts.logo_max_height" type="number" min="16" max="200" dir="ltr"
+                                    :invalid="$errors->has('logoOpts.logo_max_height')" />
+                            </x-ui.field>
+
+                            <x-ui.field label="لون الشعار الأصلي"
+                                hint="يُستخدم لمعرفة متى يحتاج الشعار قلبًا ليظهر على الخلفية.">
+                                <select wire:model="logoOpts.logo_base_color"
+                                    class="w-full px-4 py-2.5 text-sm font-bold transition-colors border rounded-xl border-ink-300 bg-white text-ink-900 focus:border-brand-500 focus:outline-none dark:border-ink-700 dark:bg-ink-900 dark:text-ink-100">
+                                    <option value="black">داكن — يظهر على خلفية فاتحة</option>
+                                    <option value="white">فاتح — يظهر على خلفية داكنة</option>
+                                </select>
+                            </x-ui.field>
+                        </div>
+
+                        <label class="flex items-start gap-3 p-4 mt-5 cursor-pointer rounded-xl bg-ink-50 dark:bg-ink-900">
+                            <input type="checkbox" wire:model="logoOpts.logo_adapt_dark" value="1"
+                                class="mt-0.5 size-4 rounded border-ink-300 text-brand-500 focus:ring-brand-500 dark:border-ink-600">
+                            <span>
+                                <span class="block text-sm font-bold text-ink-900 dark:text-ink-100">تكييف الشعار مع الوضع الداكن</span>
+                                <span class="block mt-1 text-xs text-ink-500 dark:text-ink-400">
+                                    يُقلب الشعار إلى أبيض أو أسود خالص حسب الوضع. مناسب للشعارات أحادية اللون — الملوّنة تفقد ألوانها.
+                                </span>
+                            </span>
+                        </label>
+
+                        <div class="mt-5">
+                            <x-ui.button wire:click="saveLogoOptions" icon="check" wire:loading.attr="disabled">
+                                <span wire:loading.remove wire:target="saveLogoOptions">حفظ خيارات المظهر</span>
+                                <span wire:loading wire:target="saveLogoOptions">جارٍ الحفظ…</span>
+                            </x-ui.button>
+                        </div>
+                    </div>
+                </x-admin.card>
+            @endif
+
+            {{-- ================= أيقونة الموقع ================= --}}
+            @if ($tab === 'general')
+                <x-admin.card
+                    title="أيقونة الموقع"
+                    description="تظهر في تبويب المتصفح وفي المفضّلة وعند إضافة الموقع لشاشة الجوال. يُفضّل صورة مربّعة بسيطة تبقى واضحة بحجم صغير جدًا."
+                >
+                    <div class="flex flex-wrap items-start gap-6">
+                        <div class="flex flex-col items-center gap-3">
+                            <div class="flex items-center justify-center border size-24 rounded-2xl border-ink-200 bg-ink-50 dark:border-ink-800 dark:bg-ink-900">
+                                @if ($this->faviconMedia)
+                                    <img src="{{ $this->faviconMedia->url('thumb') }}" alt="أيقونة الموقع" class="object-contain size-16">
+                                @else
+                                    <img src="/favicon.svg" alt="الأيقونة الافتراضية" class="object-contain size-16">
+                                @endif
+                            </div>
+                            {{-- معاينة بالحجم الحقيقي في التبويب --}}
+                            <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-ink-100 dark:bg-ink-800">
+                                <img src="{{ $this->faviconMedia?->url('thumb') ?? '/favicon.svg' }}" alt="" class="object-contain size-4">
+                                <span class="text-[11px] text-ink-600 dark:text-ink-400">بحجم التبويب</span>
+                            </div>
+                        </div>
+
+                        <div class="grow basis-64">
+                            <label class="flex flex-col items-center justify-center px-6 py-8 transition-colors border border-dashed cursor-pointer rounded-2xl border-ink-300 hover:border-brand-400 dark:border-ink-700">
+                                <input type="file" wire:model="favicon" accept="image/*" class="sr-only">
+                                <span class="mb-2 text-ink-500 dark:text-ink-400"><x-icon name="upload" :size="22" /></span>
+                                <span class="text-sm font-bold text-ink-800 dark:text-ink-200">اختر أيقونة</span>
+                                <span class="mt-1 text-xs text-ink-500 dark:text-ink-400">مربّعة، 512×512 أو أكبر</span>
+                            </label>
+
+                            @error('favicon')
+                                <p class="mt-2 text-sm font-bold text-red-600 dark:text-red-400">{{ $message }}</p>
+                            @enderror
+
+                            <div wire:loading wire:target="favicon" class="mt-2 text-sm text-ink-500">جارٍ الرفع…</div>
+
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                @if ($favicon)
+                                    <x-ui.button wire:click="saveFavicon" icon="check" wire:loading.attr="disabled">
+                                        <span wire:loading.remove wire:target="saveFavicon">حوّل واحفظ</span>
+                                        <span wire:loading wire:target="saveFavicon">جارٍ التحويل…</span>
+                                    </x-ui.button>
+                                @endif
+
+                                @if ($this->faviconMedia)
+                                    <x-ui.button wire:click="deleteFavicon" wire:confirm="حذف الأيقونة والعودة للافتراضية؟"
+                                        variant="ghost" icon="trash" class="text-red-600 dark:text-red-400">
+                                        حذف الأيقونة
+                                    </x-ui.button>
+                                @endif
+                            </div>
+
+                            <p class="mt-4 text-xs text-ink-500 dark:text-ink-400">
+                                قد يحتفظ المتصفح بالأيقونة القديمة في ذاكرته — أعد التحميل بـ Ctrl+Shift+R لرؤية الجديدة.
+                            </p>
                         </div>
                     </div>
                 </x-admin.card>

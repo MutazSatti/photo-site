@@ -31,6 +31,13 @@ class SettingSeeder extends Seeder
             ['key' => 'stat_clients', 'group' => 'general', 'type' => 'number', 'label' => 'عدد العملاء', 'sort_order' => 5, 'value' => '180'],
             ['key' => 'stat_workshops', 'group' => 'general', 'type' => 'number', 'label' => 'عدد الورش', 'sort_order' => 6, 'value' => '35'],
 
+            // ---------- الشعار ----------
+            // مجموعة منفصلة لا تظهر في تبويبات الإعدادات، لأن هذه الخيارات
+            // تُصيَّر يدويًا داخل بطاقة الشعار بجوار المعاينة.
+            ['key' => 'logo_max_height', 'group' => 'logo', 'type' => 'number', 'label' => 'أقصى ارتفاع للشعار (بكسل)', 'sort_order' => 1, 'value' => '40'],
+            ['key' => 'logo_adapt_dark', 'group' => 'logo', 'type' => 'boolean', 'label' => 'تكييف الشعار مع الوضع الداكن', 'sort_order' => 2, 'value' => '0'],
+            ['key' => 'logo_base_color', 'group' => 'logo', 'type' => 'select', 'label' => 'لون الشعار الأصلي', 'sort_order' => 3, 'value' => 'black'],
+
             // ---------- التواصل ----------
             ['key' => 'contact_phone', 'group' => 'contact', 'type' => 'text', 'label' => 'رقم الجوال', 'sort_order' => 1,
                 'value' => config('site.phone_local')],

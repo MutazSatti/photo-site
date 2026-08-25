@@ -67,11 +67,31 @@ class Media extends Model
         return self::$logoMemo;
     }
 
-    /** يُستدعى بعد كل تغيير على الشعار. */
+    /** الأيقونة محمَّلة لهذا الطلب. */
+    private static ?self $faviconMemo = null;
+
+    private static bool $faviconLoaded = false;
+
+    /**
+     * أيقونة الموقع المرفوعة، أو null فتُستخدم الملفات الثابتة في public.
+     */
+    public static function favicon(): ?self
+    {
+        if (! self::$faviconLoaded) {
+            self::$faviconMemo = static::where('usage', 'favicon')->first();
+            self::$faviconLoaded = true;
+        }
+
+        return self::$faviconMemo;
+    }
+
+    /** يُستدعى بعد كل تغيير على الشعار أو الأيقونة. */
     public static function forgetLogo(): void
     {
         self::$logoMemo = null;
         self::$logoLoaded = false;
+        self::$faviconMemo = null;
+        self::$faviconLoaded = false;
     }
 
     public function post(): BelongsTo

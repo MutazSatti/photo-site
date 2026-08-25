@@ -39,8 +39,15 @@
 <meta name="twitter:description" content="{{ $seo->metaDescription() }}">
 <meta name="twitter:image" content="{{ $seo->socialImage() }}">
 
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+{{-- أيقونة الموقع: المرفوعة من لوحة التحكم إن وُجدت، وإلا الملفات الثابتة --}}
+@if ($favicon = \App\Models\Media::favicon())
+    <link rel="icon" href="{{ $favicon->url('thumb') }}" type="image/webp">
+    <link rel="apple-touch-icon" href="{{ $favicon->url('thumb') }}">
+@else
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+@endif
 <link rel="manifest" href="/site.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="{{ $ownerName }} — أحدث الأعمال" href="{{ route('feed') }}">
 

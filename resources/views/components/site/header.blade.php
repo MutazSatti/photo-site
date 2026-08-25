@@ -33,7 +33,7 @@
                 class="flex items-center gap-2.5 shrink-0 group"
                 aria-label="{{ config('site.owner_name') }} — الصفحة الرئيسية"
             >
-                <x-site.brand-mark :size="36" :icon="20" />
+                <x-site.brand-mark :icon="20" />
                 <span class="flex flex-col leading-none">
                     <span class="text-base font-extrabold text-ink-900 dark:text-ink-50">{{ config('site.owner_name') }}</span>
                     <span class="text-[11px] font-normal text-ink-500 dark:text-ink-400">مصور فوتوغرافي — {{ config('site.location.city') }}</span>

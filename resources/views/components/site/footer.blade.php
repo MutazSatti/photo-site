@@ -20,7 +20,7 @@
             {{-- التعريف --}}
             <div class="lg:col-span-4">
                 <div class="flex items-center gap-2.5">
-                    <x-site.brand-mark :size="36" :icon="20" />
+                    <x-site.brand-mark :icon="20" />
                     <span class="text-base font-extrabold text-ink-900 dark:text-ink-50">{{ config('site.owner_name') }}</span>
                 </div>
 
