@@ -57,5 +57,8 @@
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+{{-- تجاوز لون العلامة — بعد @vite ليعلو على تدرّج app.css --}}
+@include('partials.brand-color')
+
 {{-- البيانات المهيكلة — ما تقرأه محرّكات البحث ومساعدات الذكاء الاصطناعي --}}
 <script type="application/ld+json">{!! $seo->jsonLd() !!}</script>

@@ -231,12 +231,14 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
             'logoOpts.brand_tagline' => ['nullable', 'string', 'max:80'],
             'logoOpts.brand_text_header' => ['required', 'in:both,name,none'],
             'logoOpts.brand_text_footer' => ['required', 'in:both,name,none'],
+            'logoOpts.brand_color' => ['nullable', 'regex:/^#[0-9a-fA-F]{6}$/'],
         ], [
             'logoOpts.logo_max_height.required' => 'حدّد الارتفاع الأقصى.',
             'logoOpts.logo_max_height.min' => 'الارتفاع الأدنى 16 بكسل.',
             'logoOpts.logo_max_height.max' => 'الارتفاع الأقصى 200 بكسل.',
             'logoOpts.brand_name.max' => 'الاسم طويل — 60 حرفًا كحد أقصى.',
             'logoOpts.brand_tagline.max' => 'الوصف طويل — 80 حرفًا كحد أقصى.',
+            'logoOpts.brand_color.regex' => 'اللون بصيغة ست خانات مثل #d9861c.',
         ]);
 
         // مربّع الاختيار يعيد boolean، وبقية الحقول نصوصًا.
@@ -542,6 +544,43 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
                                         <option value="none">بلا نص — الشعار وحده</option>
                                     </select>
                                 </x-ui.field>
+                            </div>
+                        </div>
+
+                        {{-- اللون الرئيسي --}}
+                        <div class="pt-6 mt-6 border-t border-ink-200 dark:border-ink-800">
+                            <h3 class="mb-1 text-sm font-bold text-ink-900 dark:text-ink-100">اللون الرئيسي</h3>
+                            <p class="mb-4 text-xs text-ink-500 dark:text-ink-400">
+                                يسري على الأزرار والروابط والأرقام والشارات في الموقع كله.
+                                تُشتق منه بقية الدرجات تلقائيًا. اتركه فارغًا للعودة إلى الذهبي الأصلي.
+                            </p>
+
+                            <div class="flex flex-wrap items-end gap-4">
+                                <input type="color" wire:model.live="logoOpts.brand_color"
+                                    class="border rounded-xl size-14 cursor-pointer border-ink-300 bg-transparent dark:border-ink-700"
+                                    aria-label="منتقي اللون">
+
+                                <x-ui.field label="القيمة" hint="بصيغة ست خانات مثل #d9861c"
+                                    :error="$errors->first('logoOpts.brand_color')">
+                                    <x-ui.input wire:model.live="logoOpts.brand_color" dir="ltr" placeholder="#d9861c"
+                                        class="w-36" :invalid="$errors->has('logoOpts.brand_color')" />
+                                </x-ui.field>
+
+                                @if (trim((string) ($logoOpts['brand_color'] ?? '')) !== '')
+                                    <x-ui.button wire:click="$set('logoOpts.brand_color', '')"
+                                        variant="ghost" icon="trash" class="text-ink-600 dark:text-ink-400">
+                                        إعادة الأصلي
+                                    </x-ui.button>
+                                @endif
+                            </div>
+
+                            {{-- معاينة التدرّج المشتق --}}
+                            @php $preview = trim((string) ($logoOpts['brand_color'] ?? '')) ?: '#d9861c'; @endphp
+                            <div class="flex mt-4 overflow-hidden rounded-xl" style="--b:{{ preg_match('/^#[0-9a-fA-F]{6}$/', $preview) ? $preview : '#d9861c' }}">
+                                @foreach ([['white',95],['white',88],['white',72],['white',50],['white',25],[null,0],['black',15],['black',32],['black',48],['black',60],['black',78]] as [$mix, $pct])
+                                    <span class="h-9 grow"
+                                        style="background:{{ $mix ? "color-mix(in oklab, var(--b), {$mix} {$pct}%)" : 'var(--b)' }}"></span>
+                                @endforeach
                             </div>
                         </div>
 

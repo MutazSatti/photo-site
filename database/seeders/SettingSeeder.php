@@ -45,6 +45,11 @@ class SettingSeeder extends Seeder
             ['key' => 'brand_text_header', 'group' => 'logo', 'type' => 'select', 'label' => 'النص في الترويسة', 'sort_order' => 6, 'value' => 'both'],
             ['key' => 'brand_text_footer', 'group' => 'logo', 'type' => 'select', 'label' => 'النص في التذييل', 'sort_order' => 7, 'value' => 'name'],
 
+            // ---------- اللون الرئيسي ----------
+            // فارغ = التدرّج الذهبي الأصلي المصمَّم يدويًا في app.css.
+            // أي قيمة hex هنا تُولّد تدرّجًا كاملًا يتجاوزه.
+            ['key' => 'brand_color', 'group' => 'logo', 'type' => 'color', 'label' => 'اللون الرئيسي', 'sort_order' => 8, 'value' => ''],
+
             // ---------- التواصل ----------
             ['key' => 'contact_phone', 'group' => 'contact', 'type' => 'text', 'label' => 'رقم الجوال', 'sort_order' => 1,
                 'value' => config('site.phone_local')],
