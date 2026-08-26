@@ -364,7 +364,13 @@ class Schema
                 'creator' => ['@id' => self::personId()],
                 'copyrightHolder' => ['@id' => self::personId()],
                 'creditText' => config('site.owner_name'),
+
+                // حقلا الترخيص اللذان تطلبهما Google لبطاقات الصور:
+                // license يصف الشروط، وacquireLicensePage يدلّ على المكان
+                // الذي يُطلب منه الترخيص فعلًا — وغيابه يُبلَّغ عنه في
+                // Search Console تحت "البيانات الوصفية للصور".
                 'license' => url('/'),
+                'acquireLicensePage' => route('contact'),
             ]))->all(),
         ];
     }
