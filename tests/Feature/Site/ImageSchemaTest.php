@@ -69,6 +69,25 @@ class ImageSchemaTest extends TestCase
         }
     }
 
+    /**
+     * الصفحة الرئيسية تمرّر صورة الواجهة، وهي أكثر صفحة تُشارَك.
+     * كان تمرير الرابط وحده يُسقط الأبعاد فيعرض واتساب مصغَّرًا صغيرًا.
+     */
+    public function test_the_home_page_publishes_its_social_image_dimensions(): void
+    {
+        Media::create([
+            'usage' => 'hero', 'disk' => 'public', 'path' => 'media/test/hero.webp',
+            'variants' => ['lg' => 'media/test/hero-lg.webp'], 'width' => 1600, 'height' => 900,
+        ]);
+
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $this->assertStringContainsString('og:image:width', $html);
+        $this->assertStringContainsString('og:image:height', $html);
+        $this->assertStringContainsString('content="1600"', $html);
+        $this->assertStringContainsString('content="900"', $html);
+    }
+
     public function test_the_rendered_page_includes_the_license_page_url(): void
     {
         $post = $this->postWithImage();

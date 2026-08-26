@@ -20,6 +20,14 @@ class Seo
 
     public ?string $image = null;
 
+    /**
+     * سجلّ الوسائط الذي جاءت منه صورة المشاركة، إن مُرِّر.
+     *
+     * تمرير الرابط وحده يُفقد الأبعاد، وبلا og:image:width/height يعرض
+     * واتساب وتيليجرام مصغَّرًا صغيرًا بدل بطاقة بصورة عريضة.
+     */
+    public ?Media $imageMedia = null;
+
     public ?string $canonical = null;
 
     public string $type = 'website';
@@ -47,10 +55,12 @@ class Seo
         ?string $canonical = null,
         ?string $type = null,
         ?string $robots = null,
+        ?Media $imageMedia = null,
     ): static {
         $this->title = $title ?? $this->title;
         $this->description = $description ?? $this->description;
-        $this->image = $image ?? $this->image;
+        $this->imageMedia = $imageMedia ?? $this->imageMedia;
+        $this->image = $image ?? $this->imageMedia?->url('lg') ?? $this->image;
         $this->canonical = $canonical ?? $this->canonical;
         $this->type = $type ?? $this->type;
         $this->robots = $robots ?? $this->robots;
@@ -149,13 +159,16 @@ class Seo
      */
     public function socialImageDimensions(): ?array
     {
-        if ($this->image) {
-            return null; // صورة مُمرَّرة يدويًا — أبعادها غير معروفة هنا
-        }
+        // الوسائط الممرَّرة من الصفحة أولًا، ثم الاحتياطي العام.
+        // لا نستسلم لمجرّد وجود $this->image: الصفحة الرئيسية تمرّر رابط
+        // صورة الواجهة، وهي أكثر صفحة تُشارَك.
+        $media = $this->imageMedia;
 
-        $media = Media::whereIn('usage', ['og_default', 'hero', 'owner_portrait'])
-            ->orderByRaw("CASE usage WHEN 'og_default' THEN 0 WHEN 'hero' THEN 1 ELSE 2 END")
-            ->first();
+        if (! $media && ! $this->image) {
+            $media = Media::whereIn('usage', ['og_default', 'hero', 'owner_portrait'])
+                ->orderByRaw("CASE usage WHEN 'og_default' THEN 0 WHEN 'hero' THEN 1 ELSE 2 END")
+                ->first();
+        }
 
         if (! $media || ! $media->width || ! $media->height) {
             return null;

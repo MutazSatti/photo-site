@@ -31,6 +31,7 @@
 <meta property="og:description" content="{{ $seo->metaDescription() }}">
 <meta property="og:url" content="{{ $seo->canonicalUrl() }}">
 <meta property="og:image" content="{{ $seo->socialImage() }}">
+<meta property="og:image:secure_url" content="{{ $seo->socialImage() }}">
 <meta property="og:image:alt" content="{{ $seo->title ?: $ownerName }}">
 @if ($ogSize = $seo->socialImageDimensions())
     {{-- واتساب وتيليجرام يعرضان مصغَّرًا صغيرًا بلا هذه الأبعاد --}}

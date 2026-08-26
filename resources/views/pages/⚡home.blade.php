@@ -21,7 +21,7 @@ new class extends Component
             ->set(
                 title: setting('seo_title', "{$owner} | مصور فوتوغرافي محترف في {$city}"),
                 description: setting('seo_description'),
-                image: $this->heroImage?->url('lg'),
+                imageMedia: $this->heroImage,
                 type: 'website',
             )
             ->addGraph(

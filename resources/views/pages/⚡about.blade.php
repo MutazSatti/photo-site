@@ -17,7 +17,7 @@ new class extends Component
             ->set(
                 title: setting('seo_about_title', "نبذة عن {$owner}"),
                 description: setting('seo_about_description', "تعرّف على {$owner}، مصور فوتوغرافي محترف في {$city} بخبرة في تصوير المناسبات والفعاليات والمؤتمرات والمعارض والعقارات، ومدرّب في ورش التصوير الفوتوغرافي."),
-                image: $this->portrait?->url('lg'),
+                imageMedia: $this->portrait,
                 type: 'profile',
             )
             ->breadcrumbs([['label' => 'نبذة', 'url' => route('about')]])
