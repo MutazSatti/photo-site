@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Client;
 use App\Models\Faq;
 use App\Models\Media;
 use App\Models\Post;
@@ -118,6 +119,14 @@ class SyncController extends Controller
                     'sort_order' => $f->sort_order,
                 ])->all(),
 
+                'clients' => Client::query()->active()->ordered()->with('logo')->get()->map(fn (Client $c) => [
+                    'id' => $c->id,
+                    'name' => $c->name,
+                    'name_en' => $c->name_en,
+                    'url' => $c->url,
+                    'logo' => $this->mediaMeta($c->logo),
+                ])->all(),
+
                 'testimonials' => Testimonial::query()->active()->ordered()->get()->map(fn (Testimonial $t) => [
                     'id' => $t->id,
                     'name' => $t->name,
@@ -143,7 +152,7 @@ class SyncController extends Controller
     private function buildManifest(): array
     {
         return Cache::remember('sync.manifest', now()->addMinutes(2), function () {
-            $tables = ['sections', 'categories', 'posts', 'media', 'settings', 'faqs', 'testimonials'];
+            $tables = ['sections', 'categories', 'posts', 'media', 'settings', 'faqs', 'testimonials', 'clients'];
             $parts = [];
             $counts = [];
 

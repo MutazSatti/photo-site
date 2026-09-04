@@ -12,8 +12,8 @@ new class extends Component
     public Post $post;
 
     /**
-     * يخدم مسارين: /{section}/{post} للأقسام بلا أقسام فرعية،
-     * و /{section}/{category}/{post} للأعمال داخل خدمات التصوير.
+     * يخدم مسارين: /{section}/{post} للعناصر المباشرة تحت قسمها الرئيسي،
+     * و /{section}/{category}/{post} للعناصر داخل قسم فرعي.
      *
      * Livewire يربط كل معامل بنموذجه عبر الـ slug. التحقّق هنا يمنع الوصول
      * إلى عنصر عبر رابط لا يطابق قسمه الحقيقي أو إلى مسوّدة غير منشورة.
@@ -54,9 +54,15 @@ new class extends Component
         $isPublished = $post->status === 'published'
             && ($post->published_at === null || $post->published_at->isPast());
 
+        // المطابقة في الاتجاهين: عنصرٌ داخل قسم فرعي لا يُفتح عبر الرابط
+        // القصير، وإلا لصار للعنصر الواحد رابطان مختلفان بالمحتوى نفسه
+        $matchesCategory = $category === null
+            ? $post->category_id === null
+            : $post->category_id === $category->id;
+
         return $isPublished
             && $post->section_id === $section->id
-            && ($category === null || $post->category_id === $category->id);
+            && $matchesCategory;
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\HomeBlock;
 use App\Models\Media;
 use App\Models\Setting;
 use App\Services\ImageService;
@@ -68,6 +69,58 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
     public function heroMedia(): ?Media
     {
         return Media::where('usage', 'hero')->first();
+    }
+
+    #[Computed]
+    public function homeBlocks()
+    {
+        return HomeBlock::query()->ordered()->get();
+    }
+
+    /**
+     * ينقل عنصرًا خطوة، ثم يعيد ترقيم الجميع من الصفر.
+     *
+     * العنصر المثبّت لا يتحرّك ولا يُتخطّى: الواجهة يجب أن تبقى أوّل ما يراه
+     * الزائر، وإتاحة نقلها تحت عناصر أخرى تُنتج صفحة بلا مدخل.
+     */
+    public function moveBlock(int $id, string $direction): void
+    {
+        $blocks = HomeBlock::query()->ordered()->get()->values();
+        $from = $blocks->search(fn (HomeBlock $b) => $b->id === $id);
+
+        if ($from === false || $blocks[$from]->is_locked) {
+            return;
+        }
+
+        $to = $direction === 'up' ? $from - 1 : $from + 1;
+
+        if ($to < 0 || $to >= $blocks->count() || $blocks[$to]->is_locked) {
+            return;
+        }
+
+        $reordered = $blocks->all();
+        [$reordered[$from], $reordered[$to]] = [$reordered[$to], $reordered[$from]];
+
+        foreach ($reordered as $position => $block) {
+            if ($block->sort_order !== $position) {
+                $block->update(['sort_order' => $position]);
+            }
+        }
+
+        unset($this->homeBlocks);
+    }
+
+    public function toggleBlock(int $id): void
+    {
+        $block = HomeBlock::findOrFail($id);
+
+        if ($block->is_locked) {
+            return;
+        }
+
+        $block->update(['is_active' => ! $block->is_active]);
+
+        unset($this->homeBlocks);
     }
 
     public function save(): void
@@ -249,6 +302,56 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
                     @endif
                 </form>
             </x-admin.card>
+
+            {{-- ================= ترتيب عناصر الصفحة ================= --}}
+            @if ($tab === 'home')
+                <x-admin.card
+                    title="ترتيب عناصر الصفحة"
+                    description="رتّب ما يظهر في الصفحة الرئيسية وأخفِ ما لا تحتاجه. العنصر المخفي لا يُستعلم عنه أصلًا، فإخفاؤه يسرّع الصفحة."
+                >
+                    <ul class="divide-y divide-ink-200 dark:divide-ink-800">
+                        @foreach ($this->homeBlocks as $block)
+                            <li class="flex items-center gap-3 py-3">
+                                <div class="flex flex-col -my-1">
+                                    <button type="button" wire:click="moveBlock({{ $block->id }}, 'up')"
+                                        @disabled($loop->first || $block->is_locked)
+                                        class="p-0.5 text-ink-400 transition-colors hover:text-ink-700 disabled:opacity-25 dark:hover:text-ink-200"
+                                        aria-label="نقل {{ $block->label }} لأعلى">
+                                        <x-icon name="chevron-up" :size="15" />
+                                    </button>
+
+                                    <button type="button" wire:click="moveBlock({{ $block->id }}, 'down')"
+                                        @disabled($loop->last || $block->is_locked)
+                                        class="p-0.5 text-ink-400 transition-colors hover:text-ink-700 disabled:opacity-25 dark:hover:text-ink-200"
+                                        aria-label="نقل {{ $block->label }} لأسفل">
+                                        <x-icon name="chevron-down" :size="15" />
+                                    </button>
+                                </div>
+
+                                <div class="min-w-0 grow">
+                                    <p class="text-sm font-extrabold text-ink-900 dark:text-ink-100">
+                                        {{ $block->label }}
+                                        @if ($block->is_locked)
+                                            <span class="ms-1 text-[11px] font-bold text-ink-400">مثبّت في الأعلى</span>
+                                        @endif
+                                    </p>
+                                    @if ($block->hint)
+                                        <p class="mt-0.5 text-xs text-ink-500 dark:text-ink-400">{{ $block->hint }}</p>
+                                    @endif
+                                </div>
+
+                                <button type="button" wire:click="toggleBlock({{ $block->id }})"
+                                    @disabled($block->is_locked)
+                                    class="rounded-lg px-2.5 py-1 text-xs font-bold transition-colors disabled:opacity-40 {{ $block->is_active
+                                        ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400'
+                                        : 'bg-ink-100 text-ink-500 dark:bg-ink-800' }}">
+                                    {{ $block->is_active ? 'ظاهر' : 'مخفي' }}
+                                </button>
+                            </li>
+                        @endforeach
+                    </ul>
+                </x-admin.card>
+            @endif
 
             {{-- ================= صورة الواجهة ================= --}}
             @if ($tab === 'home')

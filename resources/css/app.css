@@ -173,6 +173,56 @@
 }
 
 @layer components {
+    /*
+       لون القسم: العنصر يحمل --sec و --sec-dark في سمة style، وهذه القاعدة
+       تختار المناسب للوضع الحالي وتضعه في --sec-now. كل ما يلوّن القسم يقرأ
+       --sec-now وحده، فلا تتكرّر معالجة الوضع الداكن في كل موضع استخدام.
+    */
+    .sec-theme {
+        --sec-now: var(--sec);
+    }
+
+    .dark .sec-theme {
+        --sec-now: var(--sec-dark);
+    }
+}
+
+/*
+   أدوات لون القسم مُعرَّفة بـ @utility لا داخل @layer components، لأن هذه
+   وحدها ما يقبل تعديلات مثل hover: و group-hover: في Tailwind 4.
+*/
+
+@utility sec-text {
+    color: var(--sec-now, var(--color-brand-600));
+}
+
+@utility sec-bg-soft {
+    background-color: color-mix(in oklab, var(--sec-now, var(--color-brand-600)) 10%, transparent);
+}
+
+@utility sec-border {
+    border-color: color-mix(in oklab, var(--sec-now, var(--color-brand-600)) 40%, transparent);
+}
+
+@utility sec-bg-solid {
+    background-color: var(--sec-now, var(--color-brand-600));
+}
+
+/* شريط علوي رفيع يميّز بطاقة القسم بلونه */
+@utility sec-stripe {
+    &::before {
+        content: '';
+        position: absolute;
+        inset-inline: 0;
+        top: 0;
+        height: 3px;
+        background-color: var(--sec-now, var(--color-brand-600));
+    }
+}
+
+@layer components {
+
+
     /* شريط تقدّم التنقّل الخاص بـ wire:navigate */
     .nav-progress {
         background: linear-gradient(
@@ -180,6 +230,34 @@
             var(--color-brand-500),
             var(--color-brand-300)
         );
+    }
+
+    /*
+       شعارات الجهات: التناسق هنا لوني قبل أن يكون تخطيطيًا.
+
+       الشعارات تأتي بألوان علاماتها التجارية، وصفّها كما هي يعطي جدارًا مبقّعًا
+       يشدّ العين بعيدًا عن المحتوى. فتُعرض رماديةً هادئة، ويكشف المرور بالمؤشّر
+       ألوان الشعار الواحد كاملةً.
+
+       والمعالجة واحدة في الوضعين، لأن بطاقة الشعار تبقى فاتحة في الوضع الداكن
+       أيضًا. جُرّب بديلها — مرشّح يقلب الشعار في الوضع الداكن — فسقط على شعارات
+       حقيقية: تسطيحه إلى صورة ظلّية يمحو الكتابة داخل الشعارات المبنيّة على
+       مساحة مصمتة فتخرج كتلًا بيضاء، وقلب الإضاءة وحده يترك الشعارات متوسّطة
+       الإضاءة رماديةً باهتة على خلفية داكنة. ولا مرشّح واحد يصلح لأربعين شعارًا
+       مختلف التصميم، بينما السطح الفاتح يصلح لها كلها: كل شعار مصمَّم أصلًا
+       ليُقرأ على أبيض.
+    */
+    .logo-mark {
+        filter: grayscale(1);
+        opacity: 0.7;
+        transition:
+            filter 0.3s var(--ease-smooth),
+            opacity 0.3s var(--ease-smooth);
+    }
+
+    .group:hover .logo-mark {
+        filter: none;
+        opacity: 1;
     }
 
     /* تدرّج يغطي أسفل الصور لإظهار النص فوقها */

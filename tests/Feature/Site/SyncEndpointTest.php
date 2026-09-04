@@ -43,6 +43,7 @@ class SyncEndpointTest extends TestCase
                 'settings',
                 'faqs' => [['id', 'question', 'answer']],
                 'testimonials',
+                'clients',
             ]);
     }
 

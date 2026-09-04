@@ -157,6 +157,31 @@ class ImageConversionTest extends TestCase
         $this->assertSame(0, Media::where('post_id', $post->id)->count());
     }
 
+    /**
+     * الواصف يجب أن يقول عرض الملف الحقيقي.
+     *
+     * التصغير لا يكبّر، فصورة أصغر من المقاس المستهدف تنتج ملفًا بعرضها هي.
+     * إعلانها بالمقاس المستهدف يخدع المتصفح فيختارها لمساحة أوسع مما تحتمل.
+     */
+    public function test_the_srcset_reports_real_widths_not_target_sizes(): void
+    {
+        $media = app(ImageService::class)->store(
+            file: $this->jpeg(width: 1200, height: 800),
+            post: Post::firstOrFail(),
+        );
+
+        $srcset = $media->srcset();
+
+        $this->assertStringContainsString('400w', $srcset);
+        $this->assertStringContainsString('1200w', $srcset);
+        $this->assertStringNotContainsString('1600w', $srcset, 'لا يجوز إعلان عرض أكبر من الأصل.');
+        $this->assertStringNotContainsString('2400w', $srcset);
+
+        // الملف الواحد لا يتكرّر حين يتطابق فيه مقاسان
+        $urls = array_map(fn (string $e) => explode(' ', trim($e))[0], explode(',', $srcset));
+        $this->assertSame(count($urls), count(array_unique($urls)));
+    }
+
     public function test_making_an_image_the_cover_clears_the_previous_one(): void
     {
         $post = Post::firstOrFail();
