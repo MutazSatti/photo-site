@@ -37,3 +37,29 @@ if (! function_exists('whatsapp_url')) {
         return 'https://wa.me/'.$number.'?text='.rawurlencode($message);
     }
 }
+
+if (! function_exists('accreditations')) {
+    /**
+     * الاعتمادات الرسمية بأوصافها جاهزةً للعرض.
+     *
+     * ‎:owner‎ يُستبدل هنا لا في الملف، فيبقى اسم المالك في مصدر واحد
+     * (config/site.php أو متغيّر البيئة) ولا يُكتب ثلاث مرات في الأوصاف.
+     *
+     * @return array<int, array<string, string>>
+     */
+    function accreditations(): array
+    {
+        $owner = config('site.owner_name');
+
+        /** @var array<int, array<string, string>> $items */
+        $items = config('site.accreditations', []);
+
+        return array_map(function (array $a) use ($owner): array {
+            if (isset($a['description'])) {
+                $a['description'] = str_replace(':owner', (string) $owner, $a['description']);
+            }
+
+            return $a;
+        }, $items);
+    }
+}

@@ -140,24 +140,18 @@ class Post extends Model
     }
 
     /**
-     * الأعمال داخل خدمات التصوير تعيش تحت قسمها الفرعي، وبقية المحتوى
-     * يعيش مباشرة تحت قسمه الرئيسي. الفرق يظهر في الرابط لأنه يوضّح البنية
-     * لمحرّكات البحث ولمن يقرأ الرابط.
+     * العنصر المنتمي إلى قسم فرعي يعيش تحته، وما عداه يعيش مباشرة تحت قسمه
+     * الرئيسي. الفرق يظهر في الرابط لأنه يوضّح البنية لمحرّكات البحث ولمن
+     * يقرأ الرابط. لكل عنصر رابط واحد فقط، لا رابطان.
      */
     public function url(): string
     {
         $sectionSlug = $this->section->slug ?? Section::ARTICLES;
+        $categorySlug = $this->category->slug ?? null;
 
-        if ($sectionSlug === Section::SERVICES) {
-            $categorySlug = $this->category->slug ?? null;
-
-            // عمل بلا قسم فرعي لا يملك رابطًا هرميًا صالحًا — يُعرض ضمن المعرض
-            return $categorySlug
-                ? route('work.show', ['section' => $sectionSlug, 'category' => $categorySlug, 'post' => $this->slug])
-                : route('portfolio');
-        }
-
-        return route('post.show', ['section' => $sectionSlug, 'post' => $this->slug]);
+        return $categorySlug
+            ? route('work.show', ['section' => $sectionSlug, 'category' => $categorySlug, 'post' => $this->slug])
+            : route('post.show', ['section' => $sectionSlug, 'post' => $this->slug]);
     }
 
     public function metaTitle(): string

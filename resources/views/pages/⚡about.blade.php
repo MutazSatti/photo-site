@@ -43,6 +43,31 @@ new class extends Component
     {
         return Section::query()->active()->ordered()->withCount(['posts' => fn ($q) => $q->published()])->get();
     }
+
+    /**
+     * شعارات الجهات المانحة، مفهرسة بمفتاح الاعتماد.
+     *
+     * @return array<string, Media>
+     */
+    #[Computed]
+    public function accreditationLogos(): array
+    {
+        return Media::query()
+            ->whereIn('usage', ['accr_etec', 'accr_gaca', 'accr_gamr'])
+            ->get()
+            ->keyBy(fn (Media $m) => (string) $m->usage)
+            ->all();
+    }
+
+    /**
+     * الاعتمادات كما في config/site.php — المرجع نفسه الذي تنشره البيانات المهيكلة.
+     *
+     * @return array<int, array<string, string>>
+     */
+    public function accreditations(): array
+    {
+        return accreditations();
+    }
 }; ?>
 
 <div>
@@ -64,6 +89,54 @@ new class extends Component
                             <p>{{ trim($paragraph) }}</p>
                         @endif
                     @endforeach
+                </div>
+
+                {{--
+                    الاعتمادات: شعار الجهة يقول ما لا يقوله الاسم وحده.
+
+                    بطاقة الشعار تبقى بيضاء في الوضعين، لأن هذه الشعارات مصمَّمة
+                    لتُقرأ على أبيض، وقلبها في الوضع الداكن يمحو تدرّجاتها. وهي
+                    تُعرض بألوانها كاملة لا رمادية كشعارات العملاء: الختم الرسمي
+                    يُثبت شيئًا، وتحييد لونه يُضعف ما جاء ليقوله.
+                --}}
+                <div class="mt-10">
+                    <h2 class="text-xl font-extrabold text-ink-900 dark:text-ink-50">اعتمادات وتراخيص</h2>
+                    <p class="mt-2 text-sm leading-7 text-ink-500 dark:text-ink-400">
+                        تراخيص سارية من الجهات المنظِّمة، بأرقامها القابلة للتحقّق.
+                    </p>
+
+                    <ul class="mt-5 space-y-3">
+                        @foreach ($this->accreditations() as $item)
+                            <li class="p-4 border rounded-2xl border-ink-200 dark:border-ink-800">
+                                <div class="flex items-center gap-4">
+                                    <span class="flex items-center justify-center p-2 bg-white border shrink-0 w-28 h-16 rounded-xl border-ink-200 dark:border-ink-300">
+                                        <x-site.picture
+                                            :media="$this->accreditationLogos[$item['key']] ?? null"
+                                            variant="md"
+                                            fit="contain"
+                                            sizes="112px"
+                                            class="size-full"
+                                        />
+                                    </span>
+
+                                    <div class="min-w-0">
+                                        <h3 class="text-sm font-extrabold text-ink-900 dark:text-ink-100">{{ $item['title'] }}</h3>
+                                        <p class="mt-0.5 text-xs text-ink-600 dark:text-ink-400">{{ $item['authority'] }}</p>
+                                        <p class="mt-1 text-xs font-bold text-ink-500 dark:text-ink-500">
+                                            {{ $item['label'] }}:
+                                            <span dir="ltr" class="font-mono text-ink-800 dark:text-ink-200">{{ $item['number'] }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                @if (! empty($item['description']))
+                                    <p class="pt-3 mt-3 text-xs leading-7 border-t text-ink-600 border-ink-100 dark:border-ink-800 dark:text-ink-400">
+                                        {{ $item['description'] }}
+                                    </p>
+                                @endif
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
 
                 {{-- ما أقدّمه --}}

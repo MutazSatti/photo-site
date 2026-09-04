@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\FeedController;
+use App\Http\Controllers\GoogleOAuthController;
 use App\Http\Controllers\SyncController;
-use App\Models\Section;
+use App\Support\SectionRoutes;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,32 +46,47 @@ Route::get('/robots.txt', [FeedController::class, 'robots'])->name('robots');
 | بنية الروابط هرمية ومقروءة:
 |   /services                            قسم رئيسي
 |   /services/events                     قسم فرعي
-|   /services/events/{slug}              عمل مصوّر
-|   /articles/{slug}                     مقال (قسم بلا أقسام فرعية)
+|   /services/events/{slug}              عنصر داخل قسم فرعي
+|   /articles/{slug}                     عنصر مباشر تحت قسمه الرئيسي
 |
-| القيود على معامل section هي ما يمنع التباس المسارين ذوي المقطعين:
-| قسم "خدمات التصوير" وحده يملك أقسامًا فرعية، وبقية الأقسام تحمل عناصر مباشرة.
+| القيود مبنيّة من قاعدة البيانات لا من قائمة ثابتة، فأي قسم يُضاف من لوحة
+| التحكم يعمل رابطه فورًا، وأي قسم يملك أقسامًا فرعية أو عناصر مباشرة أو
+| الاثنين معًا يعمل كما هو متوقّع.
+|
+| المساران ذوا المقطعين يتمايزان بأن أسماء الأقسام الفرعية معروفة مسبقًا:
+| ما يطابقها فهو قسم فرعي، وما عداه فهو عنصر. لذا يُسجَّل مسار القسم الفرعي
+| أولًا.
 |
 */
 
-$sectionsWithCategories = Section::SERVICES;
-$sectionsWithoutCategories = implode('|', [Section::WORKSHOPS, Section::ARTICLES, Section::TIPS]);
-$allSections = $sectionsWithCategories.'|'.$sectionsWithoutCategories;
+$patterns = SectionRoutes::patterns();
+
+/*
+ * صفحة خدمة بتصميم خاص تسبق النمط العام.
+ *
+ * التصوير العقاري يصله ثلاثة عملاء بأسئلة مختلفة، فصفحته صفحة مبيعات لا قائمة
+ * أعمال. الرابط هو نفسه الذي يولّده Category::url()، والأسبقية في المطابقة
+ * لترتيب التسجيل لا للاسم.
+ */
+Route::livewire('/services/real-estate', 'pages::services.real-estate')
+    ->name('services.real-estate');
 
 Route::livewire('/{section}', 'pages::section')
-    ->where('section', $allSections)
+    ->where('section', $patterns['sections'])
     ->name('section.show');
 
 Route::livewire('/{section}/{category}', 'pages::category')
-    ->where('section', $sectionsWithCategories)
+    ->where('section', $patterns['sections'])
+    ->where('category', $patterns['categories'])
     ->name('category.show');
 
 Route::livewire('/{section}/{post}', 'pages::post')
-    ->where('section', $sectionsWithoutCategories)
+    ->where('section', $patterns['sections'])
     ->name('post.show');
 
 Route::livewire('/{section}/{category}/{post}', 'pages::post')
-    ->where('section', $sectionsWithCategories)
+    ->where('section', $patterns['sections'])
+    ->where('category', $patterns['categories'])
     ->name('work.show');
 
 /*
@@ -89,7 +105,14 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::livewire('/sections', 'pages::admin.sections')->name('sections');
     Route::livewire('/faqs', 'pages::admin.faqs')->name('faqs');
     Route::livewire('/testimonials', 'pages::admin.testimonials')->name('testimonials');
+    Route::livewire('/clients', 'pages::admin.clients')->name('clients');
     Route::livewire('/messages', 'pages::admin.messages')->name('messages');
+    Route::livewire('/google', 'pages::admin.google')->name('google');
+
+    // موافقة Google تتم على شاشة Google؛ هذان المساران يبدآنها ويستقبلان ردّها
+    Route::get('/google/connect', [GoogleOAuthController::class, 'redirect'])->name('google.connect');
+    Route::get('/google/callback', [GoogleOAuthController::class, 'callback'])->name('google.callback');
+
     Route::livewire('/settings', 'pages::admin.settings')->name('settings');
 });
 

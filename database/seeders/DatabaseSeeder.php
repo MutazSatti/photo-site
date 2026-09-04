@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SectionSeeder::class,
             SettingSeeder::class,
+            HomeBlockSeeder::class,
             FaqSeeder::class,
             TestimonialSeeder::class,
             PostSeeder::class,

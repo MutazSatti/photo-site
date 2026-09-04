@@ -20,15 +20,13 @@
             {{-- التعريف --}}
             <div class="lg:col-span-4">
                 <div class="flex items-center gap-2.5">
-                    <span class="flex items-center justify-center rounded-xl size-9 bg-brand-500 text-ink-950">
-                        <x-icon name="aperture" :size="20" :stroke="2" />
-                    </span>
+                    <img src="/images/logo.png" alt="" width="36" height="36" class="size-9 shrink-0" aria-hidden="true">
                     <span class="text-base font-extrabold text-ink-900 dark:text-ink-50">{{ config('site.owner_name') }}</span>
                 </div>
 
                 <p class="mt-4 max-w-sm text-sm leading-7 text-ink-600 dark:text-ink-400">
                     مصور فوتوغرافي محترف في {{ config('site.location.city') }}. تغطية المناسبات والفعاليات
-                    والمؤتمرات والمعارض والتصوير العقاري، إضافة إلى ورش تدريبية في التصوير.
+                    والمؤتمرات والمعارض والتصوير العقاري والجوي، إضافة إلى ورش تدريبية في التصوير.
                 </p>
 
                 <div class="flex gap-2 mt-6">

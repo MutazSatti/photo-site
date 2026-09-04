@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\SectionRoutes;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property string|null $tagline
  * @property string|null $description
  * @property string $icon
+ * @property string $color
  * @property int $sort_order
  * @property bool $is_active
  * @property bool $has_categories
@@ -98,6 +100,31 @@ class Section extends Model
         static::deleting(function (self $section) {
             $section->posts()->get()->each->delete();
         });
+
+        // قيود المسارات مبنيّة على قائمة الأقسام، فأي تغيير فيها يُبطلها
+        static::saved(fn () => SectionRoutes::flush());
+        static::deleted(fn () => SectionRoutes::flush());
+    }
+
+    /**
+     * متغيّرات CSS للون القسم، تُوضع في سمة style على أي حاوية.
+     *
+     * التلوين عبر متغيّرات لا عبر أصناف Tailwind مبنيّة باسم اللون: الأصناف
+     * الديناميكية لا يراها Tailwind وقت البناء فلا تُولَّد أصلًا. المتغيّر
+     * يحمل قيمتين — واحدة للوضع الفاتح وأخرى للداكن — ويُبدَّل بينهما في CSS.
+     */
+    public function colorStyle(): string
+    {
+        $palette = config('site.section_colors');
+        $color = $palette[$this->color] ?? $palette['brand'];
+
+        return sprintf('--sec:%s;--sec-dark:%s', $color['light'], $color['dark']);
+    }
+
+    public function colorLabel(): string
+    {
+        return config('site.section_colors.'.$this->color.'.label')
+            ?? config('site.section_colors.brand.label');
     }
 
     /**

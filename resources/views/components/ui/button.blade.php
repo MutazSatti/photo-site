@@ -14,6 +14,8 @@
         'primary' => 'bg-ink-900 text-white hover:bg-ink-800 dark:bg-brand-500 dark:text-ink-950 dark:hover:bg-brand-400',
         'brand' => 'bg-brand-500 text-ink-950 hover:bg-brand-400',
         'outline' => 'border border-ink-300 text-ink-800 hover:bg-ink-50 dark:border-ink-700 dark:text-ink-200 dark:hover:bg-ink-800',
+        // للأسطح الداكنة كواجهات الصفحات فوق الصور — الحدّ والنص يقرآن على الصورة
+        'outline-light' => 'border border-white/40 text-white hover:bg-white/10',
         'ghost' => 'text-ink-700 hover:bg-ink-100 dark:text-ink-300 dark:hover:bg-ink-800',
         'danger' => 'bg-red-600 text-white hover:bg-red-700',
         'whatsapp' => 'bg-[#25D366] text-white hover:bg-[#20bd5a]',

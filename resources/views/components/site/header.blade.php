@@ -33,9 +33,9 @@
                 class="flex items-center gap-2.5 shrink-0 group"
                 aria-label="{{ config('site.owner_name') }} — الصفحة الرئيسية"
             >
-                <span class="flex items-center justify-center transition-colors rounded-xl size-9 bg-brand-500 text-ink-950 group-hover:bg-brand-400">
-                    <x-icon name="aperture" :size="20" :stroke="2" />
-                </span>
+                {{-- الشعار صورة لا أيقونة مجرّدة: الرابط يحمل اسم المالك في aria-label،
+                     فالصورة زخرفية ونصّها البديل فارغ حتى لا يُقرأ الاسم مرّتين. --}}
+                <img src="/images/logo.png" alt="" width="36" height="36" class="size-9 shrink-0" aria-hidden="true">
                 <span class="flex flex-col leading-none">
                     <span class="text-base font-extrabold text-ink-900 dark:text-ink-50">{{ config('site.owner_name') }}</span>
                     <span class="text-[11px] font-normal text-ink-500 dark:text-ink-400">مصور فوتوغرافي — {{ config('site.location.city') }}</span>

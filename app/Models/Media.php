@@ -68,19 +68,41 @@ class Media extends Model
         return Storage::disk($this->disk ?: 'public')->url($path);
     }
 
-    /** سمة srcset كاملة ليختار المتصفح المقاس المناسب للشاشة. */
+    /**
+     * سمة srcset كاملة ليختار المتصفح المقاس المناسب للشاشة.
+     *
+     * الواصف يحمل العرض الحقيقي للملف لا المقاس المستهدف. التصغير لا يكبّر أبدًا،
+     * فصورة أصلها 1200 بكسل تُنتج ملفًا واحدًا بـ1200 مهما بلغت المقاسات المطلوبة.
+     * لو أعلنّا عنه 1600 لصدّق المتصفح ذلك واختاره لمساحة أوسع مما يحتمل، فظهر
+     * ناعم الحواف — وهو بالضبط ما يُفترض بـ srcset أن يمنعه.
+     *
+     * الفهرسة بالعرض تُسقط التكرار تلقائيًا حين يتطابق مقاسان في ملف واحد.
+     */
     public function srcset(): string
     {
-        $widths = ['thumb' => 400, 'md' => 800, 'lg' => 1600];
+        $targets = [
+            'thumb' => 400,
+            'md' => 800,
+            'lg' => 1600,
+            'full' => (int) config('site.images.max_width', 2400),
+        ];
+
         $paths = $this->variantPaths();
+        $disk = Storage::disk($this->disk ?: 'public');
 
         $entries = [];
 
-        foreach ($widths as $variant => $width) {
-            if (isset($paths[$variant])) {
-                $entries[] = Storage::disk($this->disk ?: 'public')->url($paths[$variant])." {$width}w";
+        foreach ($targets as $variant => $target) {
+            if (! isset($paths[$variant])) {
+                continue;
             }
+
+            $width = $this->width ? min($target, $this->width) : $target;
+
+            $entries[$width] = $disk->url($paths[$variant])." {$width}w";
         }
+
+        ksort($entries);
 
         return implode(', ', $entries);
     }

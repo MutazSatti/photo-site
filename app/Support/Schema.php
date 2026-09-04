@@ -78,13 +78,46 @@ class Schema
                 'تصوير الفعاليات',
                 'تصوير المؤتمرات والمعارض',
                 'التصوير العقاري',
+                'التصوير الجوي بالطائرات المسيّرة',
                 'الإضاءة في التصوير',
                 'معالجة الصور',
             ],
             'address' => self::address(),
             'worksFor' => ['@id' => self::businessId()],
+            'hasCredential' => self::credentials(),
             'sameAs' => self::socialLinks(),
         ]);
+    }
+
+    /**
+     * التراخيص الرسمية كبيانات مهيكلة.
+     *
+     * hasCredential هو ما يفصل «يقول إنه مرخَّص» عن «مرخَّص برقم من جهة
+     * مسمّاة»: الجهة المانحة كيان مستقل له اسم وموقع، والرقم مُعرِّف قابل
+     * للتحقّق. وهذا ما تقتبسه أدوات الذكاء الاصطناعي حين تُسأل عمّن يملك
+     * تصريح تصوير جوي.
+     *
+     * description جملة تامة لا وسم: الأداة تقتبس جملة تقرأ وحدها، والحقول
+     * المفكّكة تصلح للفهرسة لا للاقتباس. وهي نفسها المعروضة في صفحة «نبذة»،
+     * فلا نصّ مخفيّ يخالف ما يراه الزائر.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public static function credentials(): array
+    {
+        return array_map(fn (array $a): array => array_filter([
+            '@type' => 'EducationalOccupationalCredential',
+            'name' => $a['title'],
+            'description' => $a['description'] ?? null,
+            'credentialCategory' => $a['category'],
+            'identifier' => $a['number'],
+            'recognizedBy' => array_filter([
+                '@type' => 'GovernmentOrganization',
+                'name' => $a['authority'],
+                'alternateName' => $a['authority_en'] ?? null,
+                'url' => $a['authority_url'] ?? null,
+            ]),
+        ]), accreditations());
     }
 
     /**
@@ -104,11 +137,11 @@ class Schema
             'alternateName' => config('site.owner_name_en').' Photography',
             'description' => Setting::get(
                 'seo_description',
-                "خدمات تصوير فوتوغرافي احترافي في {$city}: المناسبات، الفعاليات والمؤتمرات والمعارض، والتصوير العقاري، إضافة إلى ورش تدريبية في التصوير.",
+                "خدمات تصوير فوتوغرافي احترافي في {$city}: المناسبات، الفعاليات والمؤتمرات والمعارض، والتصوير العقاري، والتصوير الجوي، إضافة إلى ورش تدريبية في التصوير.",
             ),
             'url' => url('/'),
             'image' => self::ownerImage(),
-            'logo' => url('/images/logo.svg'),
+            'logo' => url('/images/logo.png'),
             'telephone' => config('site.phone'),
             'email' => Setting::get('contact_email', config('site.email')),
             'priceRange' => '$$',
@@ -189,13 +222,17 @@ class Schema
     }
 
     /**
-     * التقييم الإجمالي — يُنشر فقط عند وجود آراء حقيقية منشورة.
+     * التقييم الإجمالي.
+     *
+     * يُحتسب من الآراء التي وصلت إلى الموقع مباشرةً فقط. الآراء المنقولة من
+     * Google تُعرض في الصفحة لكنها لا تدخل هنا: إرشادات Google للبيانات المهيكلة
+     * تمنع تجميع التقييمات من مواقع أخرى، ومخالفتها تعرّض الموقع لإجراء يدوي.
      *
      * @return array<string, mixed>|null
      */
     public static function aggregateRating(): ?array
     {
-        $testimonials = Testimonial::active()->get();
+        $testimonials = Testimonial::active()->firstParty()->get();
 
         if ($testimonials->isEmpty()) {
             return null;

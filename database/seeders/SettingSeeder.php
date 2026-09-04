@@ -39,6 +39,9 @@ class SettingSeeder extends Seeder
             ['key' => 'contact_email', 'group' => 'contact', 'type' => 'text', 'label' => 'البريد الإلكتروني', 'sort_order' => 3,
                 'value' => config('site.email')],
             ['key' => 'contact_city', 'group' => 'contact', 'type' => 'text', 'label' => 'المدينة', 'sort_order' => 4, 'value' => $city],
+            ['key' => 'google_reviews_url', 'group' => 'contact', 'type' => 'url', 'label' => 'رابط تقييماتك على Google', 'sort_order' => 6,
+                'hint' => 'من بطاقة نشاطك على خرائط Google: مشاركة ← نسخ الرابط. يظهر كزر أسفل آراء العملاء، ويرسل زوّارك إلى بطاقتك — وهو أحد ما تقيسه Google في ترتيب النتائج المحلية.',
+                'value' => null],
             ['key' => 'contact_note', 'group' => 'contact', 'type' => 'textarea', 'label' => 'ملاحظة صفحة التواصل', 'sort_order' => 5,
                 'value' => 'الواتساب هو أسرع وسيلة للوصول إليّ. أرجو ذكر نوع المناسبة وتاريخها ومكانها في أول رسالة ليصلك عرض دقيق مباشرة.'],
 
@@ -58,7 +61,7 @@ class SettingSeeder extends Seeder
             ['key' => 'seo_description', 'group' => 'seo', 'type' => 'textarea', 'label' => 'وصف الموقع', 'sort_order' => 2,
                 'value' => "{$owner} مصور فوتوغرافي محترف في {$city}، متخصص في تصوير المناسبات والفعاليات والمؤتمرات والمعارض والعقارات، ويقدّم ورشًا تدريبية في التصوير. للحجز: ".config('site.phone_local')],
             ['key' => 'seo_keywords', 'group' => 'seo', 'type' => 'textarea', 'label' => 'الكلمات المفتاحية', 'sort_order' => 3,
-                'value' => "مصور {$city}، مصور فوتوغرافي، تصوير مناسبات، تصوير فعاليات، مصور فعاليات، تصوير مؤتمرات، تصوير معارض، تصوير عقارات، ورش تصوير، مصور محترف السعودية، {$owner}"],
+                'value' => "مصور {$city}، مصور فوتوغرافي، تصوير مناسبات، تصوير فعاليات، مصور فعاليات، تصوير مؤتمرات، تصوير معارض، تصوير عقارات، تصوير جوي، مصور درون، ورش تصوير، مصور محترف السعودية، {$owner}"],
         ];
 
         foreach ($settings as $data) {
