@@ -240,7 +240,7 @@ new #[Layout('layouts::admin', ['title' => 'الجهات والعملاء'])] cl
                 <x-ui.field
                     label="رابط موقع الجهة"
                     :error="$errors->first('url')"
-                    hint="اختياري. عند إدخاله يصبح الشعار رابطًا يفتح في تبويب جديد."
+                    hint="عند إدخاله يصبح الشعار رابطًا يفتح في تبويب جديد. والجهة بلا موقع إلكتروني يُوضع لها رابط موقعها على خرائط Google بدلًا منه."
                 >
                     <x-ui.input wire:model="url" type="url" dir="ltr" placeholder="https://example.sa" />
                 </x-ui.field>

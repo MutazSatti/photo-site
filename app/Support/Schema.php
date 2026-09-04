@@ -84,8 +84,38 @@ class Schema
             ],
             'address' => self::address(),
             'worksFor' => ['@id' => self::businessId()],
+            'hasCredential' => self::credentials(),
             'sameAs' => self::socialLinks(),
         ]);
+    }
+
+    /**
+     * التراخيص الرسمية كبيانات مهيكلة.
+     *
+     * hasCredential هو ما يفصل «يقول إنه مرخَّص» عن «مرخَّص برقم من جهة
+     * مسمّاة»: الجهة المانحة كيان مستقل له اسم وموقع، والرقم مُعرِّف قابل
+     * للتحقّق. وهذا ما تقتبسه أدوات الذكاء الاصطناعي حين تُسأل عمّن يملك
+     * تصريح تصوير جوي.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public static function credentials(): array
+    {
+        /** @var array<int, array<string, string>> $items */
+        $items = config('site.accreditations', []);
+
+        return array_map(fn (array $a): array => [
+            '@type' => 'EducationalOccupationalCredential',
+            'name' => $a['title'],
+            'credentialCategory' => $a['category'],
+            'identifier' => $a['number'],
+            'recognizedBy' => array_filter([
+                '@type' => 'GovernmentOrganization',
+                'name' => $a['authority'],
+                'alternateName' => $a['authority_en'] ?? null,
+                'url' => $a['authority_url'] ?? null,
+            ]),
+        ], $items);
     }
 
     /**

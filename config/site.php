@@ -119,6 +119,50 @@ return [
         'slate' => ['label' => 'رمادي', 'light' => '#475569', 'dark' => '#94a3b8'],
     ],
 
+    /*
+     * الاعتمادات والتراخيص الرسمية.
+     *
+     * مرجع واحد تقرؤه صفحة «نبذة» والبيانات المهيكلة معًا: الرقم المعروض للزائر
+     * هو الرقم المنشور لأدوات البحث، فلا ينحرف أحدهما عن الآخر مع الوقت.
+     *
+     * وأسماء الجهات هنا كما تكتبها هي في شعاراتها لا كما تُختصر في الحديث:
+     * «هيئة تقويم التعليم والتدريب» لا «التدريب والتعليم»، و«الهيئة العامة
+     * لتنظيم الإعلام» لا «هيئة تنظيم الإعلام». الاسم الخطأ في صفحة اعتمادات
+     * يُضعف الثقة التي وُضعت الصفحة لبنائها، وتقرؤه أدوات البحث كما هو.
+     */
+    'accreditations' => [
+        [
+            'key' => 'accr_etec',
+            'title' => 'شهادة مدرب مهنية',
+            'category' => 'شهادة مهنية',
+            'authority' => 'هيئة تقويم التعليم والتدريب',
+            'authority_en' => 'Education and Training Evaluation Commission',
+            'authority_url' => 'https://etec.gov.sa',
+            'label' => 'رخصة رقم',
+            'number' => '1562',
+        ],
+        [
+            'key' => 'accr_gaca',
+            'title' => 'رخصة مشغّل طائرة مسيّرة',
+            'category' => 'رخصة تشغيل',
+            'authority' => 'الهيئة العامة للطيران المدني',
+            'authority_en' => 'General Authority of Civil Aviation',
+            'authority_url' => 'https://gaca.gov.sa',
+            'label' => 'رخصة رقم',
+            'number' => 'RPC-O-18249',
+        ],
+        [
+            'key' => 'accr_gamr',
+            'title' => 'شهادة مهنية في الإعلام',
+            'category' => 'شهادة مهنية',
+            'authority' => 'الهيئة العامة لتنظيم الإعلام',
+            'authority_en' => 'General Authority of Media Regulation',
+            'authority_url' => 'https://gamr.gov.sa',
+            'label' => 'تسجيل رقم',
+            'number' => '679957',
+        ],
+    ],
+
     'images' => [
         'quality' => 82,
         'variants' => [
