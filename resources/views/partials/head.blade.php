@@ -39,7 +39,8 @@
 <meta name="twitter:description" content="{{ $seo->metaDescription() }}">
 <meta name="twitter:image" content="{{ $seo->socialImage() }}">
 
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="{{ $ownerName }} — أحدث الأعمال" href="{{ route('feed') }}">

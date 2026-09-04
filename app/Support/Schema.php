@@ -141,7 +141,7 @@ class Schema
             ),
             'url' => url('/'),
             'image' => self::ownerImage(),
-            'logo' => url('/images/logo.svg'),
+            'logo' => url('/images/logo.png'),
             'telephone' => config('site.phone'),
             'email' => Setting::get('contact_email', config('site.email')),
             'priceRange' => '$$',
