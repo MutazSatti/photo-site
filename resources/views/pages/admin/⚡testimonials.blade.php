@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Testimonial;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -16,6 +17,8 @@ new #[Layout('layouts::admin', ['title' => 'آراء العملاء'])] class ex
     public string $role = '';
 
     public string $content = '';
+
+    public string $source = Testimonial::SOURCE_DIRECT;
 
     public int $rating = 5;
 
@@ -45,6 +48,7 @@ new #[Layout('layouts::admin', ['title' => 'آراء العملاء'])] class ex
         $this->name = $item->name;
         $this->role = (string) $item->role;
         $this->content = $item->content;
+        $this->source = $item->source;
         $this->rating = $item->rating;
         $this->sort_order = (string) $item->sort_order;
         $this->is_active = $item->is_active;
@@ -56,11 +60,13 @@ new #[Layout('layouts::admin', ['title' => 'آراء العملاء'])] class ex
             'name' => ['required', 'string', 'max:120'],
             'role' => ['nullable', 'string', 'max:120'],
             'content' => ['required', 'string', 'min:15', 'max:1000'],
+            'source' => ['required', Rule::in(array_keys(Testimonial::sourceOptions()))],
             'rating' => ['required', 'integer', 'min:1', 'max:5'],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:999'],
         ], [], [
             'name' => 'الاسم',
             'content' => 'نص الرأي',
+            'source' => 'المصدر',
             'rating' => 'التقييم',
         ]);
 
@@ -104,6 +110,7 @@ new #[Layout('layouts::admin', ['title' => 'آراء العملاء'])] class ex
     public function resetForm(): void
     {
         $this->reset(['editingId', 'creating', 'name', 'role', 'content', 'sort_order']);
+        $this->source = Testimonial::SOURCE_DIRECT;
         $this->rating = 5;
         $this->is_active = true;
         $this->resetErrorBag();
@@ -119,7 +126,7 @@ new #[Layout('layouts::admin', ['title' => 'آراء العملاء'])] class ex
 <div>
     <x-admin.page-header
         title="آراء العملاء"
-        description="تُنشر كتقييم إجمالي في البيانات المهيكلة. انشر آراء حقيقية فقط — التقييمات المهيكلة يجب أن تكون صادقة."
+        description="الآراء التي وصلتك مباشرةً تُنشر كتقييم إجمالي مهيكل. المنقولة من Google تُعرض بوسم يوضّح مصدرها ولا تدخل في ذلك الحساب."
     >
         <x-slot:actions>
             <x-ui.button wire:click="create" icon="plus">رأي جديد</x-ui.button>
@@ -139,8 +146,28 @@ new #[Layout('layouts::admin', ['title' => 'آراء العملاء'])] class ex
                     </x-ui.field>
                 </div>
 
-                <x-ui.field label="نص الرأي" required :error="$errors->first('content')">
+                <x-ui.field
+                    label="نص الرأي"
+                    required
+                    :error="$errors->first('content')"
+                    hint="انسخ النص كما كتبه العميل. صياغة كل الآراء بأسلوب واحد مصقول تجعلها تُقرأ كأنها مكتوبة في مكان واحد."
+                >
                     <x-ui.textarea wire:model="content" rows="4" :invalid="$errors->has('content')" />
+                </x-ui.field>
+
+                <x-ui.field
+                    label="مصدر الرأي"
+                    required
+                    :error="$errors->first('source')"
+                    :hint="$source === Testimonial::SOURCE_GOOGLE
+                        ? 'سيظهر على البطاقة وسم «من تقييمات Google»، ولن يدخل هذا الرأي في التقييم الإجمالي المهيكل — لأن Google تمنع تجميع تقييمات مصدرها مواقع أخرى.'
+                        : 'رأي وصلك مباشرةً عبر الواتساب أو البريد أو نموذج الموقع. هذا وحده ما يُحتسب في التقييم الإجمالي الذي قد يُظهر نجومًا في نتائج البحث.'"
+                >
+                    <x-ui.select wire:model.live="source">
+                        @foreach (Testimonial::sourceOptions() as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
+                    </x-ui.select>
                 </x-ui.field>
 
                 <div class="grid gap-4 sm:grid-cols-3">
@@ -179,12 +206,20 @@ new #[Layout('layouts::admin', ['title' => 'آراء العملاء'])] class ex
 
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         @forelse ($this->testimonials as $item)
-            <div class="flex flex-col p-5 bg-white border rounded-2xl border-ink-200 dark:border-ink-800 dark:bg-ink-900">
+            <div data-source="{{ $item->source }}" class="flex flex-col p-5 bg-white border rounded-2xl border-ink-200 dark:border-ink-800 dark:bg-ink-900">
                 <div class="flex items-center justify-between gap-2">
-                    <div class="flex gap-0.5 text-brand-500">
-                        @for ($i = 0; $i < $item->rating; $i++)
-                            <x-icon name="star-filled" :size="14" />
-                        @endfor
+                    <div class="flex items-center gap-2">
+                        <div class="flex gap-0.5 text-brand-500">
+                            @for ($i = 0; $i < $item->rating; $i++)
+                                <x-icon name="star-filled" :size="14" />
+                            @endfor
+                        </div>
+
+                        @if ($item->isFromGoogle())
+                            <span data-badge="google" class="rounded px-1.5 py-0.5 text-[11px] font-bold text-ink-500 ring-1 ring-ink-200 dark:text-ink-400 dark:ring-ink-700">
+                                Google
+                            </span>
+                        @endif
                     </div>
 
                     <button type="button" wire:click="toggleActive({{ $item->id }})"

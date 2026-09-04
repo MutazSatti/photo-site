@@ -59,7 +59,7 @@ new class extends Component
     }
 }; ?>
 
-<div>
+<div class="sec-theme" style="{{ $section->colorStyle() }}">
     <x-site.page-header
         :title="$section->name"
         :tagline="$section->tagline"
@@ -87,15 +87,15 @@ new class extends Component
                         <a
                             href="{{ $category->url() }}"
                             wire:navigate
-                            class="flex items-start gap-5 p-6 transition-all border group rounded-2xl border-ink-200 hover:border-brand-400 hover:bg-ink-50 dark:border-ink-800 dark:hover:border-brand-600 dark:hover:bg-ink-900"
+                            class="flex items-start gap-5 p-6 transition-all border group rounded-2xl border-ink-200 hover:sec-border hover:bg-ink-50 dark:border-ink-800  dark:hover:bg-ink-900"
                         >
-                            <span class="flex items-center justify-center transition-colors shrink-0 size-12 rounded-2xl bg-brand-50 text-brand-600 group-hover:bg-brand-500 group-hover:text-ink-950 dark:bg-brand-950 dark:text-brand-400">
+                            <span class="flex items-center justify-center transition-colors shrink-0 size-12 rounded-2xl sec-bg-soft sec-text group-hover:sec-bg-solid group-hover:text-white">
                                 <x-icon :name="$category->icon" :size="22" />
                             </span>
 
                             <div class="min-w-0">
                                 <h3 class="text-base font-extrabold text-ink-900 dark:text-ink-50">{{ $category->name }}</h3>
-                                <p class="mt-1 text-sm font-bold text-brand-600 dark:text-brand-400">{{ $category->tagline }}</p>
+                                <p class="mt-1 text-sm font-bold sec-text">{{ $category->tagline }}</p>
                                 <p class="mt-2 text-sm leading-7 text-ink-600 line-clamp-2 dark:text-ink-400">{{ $category->description }}</p>
                             </div>
                         </a>

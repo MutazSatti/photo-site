@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             LogoSeeder::class,
             SectionSeeder::class,
             SettingSeeder::class,
+            HomeBlockSeeder::class,
             FaqSeeder::class,
             TestimonialSeeder::class,
             PostSeeder::class,

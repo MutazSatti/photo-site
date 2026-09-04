@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\SectionRoutes;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -36,6 +37,8 @@ class Category extends Model
 
     public const REAL_ESTATE = 'real-estate';
 
+    public const AERIAL = 'aerial';
+
     protected $guarded = [];
 
     protected function casts(): array
@@ -49,6 +52,13 @@ class Category extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    /** قيود المسارات مبنيّة على قائمة الأقسام الفرعية، فأي تغيير فيها يُبطلها */
+    protected static function booted(): void
+    {
+        static::saved(fn () => SectionRoutes::flush());
+        static::deleted(fn () => SectionRoutes::flush());
     }
 
     /** @return BelongsTo<Section, $this> */

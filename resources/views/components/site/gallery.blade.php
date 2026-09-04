@@ -12,6 +12,17 @@
         default => 'sm:grid-cols-2 lg:grid-cols-3',
     };
 
+    /*
+       نسبة البلاطة تتبع اتجاه الصور. تجميعات النشر عمودية (9:16)، وقصّها على
+       نسبة أفقية يُظهر شريحة من وسطها لا الصورة. والحكم بالغالب لا بالأولى:
+       مجموعة مختلطة تُقصّ على الشكل الذي يغلب عليها.
+
+       العمودي يُقصّ على 3:4 لا 9:16 عمدًا: البلاطة الكاملة الطول تجعل صفّ
+       ثلاث صور أطول من الشاشة. والعارض يفتح الصورة كاملةً على أي حال.
+    */
+    $portrait = $items->filter(fn ($m) => $m->width && $m->height && $m->height > $m->width * 1.2)->count();
+    $tileAspect = $portrait * 2 > $items->count() ? 'aspect-3/4' : 'aspect-4/3';
+
     // بيانات خفيفة للعارض — روابط ونصوص فقط
     $lightboxData = $items->map(fn ($m) => [
         'src' => $m->url('lg'),
@@ -43,7 +54,7 @@
                 <button
                     type="button"
                     x-on:click="show({{ $index }})"
-                    class="relative group overflow-hidden rounded-2xl bg-ink-100 dark:bg-ink-800 aspect-4/3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                    class="relative group overflow-hidden rounded-2xl bg-ink-100 dark:bg-ink-800 {{ $tileAspect }} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
                     aria-label="تكبير الصورة: {{ $item->altText() }}"
                 >
                     <x-site.picture

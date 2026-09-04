@@ -9,6 +9,8 @@
         ['route' => 'admin.sections', 'label' => 'الأقسام', 'icon' => 'layers'],
         ['route' => 'admin.faqs', 'label' => 'الأسئلة الشائعة', 'icon' => 'help'],
         ['route' => 'admin.testimonials', 'label' => 'آراء العملاء', 'icon' => 'star'],
+        ['route' => 'admin.clients', 'label' => 'الجهات والعملاء', 'icon' => 'building'],
+        ['route' => 'admin.google', 'label' => 'تقييمات Google', 'icon' => 'google'],
         ['route' => 'admin.messages', 'label' => 'الرسائل', 'icon' => 'inbox', 'badge' => $unread],
         ['route' => 'admin.settings', 'label' => 'الإعدادات', 'icon' => 'settings'],
     ];
