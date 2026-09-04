@@ -31,5 +31,17 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             PostSeeder::class,
         ]);
+
+        /*
+         * مجموعات صفحة التصوير العقاري تُنشئها هجرة محتوى، وهي تعمل على تثبيت
+         * جديد قبل بذر الأقسام فتجد القسم غائبًا وتنسحب. فتُستدعى هنا بعد وجوده.
+         *
+         * على تثبيت قائم لا أثر لهذا: الهجرة أنشأتها وقت الترحيل، والاستدعاء
+         * مبنيّ على updateOrCreate فلا يكرّر ولا يستبدل.
+         */
+        (require database_path('migrations/2026_09_03_000002_build_real_estate_service_page.php'))->up();
+
+        // بعد المجموعات لأنها تعلّق صورها بها
+        $this->call(SiteMediaSeeder::class);
     }
 }
