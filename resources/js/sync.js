@@ -2,7 +2,7 @@
  * مزامنة بيانات الموقع مع قاعدة بيانات المتصفح (IndexedDB).
  *
  * الفكرة: كل البيانات النصية والرقمية — الأقسام، الأعمال، المقالات، الإعدادات،
- * الأسئلة الشائعة، الآراء — تُحفظ محليًا في المتصفح. الصور والفيديوهات مستثناة
+ * الأسئلة الشائعة، الآراء، الجهات — تُحفظ محليًا في المتصفح. الصور والفيديوهات مستثناة
  * تمامًا؛ يُخزَّن منها المسار والأبعاد فقط ويتكفّل كاش المتصفح بالملفات نفسها.
  *
  * الفائدة العملية:
@@ -13,7 +13,8 @@
  */
 
 const DB_NAME = 'mutaz-satti-site';
-const DB_VERSION = 1;
+// 2: أُضيف مخزن الجهات — رفع الرقم يجعل onupgradeneeded ينشئه لدى زوّار قدامى
+const DB_VERSION = 2;
 
 const STORES = [
     'sections',
@@ -21,6 +22,7 @@ const STORES = [
     'posts',
     'faqs',
     'testimonials',
+    'clients',
 ];
 
 const KEYVAL_STORES = ['settings', 'meta'];
@@ -295,6 +297,7 @@ class SiteSync {
                 this.replaceStore('posts', payload.posts),
                 this.replaceStore('faqs', payload.faqs),
                 this.replaceStore('testimonials', payload.testimonials),
+                this.replaceStore('clients', payload.clients),
                 this.putKeyVal('settings', 'all', payload.settings),
             ]);
 

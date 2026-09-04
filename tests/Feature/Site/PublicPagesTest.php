@@ -124,4 +124,61 @@ class PublicPagesTest extends TestCase
             ->assertOk()
             ->assertSee('wire:navigate', escape: false);
     }
+
+    /** الاعتمادات تُعرض للزائر وتُنشر كبيانات مهيكلة من المرجع نفسه. */
+    public function test_the_about_page_shows_the_official_accreditations(): void
+    {
+        $response = $this->get(route('about'))->assertOk();
+
+        $response->assertSee('اعتمادات وتراخيص')
+            ->assertSee('"@type": "EducationalOccupationalCredential"', escape: false)
+            ->assertSee('"@type": "GovernmentOrganization"', escape: false);
+
+        foreach (accreditations() as $accreditation) {
+            $response->assertSee($accreditation['title'])
+                ->assertSee($accreditation['authority'])
+                ->assertSee($accreditation['number']);
+        }
+    }
+
+    /**
+     * لكل ترخيص جملة تامة تقرأ وحدها، معروضةً ومنشورة معًا.
+     *
+     * الأداة تقتبس جملة لا جدولًا، والجملة التي تُنشر في البيانات المهيكلة ولا
+     * يراها الزائر نصٌّ مخفيّ — فيجب أن تكون الجملة نفسها في الموضعين.
+     */
+    public function test_each_credential_carries_a_quotable_sentence(): void
+    {
+        $response = $this->get(route('about'))->assertOk();
+
+        $owner = (string) config('site.owner_name');
+
+        foreach (accreditations() as $accreditation) {
+            $sentence = $accreditation['description'];
+
+            $this->assertStringStartsWith($owner, $sentence);
+            $this->assertStringContainsString($accreditation['authority'], $sentence);
+            $this->assertStringContainsString($accreditation['number'], $sentence);
+
+            $response->assertSee($sentence)
+                ->assertSee(json_encode($sentence, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), escape: false);
+        }
+    }
+
+    /**
+     * أسماء الجهات المنظِّمة كما تكتبها هي، لا كما تُختصر في الحديث.
+     *
+     * الاختصار الشائع يقلب ترتيب «التعليم والتدريب» ويُسقط «العامة» من اسم
+     * هيئة الإعلام. والاسم الخطأ في صفحة اعتمادات يُضعف ما جاءت لتُثبته.
+     */
+    public function test_the_regulator_names_match_their_official_form(): void
+    {
+        $names = array_column(config('site.accreditations'), 'authority');
+
+        $this->assertSame([
+            'هيئة تقويم التعليم والتدريب',
+            'الهيئة العامة للطيران المدني',
+            'الهيئة العامة لتنظيم الإعلام',
+        ], $names);
+    }
 }
