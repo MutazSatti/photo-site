@@ -97,16 +97,18 @@ class Schema
      * للتحقّق. وهذا ما تقتبسه أدوات الذكاء الاصطناعي حين تُسأل عمّن يملك
      * تصريح تصوير جوي.
      *
+     * description جملة تامة لا وسم: الأداة تقتبس جملة تقرأ وحدها، والحقول
+     * المفكّكة تصلح للفهرسة لا للاقتباس. وهي نفسها المعروضة في صفحة «نبذة»،
+     * فلا نصّ مخفيّ يخالف ما يراه الزائر.
+     *
      * @return array<int, array<string, mixed>>
      */
     public static function credentials(): array
     {
-        /** @var array<int, array<string, string>> $items */
-        $items = config('site.accreditations', []);
-
-        return array_map(fn (array $a): array => [
+        return array_map(fn (array $a): array => array_filter([
             '@type' => 'EducationalOccupationalCredential',
             'name' => $a['title'],
+            'description' => $a['description'] ?? null,
             'credentialCategory' => $a['category'],
             'identifier' => $a['number'],
             'recognizedBy' => array_filter([
@@ -115,7 +117,7 @@ class Schema
                 'alternateName' => $a['authority_en'] ?? null,
                 'url' => $a['authority_url'] ?? null,
             ]),
-        ], $items);
+        ]), accreditations());
     }
 
     /**

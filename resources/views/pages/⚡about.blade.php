@@ -66,7 +66,7 @@ new class extends Component
      */
     public function accreditations(): array
     {
-        return config('site.accreditations', []);
+        return accreditations();
     }
 }; ?>
 
@@ -107,25 +107,33 @@ new class extends Component
 
                     <ul class="mt-5 space-y-3">
                         @foreach ($this->accreditations() as $item)
-                            <li class="flex items-center gap-4 p-4 border rounded-2xl border-ink-200 dark:border-ink-800">
-                                <span class="flex items-center justify-center p-2 bg-white border shrink-0 w-28 h-16 rounded-xl border-ink-200 dark:border-ink-300">
-                                    <x-site.picture
-                                        :media="$this->accreditationLogos[$item['key']] ?? null"
-                                        variant="md"
-                                        fit="contain"
-                                        sizes="112px"
-                                        class="size-full"
-                                    />
-                                </span>
+                            <li class="p-4 border rounded-2xl border-ink-200 dark:border-ink-800">
+                                <div class="flex items-center gap-4">
+                                    <span class="flex items-center justify-center p-2 bg-white border shrink-0 w-28 h-16 rounded-xl border-ink-200 dark:border-ink-300">
+                                        <x-site.picture
+                                            :media="$this->accreditationLogos[$item['key']] ?? null"
+                                            variant="md"
+                                            fit="contain"
+                                            sizes="112px"
+                                            class="size-full"
+                                        />
+                                    </span>
 
-                                <div class="min-w-0">
-                                    <h3 class="text-sm font-extrabold text-ink-900 dark:text-ink-100">{{ $item['title'] }}</h3>
-                                    <p class="mt-0.5 text-xs text-ink-600 dark:text-ink-400">{{ $item['authority'] }}</p>
-                                    <p class="mt-1 text-xs font-bold text-ink-500 dark:text-ink-500">
-                                        {{ $item['label'] }}:
-                                        <span dir="ltr" class="font-mono text-ink-800 dark:text-ink-200">{{ $item['number'] }}</span>
-                                    </p>
+                                    <div class="min-w-0">
+                                        <h3 class="text-sm font-extrabold text-ink-900 dark:text-ink-100">{{ $item['title'] }}</h3>
+                                        <p class="mt-0.5 text-xs text-ink-600 dark:text-ink-400">{{ $item['authority'] }}</p>
+                                        <p class="mt-1 text-xs font-bold text-ink-500 dark:text-ink-500">
+                                            {{ $item['label'] }}:
+                                            <span dir="ltr" class="font-mono text-ink-800 dark:text-ink-200">{{ $item['number'] }}</span>
+                                        </p>
+                                    </div>
                                 </div>
+
+                                @if (! empty($item['description']))
+                                    <p class="pt-3 mt-3 text-xs leading-7 border-t text-ink-600 border-ink-100 dark:border-ink-800 dark:text-ink-400">
+                                        {{ $item['description'] }}
+                                    </p>
+                                @endif
                             </li>
                         @endforeach
                     </ul>

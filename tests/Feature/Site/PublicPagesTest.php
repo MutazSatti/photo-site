@@ -134,10 +134,34 @@ class PublicPagesTest extends TestCase
             ->assertSee('"@type": "EducationalOccupationalCredential"', escape: false)
             ->assertSee('"@type": "GovernmentOrganization"', escape: false);
 
-        foreach (config('site.accreditations') as $accreditation) {
+        foreach (accreditations() as $accreditation) {
             $response->assertSee($accreditation['title'])
                 ->assertSee($accreditation['authority'])
                 ->assertSee($accreditation['number']);
+        }
+    }
+
+    /**
+     * لكل ترخيص جملة تامة تقرأ وحدها، معروضةً ومنشورة معًا.
+     *
+     * الأداة تقتبس جملة لا جدولًا، والجملة التي تُنشر في البيانات المهيكلة ولا
+     * يراها الزائر نصٌّ مخفيّ — فيجب أن تكون الجملة نفسها في الموضعين.
+     */
+    public function test_each_credential_carries_a_quotable_sentence(): void
+    {
+        $response = $this->get(route('about'))->assertOk();
+
+        $owner = (string) config('site.owner_name');
+
+        foreach (accreditations() as $accreditation) {
+            $sentence = $accreditation['description'];
+
+            $this->assertStringStartsWith($owner, $sentence);
+            $this->assertStringContainsString($accreditation['authority'], $sentence);
+            $this->assertStringContainsString($accreditation['number'], $sentence);
+
+            $response->assertSee($sentence)
+                ->assertSee(json_encode($sentence, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), escape: false);
         }
     }
 
