@@ -29,7 +29,9 @@ class DatabaseSeeder extends Seeder
             HomeBlockSeeder::class,
             FaqSeeder::class,
             TestimonialSeeder::class,
+            ClientSeeder::class,
             PostSeeder::class,
+            WorkSeeder::class,
         ]);
 
         /*
@@ -41,7 +43,7 @@ class DatabaseSeeder extends Seeder
          */
         (require database_path('migrations/2026_09_03_000002_build_real_estate_service_page.php'))->up();
 
-        // بعد المجموعات لأنها تعلّق صورها بها
+        // بعد المجموعات والأعمال والجهات لأنها تعلّق صورها بها كلها
         $this->call(SiteMediaSeeder::class);
     }
 }

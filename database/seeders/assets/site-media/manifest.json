@@ -1,503 +1,2093 @@
 [
-    {
-        "file": "aqarat-20241115-1-lg.webp",
-        "post": "almrafq-alkharijiya",
-        "alt": "مرافق الترفيه في المجمعات — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 0,
-        "is_cover": true
-    },
-    {
-        "file": "mutaz-satti-18jpg-gjtjb37q-lg.webp",
-        "post": "almrafq-alkharijiya",
-        "alt": "مسبح مجمّع سكني بمياه صافية تحيط به الفلل من الجانبين — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 1,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20241115-2-lg.webp",
-        "post": "almrafq-alkharijiya",
-        "alt": "مرافق الترفيه في المجمعات — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 2,
-        "is_cover": false
-    },
-    {
-        "file": "file-00000000878c720a8cc787bed7507212jpg-ryfte40u.webp",
-        "post": "almrafq-alkharijiya",
-        "alt": "واجهة مبنى سكني متعدّد الأدوار مصوّر من الزاوية عند الغروب — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 3,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20241115-3-lg.webp",
-        "post": "almrafq-alkharijiya",
-        "alt": "مرافق الترفيه في المجمعات — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 4,
-        "is_cover": false
-    },
-    {
-        "file": "file-00000000c22881f78f2b56c835942cb4jpg-amznwmmj.webp",
-        "post": "almrafq-alkharijiya",
-        "alt": "مجمّع فلل بفناء مشترك ومسبح ومساحات خضراء منسّقة — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 5,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20241115-4-lg.webp",
-        "post": "almrafq-alkharijiya",
-        "alt": "مرافق الترفيه في المجمعات — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 6,
-        "is_cover": false
-    },
-    {
-        "file": "file-000000005bb0820ab56f64588d89ca27jpg-nfsjswnv.webp",
-        "post": "almrafq-alkharijiya",
-        "alt": "مسبح خارجي بمظلات قماشية في مجمّع سكني — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 7,
-        "is_cover": false
-    },
-    {
-        "file": "file-00000000db38820abf571235711cfff6jpg-pkpg03p5.webp",
-        "post": "almrafq-alkharijiya",
-        "alt": "ملعب بادل أزرق داخل مجمّع سكني محاط بالفلل — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 8,
-        "is_cover": false
-    },
-    {
-        "file": "generated-image-january-15-2026-3-28pmjp-5vuvnsx3.webp",
-        "post": "almrafq-alkharijiya",
-        "alt": "جلسة سطح خارجية بإضاءة معلّقة وأثاث خيزران وقت الغروب — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 9,
-        "is_cover": false
-    },
-    {
-        "file": "1775813043623-1jpg-3ifzcquq.webp",
-        "post": "almrafq-alkharijiya",
-        "alt": "واجهة عمارة سكنية كلاسيكية عند الغروب مع إضاءة خارجية ونخيل — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 10,
-        "is_cover": false
-    },
-    {
-        "file": "at-mutaz-satti-4jpg-epzp1fpo.webp",
-        "post": "almrafq-alkharijiya",
-        "alt": "واجهة عمارة سكنية حديثة بتشطيب حجري وطوب بلون الطين — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 11,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20240119-1.webp",
-        "post": "almdakhl-walmmrat",
-        "alt": "المداخل واللوبي — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 0,
-        "is_cover": true
-    },
-    {
-        "file": "mutaz-satti-960-hwyuobmh-lg.webp",
-        "post": "almdakhl-walmmrat",
-        "alt": "مدخل رخامي بأبواب زجاجية ونباتات داخلية وإضاءة دافئة — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 1,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20240119-2.webp",
-        "post": "almdakhl-walmmrat",
-        "alt": "المداخل واللوبي — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 2,
-        "is_cover": false
-    },
-    {
-        "file": "hm7a8570-abmao0et-lg.webp",
-        "post": "almdakhl-walmmrat",
-        "alt": "مدخل شقة بباب خشبي وزجاج ونباتات على الجانبين — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 3,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20250723-1-lg.webp",
-        "post": "almdakhl-walmmrat",
-        "alt": "المداخل واللوبي — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 4,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20250723-2-lg.webp",
-        "post": "almdakhl-walmmrat",
-        "alt": "المداخل واللوبي — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 5,
-        "is_cover": false
-    },
-    {
-        "file": "mutaz-satti-948-ffgdfzqc-lg.webp",
-        "post": "almjals-walmaisha",
-        "alt": "مجلس واسع بأرائك كريمية وطاولة وسطية مستديرة وثلاث لوحات على الجدار — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 1,
-        "is_cover": true
-    },
-    {
-        "file": "mutaz-satti-928-5njyekip-lg.webp",
-        "post": "almjals-walmaisha",
-        "alt": "تلفزيون معلّق فوق مدفأة إيثانول بلهب ظاهر وخزانة خشبية — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 2,
-        "is_cover": false
-    },
-    {
-        "file": "mutaz-satti-944-oxh9olce-lg.webp",
-        "post": "almjals-walmaisha",
-        "alt": "صالة معيشة فاتحة بتلفزيون معلّق ونبتة زيتون ومقعد جانبي — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 3,
-        "is_cover": false
-    },
-    {
-        "file": "hm7a0693-qm4cajz8-lg.webp",
-        "post": "almjals-walmaisha",
-        "alt": "صالة معيشة بأريكتين وطاولتين خشبيتين ولوحة أفقية — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 4,
-        "is_cover": false
-    },
-    {
-        "file": "hm7a0695-hid40pdr-lg.webp",
-        "post": "almjals-walmaisha",
-        "alt": "استوديو مؤثّث بتلفزيون وطاولة قهوة خشبية وإضاءة مسارية — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 5,
-        "is_cover": false
-    },
-    {
-        "file": "at-mutaz-satti-16jpg-p51mnfmi-lg.webp",
-        "post": "almjals-walmaisha",
-        "alt": "صالة معيشة في شقة نموذجية بإضاءة طبيعية وأثاث فاتح — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 6,
-        "is_cover": false
-    },
-    {
-        "file": "hm7a6459-dvdpwc3g-lg.webp",
-        "post": "almjals-walmaisha",
-        "alt": "صالة بأريكة زاوية رمادية وطاولة قهوة ومقعد مبطّن — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 7,
-        "is_cover": false
-    },
-    {
-        "file": "hm7a6475-oa62ykvv-lg.webp",
-        "post": "almjals-walmaisha",
-        "alt": "صالة معيشة بأريكة رمادية وتلفزيون وسجادة فاتحة — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 8,
-        "is_cover": false
-    },
-    {
-        "file": "at-mutaz-satti-12-g058bi3x-lg.webp",
-        "post": "almjals-walmaisha",
-        "alt": "صالة معيشة بأريكة رمادية ووسائد ملوّنة ومطبخ مفتوح خلفها — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 9,
-        "is_cover": false
-    },
-    {
-        "file": "mutaz-satti-111-x0kazuuh-lg.webp",
-        "post": "almjals-walmaisha",
-        "alt": "مجلس بأريكة كريمية وتلفزيون معلّق وكرسي أخضر مفرد — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 10,
-        "is_cover": false
-    },
-    {
-        "file": "mutaz-satti-893-dl7qyex2-lg.webp",
-        "post": "ghrf-alnoom",
-        "alt": "غرفة نوم بسرير أبيض وركن جلوس وإضاءة مخفية في السقف — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 0,
-        "is_cover": true
-    },
-    {
-        "file": "mutaz-satti-969-or3tpnfv-lg.webp",
-        "post": "ghrf-alnoom",
-        "alt": "غرفة بسريرين مفردين وستائر شفافة تدخل منها إضاءة النهار — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 1,
-        "is_cover": false
-    },
-    {
-        "file": "generated-image-january-15-2026-3-37pmjp-alvvjrtp.webp",
-        "post": "ghrf-alnoom",
-        "alt": "غرفة نوم رئيسية مؤثّثة بإضاءة مخفية وطاولتين جانبيتين — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 2,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20241223-1-lg.webp",
-        "post": "ghrf-alnoom",
-        "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 3,
-        "is_cover": false
-    },
-    {
-        "file": "at-mutaz-satti-2449jpg-xmwankwe-lg.webp",
-        "post": "ghrf-alnoom",
-        "alt": "غرفة نوم بنافذة عالية وستائر شفافة تدخل منها إضاءة طبيعية — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 4,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20241223-2-lg.webp",
-        "post": "ghrf-alnoom",
-        "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 5,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20241223-3-lg.webp",
-        "post": "ghrf-alnoom",
-        "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 6,
-        "is_cover": false
-    },
-    {
-        "file": "mutaz-satti-865-oa9ssizk-lg.webp",
-        "post": "almtabkh-wmoaid-altaam",
-        "alt": "مطبخ بجزيرة وسطية بيضاء وخزائن خشبية فاتحة وأجهزة مدمجة — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 0,
-        "is_cover": true
-    },
-    {
-        "file": "hm7a0710-dknqt17m-lg.webp",
-        "post": "almtabkh-wmoaid-altaam",
-        "alt": "مطبخ زاوية بغسالة مدمجة وموقد غاز وخزائن بلون الزيتون — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 1,
-        "is_cover": false
-    },
-    {
-        "file": "generated-image-january-15-2026-4-38pm-1-vqg1qvjr.webp",
-        "post": "almtabkh-wmoaid-altaam",
-        "alt": "مطبخ مفتوح بجزيرة وسطية وخزائن خشبية وأجهزة مدمجة — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 2,
-        "is_cover": false
-    },
-    {
-        "file": "hm7a8466-1-qxqjgydp-lg.webp",
-        "post": "almtabkh-wmoaid-altaam",
-        "alt": "مطبخ بخزائن خشبية وغسالة ونشّافة فوق بعضهما وفرن مدمج — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 3,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20240609-1.webp",
-        "post": "almtabkh-wmoaid-altaam",
-        "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 4,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20240609-2.webp",
-        "post": "almtabkh-wmoaid-altaam",
-        "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 5,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20240609-3.webp",
-        "post": "almtabkh-wmoaid-altaam",
-        "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 6,
-        "is_cover": false
-    },
-    {
-        "file": "hm7a0741-1alipggz-lg.webp",
-        "post": "almrafq-waltfasyl",
-        "alt": "صينية ضيافة بغلاية كهربائية وماكينة قهوة وأكواب ومياه — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 0,
-        "is_cover": true
-    },
-    {
-        "file": "mutaz-satti-966-t3trtfjh-lg.webp",
-        "post": "almrafq-waltfasyl",
-        "alt": "تفصيلة حوض حمّام رخامي بصنبور أسود وزجاجتَي صابون — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 1,
-        "is_cover": false
-    },
-    {
-        "file": "hm7a0736-e3jltsml-lg.webp",
-        "post": "almrafq-waltfasyl",
-        "alt": "دورة مياه صغيرة بدش زجاجي ومغسلة معلّقة — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 2,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20250117-1-lg.webp",
-        "post": "almrafq-waltfasyl",
-        "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 3,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20250117-2-lg.webp",
-        "post": "almrafq-waltfasyl",
-        "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 4,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20250117-3-lg.webp",
-        "post": "almrafq-waltfasyl",
-        "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 5,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20240806-1.webp",
-        "post": "almkatb-altjarya",
-        "alt": "المكاتب والمعارض التجارية — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 0,
-        "is_cover": true
-    },
-    {
-        "file": "img-8141-dj9lgthx-lg.webp",
-        "post": "almkatb-altjarya",
-        "alt": "مكتب محاماة بأرائك جلدية خضراء ومكتبة خشبية وإضاءة مسارية — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 1,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20240806-2.webp",
-        "post": "almkatb-altjarya",
-        "alt": "المكاتب والمعارض التجارية — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 2,
-        "is_cover": false
-    },
-    {
-        "file": "img-8117-1rlx5ibh-lg.webp",
-        "post": "almkatb-altjarya",
-        "alt": "قاعة اجتماعات بطاولة خضراء طويلة وكراسي خشبية مبطّنة — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 3,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20240324-1.webp",
-        "post": "almkatb-altjarya",
-        "alt": "المكاتب والمعارض التجارية — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 4,
-        "is_cover": false
-    },
-    {
-        "file": "hm7a8588jpg-1ajmfdni-lg.webp",
-        "post": "almkatb-altjarya",
-        "alt": "مكتب إداري مؤثّث بمكتبة كتب وعلم السعودية — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 5,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20240324-2.webp",
-        "post": "almkatb-altjarya",
-        "alt": "المكاتب والمعارض التجارية — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 6,
-        "is_cover": false
-    },
-    {
-        "file": "at-mutaz-satti-13jpg-oge4kck0-lg.webp",
-        "post": "almkatb-altjarya",
-        "alt": "برج مكاتب بواجهة زجاجية زرقاء مضاء وقت الغسق — تصوير عقاري في جدة بعدسة معتز ساتي",
-        "caption": null,
-        "sort_order": 7,
-        "is_cover": false
-    },
-    {
-        "file": "aqarat-20240324-3.webp",
-        "post": "almkatb-altjarya",
-        "alt": "المكاتب والمعارض التجارية — تصوير معتز ساتي",
-        "caption": null,
-        "sort_order": 8,
-        "is_cover": false
-    },
-    {
-        "file": "mutaz-satti-872-h7ve9zqw.webp",
-        "usage": "re_hero",
-        "alt": "مجلس واسع بأريكة زاوية بيضاء وثريا خطية وجدار مرايا — تصوير عقاري في جدة بعدسة معتز ساتي"
-    },
-    {
-        "file": "mutaz-satti-901-ceamxin1.webp",
-        "usage": "re_craft_verticals",
-        "alt": "ممر رخامي طويل بأعمدة داكنة وخطوط رأسية مستقيمة — تصوير عقاري في جدة بعدسة معتز ساتي"
-    },
-    {
-        "file": "mutaz-satti-897-xpimmtg6.webp",
-        "usage": "re_craft_bluehour",
-        "alt": "واجهة مبنى سكني مضاءة عند الساعة الزرقاء بعد الغروب — تصوير عقاري في جدة بعدسة معتز ساتي"
-    },
-    {
-        "file": "mutaz-satti-926-o8stpcyd.webp",
-        "usage": "re_craft_styling",
-        "alt": "ركن طعام مرتَّب قبل التصوير بطاولة زجاجية وستة كراسي — تصوير عقاري في جدة بعدسة معتز ساتي"
-    },
-    {
-        "file": "mgls-balgoal-4mdri4cw.webp",
-        "usage": "re_before",
-        "alt": "المجلس نفسه ملتقطًا بالجوال قبل التصوير الاحترافي — مقارنة من أعمال معتز ساتي"
-    },
-    {
-        "file": "hm7a0745-final-vzmwciaz.webp",
-        "usage": "re_after",
-        "alt": "اللقطة نفسها بعد المعالجة اللونية وتصحيح المنظور — تصوير عقاري في جدة بعدسة معتز ساتي"
-    },
-    {
-        "file": "logo-etec-cq6c0czm.webp",
-        "usage": "accr_etec",
-        "alt": "شعار هيئة تقويم التعليم والتدريب"
-    },
-    {
-        "file": "logo-gaca-n2ij1veb.webp",
-        "usage": "accr_gaca",
-        "alt": "شعار الهيئة العامة للطيران المدني"
-    },
-    {
-        "file": "logo-gamr-0fqtycru.webp",
-        "usage": "accr_gamr",
-        "alt": "شعار الهيئة العامة لتنظيم الإعلام"
-    }
+ {
+  "file": "aqarat-20241115-1-lg.webp",
+  "post": "almrafq-alkharijiya",
+  "alt": "مرافق الترفيه في المجمعات — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "mutaz-satti-18jpg-gjtjb37q-lg.webp",
+  "post": "almrafq-alkharijiya",
+  "alt": "مسبح مجمّع سكني بمياه صافية تحيط به الفلل من الجانبين — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20241115-2-lg.webp",
+  "post": "almrafq-alkharijiya",
+  "alt": "مرافق الترفيه في المجمعات — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "file-00000000878c720a8cc787bed7507212jpg-ryfte40u.webp",
+  "post": "almrafq-alkharijiya",
+  "alt": "واجهة مبنى سكني متعدّد الأدوار مصوّر من الزاوية عند الغروب — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20241115-3-lg.webp",
+  "post": "almrafq-alkharijiya",
+  "alt": "مرافق الترفيه في المجمعات — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "file-00000000c22881f78f2b56c835942cb4jpg-amznwmmj.webp",
+  "post": "almrafq-alkharijiya",
+  "alt": "مجمّع فلل بفناء مشترك ومسبح ومساحات خضراء منسّقة — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20241115-4-lg.webp",
+  "post": "almrafq-alkharijiya",
+  "alt": "مرافق الترفيه في المجمعات — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 6,
+  "is_cover": false
+ },
+ {
+  "file": "file-000000005bb0820ab56f64588d89ca27jpg-nfsjswnv.webp",
+  "post": "almrafq-alkharijiya",
+  "alt": "مسبح خارجي بمظلات قماشية في مجمّع سكني — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 7,
+  "is_cover": false
+ },
+ {
+  "file": "file-00000000db38820abf571235711cfff6jpg-pkpg03p5.webp",
+  "post": "almrafq-alkharijiya",
+  "alt": "ملعب بادل أزرق داخل مجمّع سكني محاط بالفلل — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 8,
+  "is_cover": false
+ },
+ {
+  "file": "generated-image-january-15-2026-3-28pmjp-5vuvnsx3.webp",
+  "post": "almrafq-alkharijiya",
+  "alt": "جلسة سطح خارجية بإضاءة معلّقة وأثاث خيزران وقت الغروب — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 9,
+  "is_cover": false
+ },
+ {
+  "file": "1775813043623-1jpg-3ifzcquq.webp",
+  "post": "almrafq-alkharijiya",
+  "alt": "واجهة عمارة سكنية كلاسيكية عند الغروب مع إضاءة خارجية ونخيل — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 10,
+  "is_cover": false
+ },
+ {
+  "file": "at-mutaz-satti-4jpg-epzp1fpo.webp",
+  "post": "almrafq-alkharijiya",
+  "alt": "واجهة عمارة سكنية حديثة بتشطيب حجري وطوب بلون الطين — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 11,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240119-1.webp",
+  "post": "almdakhl-walmmrat",
+  "alt": "المداخل واللوبي — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "mutaz-satti-960-hwyuobmh-lg.webp",
+  "post": "almdakhl-walmmrat",
+  "alt": "مدخل رخامي بأبواب زجاجية ونباتات داخلية وإضاءة دافئة — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240119-2.webp",
+  "post": "almdakhl-walmmrat",
+  "alt": "المداخل واللوبي — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "hm7a8570-abmao0et-lg.webp",
+  "post": "almdakhl-walmmrat",
+  "alt": "مدخل شقة بباب خشبي وزجاج ونباتات على الجانبين — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20250723-1-lg.webp",
+  "post": "almdakhl-walmmrat",
+  "alt": "المداخل واللوبي — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20250723-2-lg.webp",
+  "post": "almdakhl-walmmrat",
+  "alt": "المداخل واللوبي — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "mutaz-satti-948-ffgdfzqc-lg.webp",
+  "post": "almjals-walmaisha",
+  "alt": "مجلس واسع بأرائك كريمية وطاولة وسطية مستديرة وثلاث لوحات على الجدار — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": true
+ },
+ {
+  "file": "mutaz-satti-928-5njyekip-lg.webp",
+  "post": "almjals-walmaisha",
+  "alt": "تلفزيون معلّق فوق مدفأة إيثانول بلهب ظاهر وخزانة خشبية — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "mutaz-satti-944-oxh9olce-lg.webp",
+  "post": "almjals-walmaisha",
+  "alt": "صالة معيشة فاتحة بتلفزيون معلّق ونبتة زيتون ومقعد جانبي — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "hm7a0693-qm4cajz8-lg.webp",
+  "post": "almjals-walmaisha",
+  "alt": "صالة معيشة بأريكتين وطاولتين خشبيتين ولوحة أفقية — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "hm7a0695-hid40pdr-lg.webp",
+  "post": "almjals-walmaisha",
+  "alt": "استوديو مؤثّث بتلفزيون وطاولة قهوة خشبية وإضاءة مسارية — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "at-mutaz-satti-16jpg-p51mnfmi-lg.webp",
+  "post": "almjals-walmaisha",
+  "alt": "صالة معيشة في شقة نموذجية بإضاءة طبيعية وأثاث فاتح — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 6,
+  "is_cover": false
+ },
+ {
+  "file": "hm7a6459-dvdpwc3g-lg.webp",
+  "post": "almjals-walmaisha",
+  "alt": "صالة بأريكة زاوية رمادية وطاولة قهوة ومقعد مبطّن — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 7,
+  "is_cover": false
+ },
+ {
+  "file": "hm7a6475-oa62ykvv-lg.webp",
+  "post": "almjals-walmaisha",
+  "alt": "صالة معيشة بأريكة رمادية وتلفزيون وسجادة فاتحة — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 8,
+  "is_cover": false
+ },
+ {
+  "file": "at-mutaz-satti-12-g058bi3x-lg.webp",
+  "post": "almjals-walmaisha",
+  "alt": "صالة معيشة بأريكة رمادية ووسائد ملوّنة ومطبخ مفتوح خلفها — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 9,
+  "is_cover": false
+ },
+ {
+  "file": "mutaz-satti-111-x0kazuuh-lg.webp",
+  "post": "almjals-walmaisha",
+  "alt": "مجلس بأريكة كريمية وتلفزيون معلّق وكرسي أخضر مفرد — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 10,
+  "is_cover": false
+ },
+ {
+  "file": "mutaz-satti-893-dl7qyex2-lg.webp",
+  "post": "ghrf-alnoom",
+  "alt": "غرفة نوم بسرير أبيض وركن جلوس وإضاءة مخفية في السقف — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "mutaz-satti-969-or3tpnfv-lg.webp",
+  "post": "ghrf-alnoom",
+  "alt": "غرفة بسريرين مفردين وستائر شفافة تدخل منها إضاءة النهار — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "generated-image-january-15-2026-3-37pmjp-alvvjrtp.webp",
+  "post": "ghrf-alnoom",
+  "alt": "غرفة نوم رئيسية مؤثّثة بإضاءة مخفية وطاولتين جانبيتين — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20241223-1-lg.webp",
+  "post": "ghrf-alnoom",
+  "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "at-mutaz-satti-2449jpg-xmwankwe-lg.webp",
+  "post": "ghrf-alnoom",
+  "alt": "غرفة نوم بنافذة عالية وستائر شفافة تدخل منها إضاءة طبيعية — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20241223-2-lg.webp",
+  "post": "ghrf-alnoom",
+  "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20241223-3-lg.webp",
+  "post": "ghrf-alnoom",
+  "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 6,
+  "is_cover": false
+ },
+ {
+  "file": "mutaz-satti-865-oa9ssizk-lg.webp",
+  "post": "almtabkh-wmoaid-altaam",
+  "alt": "مطبخ بجزيرة وسطية بيضاء وخزائن خشبية فاتحة وأجهزة مدمجة — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "hm7a0710-dknqt17m-lg.webp",
+  "post": "almtabkh-wmoaid-altaam",
+  "alt": "مطبخ زاوية بغسالة مدمجة وموقد غاز وخزائن بلون الزيتون — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "generated-image-january-15-2026-4-38pm-1-vqg1qvjr.webp",
+  "post": "almtabkh-wmoaid-altaam",
+  "alt": "مطبخ مفتوح بجزيرة وسطية وخزائن خشبية وأجهزة مدمجة — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "hm7a8466-1-qxqjgydp-lg.webp",
+  "post": "almtabkh-wmoaid-altaam",
+  "alt": "مطبخ بخزائن خشبية وغسالة ونشّافة فوق بعضهما وفرن مدمج — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240609-1.webp",
+  "post": "almtabkh-wmoaid-altaam",
+  "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240609-2.webp",
+  "post": "almtabkh-wmoaid-altaam",
+  "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240609-3.webp",
+  "post": "almtabkh-wmoaid-altaam",
+  "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 6,
+  "is_cover": false
+ },
+ {
+  "file": "hm7a0741-1alipggz-lg.webp",
+  "post": "almrafq-waltfasyl",
+  "alt": "صينية ضيافة بغلاية كهربائية وماكينة قهوة وأكواب ومياه — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "mutaz-satti-966-t3trtfjh-lg.webp",
+  "post": "almrafq-waltfasyl",
+  "alt": "تفصيلة حوض حمّام رخامي بصنبور أسود وزجاجتَي صابون — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "hm7a0736-e3jltsml-lg.webp",
+  "post": "almrafq-waltfasyl",
+  "alt": "دورة مياه صغيرة بدش زجاجي ومغسلة معلّقة — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20250117-1-lg.webp",
+  "post": "almrafq-waltfasyl",
+  "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20250117-2-lg.webp",
+  "post": "almrafq-waltfasyl",
+  "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20250117-3-lg.webp",
+  "post": "almrafq-waltfasyl",
+  "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240806-1.webp",
+  "post": "almkatb-altjarya",
+  "alt": "المكاتب والمعارض التجارية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "img-8141-dj9lgthx-lg.webp",
+  "post": "almkatb-altjarya",
+  "alt": "مكتب محاماة بأرائك جلدية خضراء ومكتبة خشبية وإضاءة مسارية — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240806-2.webp",
+  "post": "almkatb-altjarya",
+  "alt": "المكاتب والمعارض التجارية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "img-8117-1rlx5ibh-lg.webp",
+  "post": "almkatb-altjarya",
+  "alt": "قاعة اجتماعات بطاولة خضراء طويلة وكراسي خشبية مبطّنة — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240324-1.webp",
+  "post": "almkatb-altjarya",
+  "alt": "المكاتب والمعارض التجارية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "hm7a8588jpg-1ajmfdni-lg.webp",
+  "post": "almkatb-altjarya",
+  "alt": "مكتب إداري مؤثّث بمكتبة كتب وعلم السعودية — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240324-2.webp",
+  "post": "almkatb-altjarya",
+  "alt": "المكاتب والمعارض التجارية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 6,
+  "is_cover": false
+ },
+ {
+  "file": "at-mutaz-satti-13jpg-oge4kck0-lg.webp",
+  "post": "almkatb-altjarya",
+  "alt": "برج مكاتب بواجهة زجاجية زرقاء مضاء وقت الغسق — تصوير عقاري في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 7,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240324-3.webp",
+  "post": "almkatb-altjarya",
+  "alt": "المكاتب والمعارض التجارية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 8,
+  "is_cover": false
+ },
+ {
+  "file": "mutaz-satti-872-h7ve9zqw.webp",
+  "usage": "re_hero",
+  "alt": "مجلس واسع بأريكة زاوية بيضاء وثريا خطية وجدار مرايا — تصوير عقاري في جدة بعدسة معتز ساتي"
+ },
+ {
+  "file": "mutaz-satti-901-ceamxin1.webp",
+  "usage": "re_craft_verticals",
+  "alt": "ممر رخامي طويل بأعمدة داكنة وخطوط رأسية مستقيمة — تصوير عقاري في جدة بعدسة معتز ساتي"
+ },
+ {
+  "file": "mutaz-satti-897-xpimmtg6.webp",
+  "usage": "re_craft_bluehour",
+  "alt": "واجهة مبنى سكني مضاءة عند الساعة الزرقاء بعد الغروب — تصوير عقاري في جدة بعدسة معتز ساتي"
+ },
+ {
+  "file": "mutaz-satti-926-o8stpcyd.webp",
+  "usage": "re_craft_styling",
+  "alt": "ركن طعام مرتَّب قبل التصوير بطاولة زجاجية وستة كراسي — تصوير عقاري في جدة بعدسة معتز ساتي"
+ },
+ {
+  "file": "mgls-balgoal-4mdri4cw.webp",
+  "usage": "re_before",
+  "alt": "المجلس نفسه ملتقطًا بالجوال قبل التصوير الاحترافي — مقارنة من أعمال معتز ساتي"
+ },
+ {
+  "file": "hm7a0745-final-vzmwciaz.webp",
+  "usage": "re_after",
+  "alt": "اللقطة نفسها بعد المعالجة اللونية وتصحيح المنظور — تصوير عقاري في جدة بعدسة معتز ساتي"
+ },
+ {
+  "file": "logo-etec-cq6c0czm.webp",
+  "usage": "accr_etec",
+  "alt": "شعار هيئة تقويم التعليم والتدريب"
+ },
+ {
+  "file": "logo-gaca-n2ij1veb.webp",
+  "usage": "accr_gaca",
+  "alt": "شعار الهيئة العامة للطيران المدني"
+ },
+ {
+  "file": "logo-gamr-0fqtycru.webp",
+  "usage": "accr_gamr",
+  "alt": "شعار الهيئة العامة لتنظيم الإعلام"
+ },
+ {
+  "file": "amanat-jeddah.png",
+  "usage": "client_logo",
+  "alt": "شعار أمانة جدة",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "أمانة جدة"
+ },
+ {
+  "file": "kau.png",
+  "usage": "client_logo",
+  "alt": "شعار جامعة الملك عبدالعزيز",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "جامعة الملك عبدالعزيز"
+ },
+ {
+  "file": "ksgaal.png",
+  "usage": "client_logo",
+  "alt": "شعار مجمع الملك سلمان العالمي للغة العربية",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "مجمع الملك سلمان العالمي للغة العربية"
+ },
+ {
+  "file": "ministry-of-sport.png",
+  "usage": "client_logo",
+  "alt": "شعار وزارة الرياضة",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "وزارة الرياضة"
+ },
+ {
+  "file": "oman-foreign-ministry.png",
+  "usage": "client_logo",
+  "alt": "شعار وزارة الخارجية — سلطنة عُمان",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "وزارة الخارجية — سلطنة عُمان"
+ },
+ {
+  "file": "iraq-consulate-jeddah.png",
+  "usage": "client_logo",
+  "alt": "شعار القنصلية العامة لجمهورية العراق في جدة",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "القنصلية العامة لجمهورية العراق في جدة"
+ },
+ {
+  "file": "saudi-cycling.png",
+  "usage": "client_logo",
+  "alt": "شعار الاتحاد السعودي للدراجات",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "الاتحاد السعودي للدراجات"
+ },
+ {
+  "file": "saudi-karate.png",
+  "usage": "client_logo",
+  "alt": "شعار الاتحاد السعودي للكاراتيه",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "الاتحاد السعودي للكاراتيه"
+ },
+ {
+  "file": "saudi-kickboxing.png",
+  "usage": "client_logo",
+  "alt": "شعار الاتحاد السعودي للملاكمة والركل",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "الاتحاد السعودي للملاكمة والركل"
+ },
+ {
+  "file": "saudi-life-saving.png",
+  "usage": "client_logo",
+  "alt": "شعار الاتحاد السعودي للإنقاذ والسلامة المائية",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "الاتحاد السعودي للإنقاذ والسلامة المائية"
+ },
+ {
+  "file": "saudi-billiard-snooker.png",
+  "usage": "client_logo",
+  "alt": "شعار الاتحاد السعودي للبلياردو والسنوكر",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "الاتحاد السعودي للبلياردو والسنوكر"
+ },
+ {
+  "file": "waqf-lughat-alquran.png",
+  "usage": "client_logo",
+  "alt": "شعار وقف لغة القرآن بجامعة الملك عبدالعزيز",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "وقف لغة القرآن بجامعة الملك عبدالعزيز"
+ },
+ {
+  "file": "mujamma-altaj-alqurani.png",
+  "usage": "client_logo",
+  "alt": "شعار مجمع التاج القرآني بجامع الزبيدي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "مجمع التاج القرآني بجامع الزبيدي"
+ },
+ {
+  "file": "manaer-association.png",
+  "usage": "client_logo",
+  "alt": "شعار جمعية منائر لخدمة المساجد بمنطقة مكة المكرمة",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "جمعية منائر لخدمة المساجد بمنطقة مكة المكرمة"
+ },
+ {
+  "file": "riayat-alajyal.png",
+  "usage": "client_logo",
+  "alt": "شعار جمعية رعاية الأجيال",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "جمعية رعاية الأجيال"
+ },
+ {
+  "file": "namaa-almakkiyah.png",
+  "usage": "client_logo",
+  "alt": "شعار نماء المكية للسقاية والرفادة",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "نماء المكية للسقاية والرفادة"
+ },
+ {
+  "file": "madaris-alamjad.png",
+  "usage": "client_logo",
+  "alt": "شعار مدارس الأمجاد",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "مدارس الأمجاد"
+ },
+ {
+  "file": "ldi.png",
+  "usage": "client_logo",
+  "alt": "شعار معهد إعداد القادة",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "معهد إعداد القادة"
+ },
+ {
+  "file": "kayan-alnahda.png",
+  "usage": "client_logo",
+  "alt": "شعار مؤسسة كيان النهضة العقارية",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "مؤسسة كيان النهضة العقارية"
+ },
+ {
+  "file": "almuhannad-real-estate.png",
+  "usage": "client_logo",
+  "alt": "شعار المهند العقارية",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "المهند العقارية"
+ },
+ {
+  "file": "bilsan-real-estate.png",
+  "usage": "client_logo",
+  "alt": "شعار بيلسان العقارية",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "بيلسان العقارية"
+ },
+ {
+  "file": "raf-real-estate.png",
+  "usage": "client_logo",
+  "alt": "شعار راف العقارية",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "راف العقارية"
+ },
+ {
+  "file": "dyara.png",
+  "usage": "client_logo",
+  "alt": "شعار ديارا",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "ديارا"
+ },
+ {
+  "file": "maskan-maymoon.png",
+  "usage": "client_logo",
+  "alt": "شعار مسكن ميمون",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "مسكن ميمون"
+ },
+ {
+  "file": "alruwaihy-alshahrani.png",
+  "usage": "client_logo",
+  "alt": "شعار الرويحي والشهراني — محامون ومستشارون",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "الرويحي والشهراني — محامون ومستشارون"
+ },
+ {
+  "file": "jaber-yaslam-law.png",
+  "usage": "client_logo",
+  "alt": "شعار جابر يسلم للمحاماة والاستشارات القانونية",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "جابر يسلم للمحاماة والاستشارات القانونية"
+ },
+ {
+  "file": "watan.png",
+  "usage": "client_logo",
+  "alt": "شعار WATAN",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "WATAN"
+ },
+ {
+  "file": "fonon.png",
+  "usage": "client_logo",
+  "alt": "شعار فنون",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "فنون"
+ },
+ {
+  "file": "focus-production-house.png",
+  "usage": "client_logo",
+  "alt": "شعار Focus Production House",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "Focus Production House"
+ },
+ {
+  "file": "alsuhaili.png",
+  "usage": "client_logo",
+  "alt": "شعار السحيلي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "السحيلي"
+ },
+ {
+  "file": "samir.png",
+  "usage": "client_logo",
+  "alt": "شعار سمير",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "سمير"
+ },
+ {
+  "file": "tbwyeb.png",
+  "usage": "client_logo",
+  "alt": "شعار متجر تبويب",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "متجر تبويب"
+ },
+ {
+  "file": "tharwa.png",
+  "usage": "client_logo",
+  "alt": "شعار ثروة",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "ثروة"
+ },
+ {
+  "file": "le-beurre.png",
+  "usage": "client_logo",
+  "alt": "شعار Le Beurre",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "Le Beurre"
+ },
+ {
+  "file": "madghout-baitna.png",
+  "usage": "client_logo",
+  "alt": "شعار مضغوط بيتنا",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "مضغوط بيتنا"
+ },
+ {
+  "file": "fradis.png",
+  "usage": "client_logo",
+  "alt": "شعار Fradis",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "Fradis"
+ },
+ {
+  "file": "hadiqa-almarah.png",
+  "usage": "client_logo",
+  "alt": "شعار حديقة المرح",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "حديقة المرح"
+ },
+ {
+  "file": "dubai-jeddah-brand.png",
+  "usage": "client_logo",
+  "alt": "شعار شركة الشبل الإبداعية المحدودة",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": false,
+  "client": "شركة الشبل الإبداعية المحدودة"
+ },
+ {
+  "file": "munasabat-20241017-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "munasabat-20250111-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250111-2.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250111-3.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250111-4.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250108-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250108-2.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 6,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250108-3.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 7,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250108-4.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 8,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250210-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 9,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250210-2.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 10,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250210-3.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 11,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250625-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 12,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250625-2.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 13,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250626-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 14,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250627-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 15,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250627-2.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 16,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250629-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 17,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251225-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 18,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251225-2.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 19,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251225-3.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 20,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251225-4.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 21,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260202-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 22,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260507-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 23,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260508-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 24,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260706-1.webp",
+  "post": "burtreh-alaris-laylat-alzawaj",
+  "alt": "بورتريه العريس في ليلة الزواج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 25,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250102-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "munasabat-20250203-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250203-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250203-3.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250203-4.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250203-5.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250209-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 6,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250209-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 7,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250209-3.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 8,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250209-4.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 9,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250314-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 10,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250314-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 11,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250615-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 12,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250615-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 13,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250624-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 14,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250624-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 15,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250624-3.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 16,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250624-4.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 17,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250705-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 18,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250705-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 19,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250705-3.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 20,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250705-4.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 21,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250705-5.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 22,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250723-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 23,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250724-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 24,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250814-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 25,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250814-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 26,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250817-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 27,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250817-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 28,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250817-3.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 29,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250819-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 30,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250825-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 31,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250827-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 32,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250827-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 33,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250827-3.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 34,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250827-4.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 35,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250907-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 36,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250910-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 37,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250910-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 38,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250910-3.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 39,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250910-4.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 40,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250910-5.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 41,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250913-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 42,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250922-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 43,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250922-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 44,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250922-3.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 45,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251008-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 46,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251008-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 47,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251008-3.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 48,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251008-4.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 49,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251014-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 50,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251014-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 51,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251014-3.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 52,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251014-4.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 53,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251122-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 54,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260205-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 55,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260205-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 56,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260205-3.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 57,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260205-4.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 58,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260509-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 59,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260530-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 60,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260530-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 61,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260530-3.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 62,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260603-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 63,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260603-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 64,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260829-1.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 65,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20260829-2.webp",
+  "post": "taghtiyat-hafl-alzawaj",
+  "alt": "تغطية حفل الزواج من الاستقبال إلى الختام — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 66,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20241007-1.webp",
+  "post": "sayarat-alzifaf-wal-khuruj",
+  "alt": "سيارة الزفاف ولحظة الخروج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "munasabat-20240526-1.webp",
+  "post": "sayarat-alzifaf-wal-khuruj",
+  "alt": "سيارة الزفاف ولحظة الخروج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250105-1.webp",
+  "post": "sayarat-alzifaf-wal-khuruj",
+  "alt": "سيارة الزفاف ولحظة الخروج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250105-2.webp",
+  "post": "sayarat-alzifaf-wal-khuruj",
+  "alt": "سيارة الزفاف ولحظة الخروج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250126-1.webp",
+  "post": "sayarat-alzifaf-wal-khuruj",
+  "alt": "سيارة الزفاف ولحظة الخروج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250126-2.webp",
+  "post": "sayarat-alzifaf-wal-khuruj",
+  "alt": "سيارة الزفاف ولحظة الخروج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250126-3.webp",
+  "post": "sayarat-alzifaf-wal-khuruj",
+  "alt": "سيارة الزفاف ولحظة الخروج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 6,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250126-4.webp",
+  "post": "sayarat-alzifaf-wal-khuruj",
+  "alt": "سيارة الزفاف ولحظة الخروج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 7,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251125-1.webp",
+  "post": "sayarat-alzifaf-wal-khuruj",
+  "alt": "سيارة الزفاف ولحظة الخروج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 8,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251125-2.webp",
+  "post": "sayarat-alzifaf-wal-khuruj",
+  "alt": "سيارة الزفاف ولحظة الخروج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 9,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20251125-3.webp",
+  "post": "sayarat-alzifaf-wal-khuruj",
+  "alt": "سيارة الزفاف ولحظة الخروج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 10,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20240601-1.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "munasabat-20250407-1.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250407-2.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250407-3.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250407-4.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250407-5.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250516-1.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 6,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250516-2.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 7,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250516-3.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 8,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250516-4.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 9,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250611-1.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 10,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250611-2.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 11,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250611-3.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 12,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250611-4.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 13,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250611-5.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 14,
+  "is_cover": false
+ },
+ {
+  "file": "munasabat-20250611-6.webp",
+  "post": "hafalat-altakrim-waltakharruj",
+  "alt": "حفلات التكريم والتخرّج — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 15,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20240628-1.webp",
+  "post": "taghtiyat-albutulat-alriyadiyya",
+  "alt": "تغطية البطولات والفعاليات الرياضية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20240628-2.webp",
+  "post": "taghtiyat-albutulat-alriyadiyya",
+  "alt": "تغطية البطولات والفعاليات الرياضية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20251128-1.webp",
+  "post": "taghtiyat-albutulat-alriyadiyya",
+  "alt": "تغطية البطولات والفعاليات الرياضية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20251128-2.webp",
+  "post": "taghtiyat-albutulat-alriyadiyya",
+  "alt": "تغطية البطولات والفعاليات الرياضية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20251128-3.webp",
+  "post": "taghtiyat-albutulat-alriyadiyya",
+  "alt": "تغطية البطولات والفعاليات الرياضية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20251129-1.webp",
+  "post": "taghtiyat-albutulat-alriyadiyya",
+  "alt": "تغطية البطولات والفعاليات الرياضية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 6,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20251129-2.webp",
+  "post": "taghtiyat-albutulat-alriyadiyya",
+  "alt": "تغطية البطولات والفعاليات الرياضية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 7,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20251129-3.webp",
+  "post": "taghtiyat-albutulat-alriyadiyya",
+  "alt": "تغطية البطولات والفعاليات الرياضية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 8,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20251129-4.webp",
+  "post": "taghtiyat-albutulat-alriyadiyya",
+  "alt": "تغطية البطولات والفعاليات الرياضية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 9,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20251129-5.webp",
+  "post": "taghtiyat-albutulat-alriyadiyya",
+  "alt": "تغطية البطولات والفعاليات الرياضية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 10,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20251129-6.webp",
+  "post": "taghtiyat-albutulat-alriyadiyya",
+  "alt": "تغطية البطولات والفعاليات الرياضية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 11,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20241130-1.webp",
+  "post": "taghtiyat-iftitah-tijari",
+  "alt": "تغطية افتتاح فرع تجاري — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "faaliyat-20241130-2.webp",
+  "post": "taghtiyat-iftitah-tijari",
+  "alt": "تغطية افتتاح فرع تجاري — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240608-1.webp",
+  "post": "taswir-shaqqa-namudhajiyya",
+  "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "aqarat-20240608-2.webp",
+  "post": "taswir-shaqqa-namudhajiyya",
+  "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240608-3.webp",
+  "post": "taswir-shaqqa-namudhajiyya",
+  "alt": "الوحدات السكنية المؤثثة — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20250721-1.webp",
+  "post": "almujammaat-alsakaniyya-walwajihat",
+  "alt": "المجمعات السكنية والواجهات — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "aqarat-20250721-2.webp",
+  "post": "almujammaat-alsakaniyya-walwajihat",
+  "alt": "المجمعات السكنية والواجهات — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20240402-1.webp",
+  "post": "almujammaat-alsakaniyya-walwajihat",
+  "alt": "المجمعات السكنية والواجهات — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20250731-1.webp",
+  "post": "almujammaat-alsakaniyya-walwajihat",
+  "alt": "المجمعات السكنية والواجهات — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20250731-2.webp",
+  "post": "almujammaat-alsakaniyya-walwajihat",
+  "alt": "المجمعات السكنية والواجهات — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20250731-3.webp",
+  "post": "almujammaat-alsakaniyya-walwajihat",
+  "alt": "المجمعات السكنية والواجهات — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "aqarat-20250506-1.webp",
+  "post": "tawthiq-marahil-alinsha",
+  "alt": "توثيق مراحل الإنشاء — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "aqarat-20250506-2.webp",
+  "post": "tawthiq-marahil-alinsha",
+  "alt": "توثيق مراحل الإنشاء — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20240522-1.webp",
+  "post": "tawthiq-barnamaj-tadribi",
+  "alt": "tawthiq-barnamaj-tadribi — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "faaliyat-20240626-1.webp",
+  "post": "tawthiq-barnamaj-tadribi",
+  "alt": "tawthiq-barnamaj-tadribi — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20240626-2.webp",
+  "post": "tawthiq-barnamaj-tadribi",
+  "alt": "tawthiq-barnamaj-tadribi — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20240516-1.webp",
+  "post": "taghtiyat-mutamar-mahali",
+  "alt": "taghtiyat-mutamar-mahali — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "faaliyat-20240516-2.webp",
+  "post": "taghtiyat-mutamar-mahali",
+  "alt": "taghtiyat-mutamar-mahali — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20250120-1.webp",
+  "post": "taghtiyat-mutamar-mahali",
+  "alt": "taghtiyat-mutamar-mahali — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20250120-2.webp",
+  "post": "taghtiyat-mutamar-mahali",
+  "alt": "taghtiyat-mutamar-mahali — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20250120-3.webp",
+  "post": "taghtiyat-mutamar-mahali",
+  "alt": "taghtiyat-mutamar-mahali — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20250120-4.webp",
+  "post": "taghtiyat-mutamar-mahali",
+  "alt": "taghtiyat-mutamar-mahali — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "wirash-20250712-1.webp",
+  "post": "warshat-asasiyat-altaswir",
+  "alt": "warshat-asasiyat-altaswir — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "wirash-20250712-2.webp",
+  "post": "warshat-asasiyat-altaswir",
+  "alt": "warshat-asasiyat-altaswir — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "faaliyat-20240612-1.webp",
+  "post": "taghtiyat-albutulat-alriyadiyya",
+  "alt": "تغطية البطولات والفعاليات الرياضية — تصوير معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ }
 ]

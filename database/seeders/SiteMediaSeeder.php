@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Client;
 use App\Models\Media;
 use App\Models\Post;
 use App\Services\ImageService;
@@ -47,13 +48,26 @@ class SiteMediaSeeder extends Seeder
             }
 
             $usage = isset($item['usage']) ? (string) $item['usage'] : null;
+            $client = null;
 
-            // الخانة محجوزة سلفًا، أو الصورة مستوردة سلفًا باسمها
-            if ($usage !== null && Media::where('usage', $usage)->exists()) {
+            if (isset($item['client'])) {
+                $client = Client::where('name', $item['client'])->first();
+
+                if (! $client) {
+                    continue;
+                }
+
+                // الجهات كلها تتشارك usage واحدًا فلا يصلح للتمييز بينها:
+                // المعيار أن تكون هذه الجهة بعينها تملك شعارًا
+                if ($client->media_id) {
+                    continue;
+                }
+            } elseif ($usage !== null && Media::where('usage', $usage)->exists()) {
+                // الخانة محجوزة سلفًا
                 continue;
             }
 
-            if ($usage === null && Media::where('original_name', $item['file'])->exists()) {
+            if ($client === null && $usage === null && $this->alreadyImported((string) $item['file'])) {
                 continue;
             }
 
@@ -85,6 +99,8 @@ class SiteMediaSeeder extends Seeder
                     'caption' => $item['caption'] ?? null,
                     'sort_order' => (int) ($item['sort_order'] ?? 0),
                 ]);
+
+                $client?->update(['media_id' => $media->id]);
             } catch (Throwable $e) {
                 // صورة واحدة معطوبة لا توقف بذر البقية على خادم حيّ. أما في
                 // الاختبار فالصمت يُخفي العطل الذي جاء الاختبار ليكشفه.
@@ -97,5 +113,19 @@ class SiteMediaSeeder extends Seeder
         }
 
         Media::forgetLogo();
+    }
+
+    /**
+     * هل استُوردت هذه الصورة سلفًا؟
+     *
+     * نسخة المستودع قد تحمل لاحقة مقاس (‎-lg‎) لا تحملها الصورة بعد استيرادها،
+     * فالمطابقة على الاسم كما هو تُخطئ وتستورد نسخة ثانية عند كل تشغيل.
+     * المقارنة تشمل الاسم مجرّدًا من اللاحقة أيضًا.
+     */
+    private function alreadyImported(string $file): bool
+    {
+        $base = (string) preg_replace('/-(lg|md|thumb)(\.[A-Za-z0-9]+)$/', '$2', $file);
+
+        return Media::whereIn('original_name', array_unique([$file, $base]))->exists();
     }
 }
