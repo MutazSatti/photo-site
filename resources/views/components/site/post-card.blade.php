@@ -12,12 +12,30 @@
     <a href="{{ $post->url() }}" wire:navigate class="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500 rounded-2xl">
 
         <div class="relative overflow-hidden bg-ink-100 rounded-2xl dark:bg-ink-800 aspect-4/3">
-            <x-site.picture
-                :media="$cover"
-                variant="md"
-                :eager="$eager"
-                class="size-full transition-transform duration-700 ease-smooth group-hover:scale-105"
-            />
+            @if ($cover)
+                <x-site.picture
+                    :media="$cover"
+                    variant="md"
+                    :eager="$eager"
+                    class="size-full transition-transform duration-700 ease-smooth group-hover:scale-105"
+                />
+            @else
+                {{--
+                    العنصر بلا غلاف كان يرث بديل x-site.picture: مربّع رمادي فيه
+                    أيقونة صورة مكسورة. وهو يوحي بأن شيئًا تعطّل لا بأن الغلاف
+                    ناقص — والمقالات والمنشورات التعليمية لا غلاف لها بطبيعتها،
+                    فكان ثلثا صفحة المنشورات مربّعات مكسورة.
+
+                    البديل لوحة مصمّمة بعلامة الموقع: تملأ المكان بهدوء، وتتناسق
+                    مع بقية البطاقات، ولا تدّعي وجود صورة.
+                --}}
+                <div
+                    class="flex items-center justify-center transition-transform size-full bg-gradient-to-br from-ink-100 via-ink-100 to-brand-100 duration-700 ease-smooth group-hover:scale-105 dark:from-ink-800 dark:via-ink-800 dark:to-ink-900"
+                    aria-hidden="true"
+                >
+                    <x-icon name="aperture" :size="52" :stroke="1.25" class="text-brand-300 dark:text-ink-700" />
+                </div>
+            @endif
 
             <div class="absolute inset-0 transition-opacity opacity-0 img-scrim group-hover:opacity-100"></div>
 
