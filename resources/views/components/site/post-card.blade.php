@@ -26,15 +26,14 @@
                     ناقص — والمقالات والمنشورات التعليمية لا غلاف لها بطبيعتها،
                     فكان ثلثا صفحة المنشورات مربّعات مكسورة.
 
-                    البديل لوحة مصمّمة بعلامة الموقع: تملأ المكان بهدوء، وتتناسق
-                    مع بقية البطاقات، ولا تدّعي وجود صورة.
+                    البذرة هي الاسم اللطيف لا العنوان: العنوان يتغيّر بالتحرير
+                    فيتبدّل الرسم معه، والاسم اللطيف ثابت ما بقي العنصر.
                 --}}
-                <div
-                    class="flex items-center justify-center transition-transform size-full bg-gradient-to-br from-ink-100 via-ink-100 to-brand-100 duration-700 ease-smooth group-hover:scale-105 dark:from-ink-800 dark:via-ink-800 dark:to-ink-900"
-                    aria-hidden="true"
-                >
-                    <x-icon name="aperture" :size="52" :stroke="1.25" class="text-brand-300 dark:text-ink-700" />
-                </div>
+                <x-site.cover-art
+                    :seed="$post->slug"
+                    :icon="$post->section?->icon ?? 'aperture'"
+                    class="size-full transition-transform duration-700 ease-smooth group-hover:scale-105"
+                />
             @endif
 
             <div class="absolute inset-0 transition-opacity opacity-0 img-scrim group-hover:opacity-100"></div>

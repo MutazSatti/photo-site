@@ -19,6 +19,25 @@
         </svg>
     </div>
 
+    {{--
+        النصّ يشغل ثلاثة أخماس العرض، فيبقى خمساه فراغًا مسطّحًا على الشاشات
+        الواسعة. رسم البؤرة يملؤه ويذوب في الحافّة فلا ينافس العنوان.
+
+        يظهر من lg فقط: على الشاشات الضيقة لا فراغ أصلًا، وإقحامه هناك يزاحم
+        النصّ الذي جاء الزائر لأجله.
+    --}}
+    {{--
+        end لا start: الصفحة RTL فالنصّ يبدأ من اليمين والفراغ يقع يساره. ووضعه
+        على start يضعه تحت العنوان نفسه.
+
+        واتجاه التدرّج فيزيائي لا منطقي — والموقع RTL ثابتًا — فهو شفاف عند
+        الحافّة اليسرى حيث يظهر الرسم، ومصمت عند اليمين حيث يبدأ النصّ.
+    --}}
+    <div class="absolute inset-y-0 hidden pointer-events-none end-0 w-1/3 lg:block" aria-hidden="true">
+        <x-site.cover-art :seed="$title" :icon="$icon" class="size-full bg-transparent! dark:bg-transparent!" />
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-ink-50 dark:to-ink-900"></div>
+    </div>
+
     <div class="relative px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-16">
         @if ($breadcrumbs !== [])
             <x-site.breadcrumbs :items="$breadcrumbs" class="mb-6" />

@@ -207,6 +207,19 @@ new class extends Component
                 <h2 class="sr-only">صور {{ $post->title }}</h2>
                 <x-site.gallery :media="$post->media" :columns="3" />
             </section>
+        @else
+            {{--
+                المقال بلا صور يبدأ نصًّا فور الترويسة على موقع مصوّر — وهو أضعف
+                ما فيه. شريط الرسم المولَّد يفصل الترويسة عن النصّ ويمنح العين
+                محطّة قبل القراءة، دون أن يدّعي أنه صورة.
+            --}}
+            <section class="px-4 pt-10 mx-auto max-w-3xl sm:px-6 lg:px-8">
+                <x-site.cover-art
+                    :seed="$post->slug"
+                    :icon="$post->section?->icon ?? 'aperture'"
+                    class="rounded-2xl border border-ink-200 h-44 sm:h-56 dark:border-ink-800"
+                />
+            </section>
         @endif
 
         {{-- ================= المحتوى ================= --}}
