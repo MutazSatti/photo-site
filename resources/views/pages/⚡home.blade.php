@@ -132,9 +132,13 @@ new class extends Component
     }
 
     #[Computed]
+    /**
+     * كل الآراء المنشورة لا ثلاثة منها: القسم صار يبدّلها تلقائيًا، فحصرها في
+     * ثلاثة كان يُخفي بقيتها خلف رابط Google بلا سبب.
+     */
     public function testimonials()
     {
-        return Testimonial::query()->active()->ordered()->take(3)->get();
+        return Testimonial::query()->active()->ordered()->get();
     }
 
     #[Computed]
