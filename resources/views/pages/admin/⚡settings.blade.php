@@ -52,6 +52,7 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
         $this->loadValues();
         $this->loadLogoOptions();
         $this->loadSeoValues();
+        $this->loadBlockText();
     }
 
     /** المفاتيح التي يمثّلها مربّع اختيار، فتحتاج boolean لا نصًّا. */
@@ -257,7 +258,54 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
 
         $block->update(['is_active' => ! $block->is_active]);
 
+        HomeBlock::forget();
         unset($this->homeBlocks);
+    }
+
+    /**
+     * عناوين العناصر ومقدّماتها، مفهرسة بالمعرّف.
+     *
+     * تُحمَّل من القاعدة لا من التعريفات: الحقل الفارغ هنا يعني «استعمل
+     * المبدئي»، فلو ملأناه بالمبدئي لصار كل عنصر محرَّرًا بمجرد فتح الصفحة
+     * وانقطع عن أي تحسين لاحق في نصوص الشيفرة.
+     *
+     * @var array<int, array{title: string, subtitle: string}>
+     */
+    public array $blockText = [];
+
+    public function loadBlockText(): void
+    {
+        foreach (HomeBlock::query()->ordered()->get() as $block) {
+            $this->blockText[$block->id] = [
+                'title' => (string) $block->title,
+                'subtitle' => (string) $block->subtitle,
+            ];
+        }
+    }
+
+    public function saveBlockText(int $id): void
+    {
+        $block = HomeBlock::findOrFail($id);
+
+        $this->validate([
+            'blockText.'.$id.'.title' => ['nullable', 'string', 'max:120'],
+            'blockText.'.$id.'.subtitle' => ['nullable', 'string', 'max:400'],
+        ], [], [
+            'blockText.'.$id.'.title' => 'العنوان',
+            'blockText.'.$id.'.subtitle' => 'المقدّمة',
+        ]);
+
+        // الفراغ يُحفظ null لا سلسلة فارغة، فيقرأه النموذج «أعد المبدئي»
+        $block->update([
+            'title' => trim($this->blockText[$id]['title'] ?? '') ?: null,
+            'subtitle' => trim($this->blockText[$id]['subtitle'] ?? '') ?: null,
+        ]);
+
+        HomeBlock::forget();
+        unset($this->homeBlocks);
+        $this->loadBlockText();
+
+        $this->dispatch('notify', message: 'حُدّث نصّ العنصر.');
     }
 
     public function save(): void
@@ -572,6 +620,24 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
                                     @endif
                                 </div>
 
+                                {{--
+                                    التحرير مطويّ خلف زرّ: القائمة أداةُ ترتيبٍ
+                                    أولًا، وعشرة حقول مفتوحة فيها تُخفي الترتيب
+                                    الذي جاء المالك لأجله.
+
+                                    والواجهة وحدها بلا حقول هنا — عنوانها ونصّها
+                                    في بطاقة الإعدادات فوق، لا في العناصر.
+                                --}}
+                                @if ($block->key !== 'hero')
+                                    <button type="button"
+                                        x-data
+                                        @click="$el.closest('li').nextElementSibling.hidden = ! $el.closest('li').nextElementSibling.hidden"
+                                        class="rounded-lg px-2.5 py-1 text-xs font-bold text-ink-600 transition-colors hover:bg-ink-100 dark:text-ink-400 dark:hover:bg-ink-800"
+                                    >
+                                        النصّ
+                                    </button>
+                                @endif
+
                                 <button type="button" wire:click="toggleBlock({{ $block->id }})"
                                     @disabled($block->is_locked)
                                     class="rounded-lg px-2.5 py-1 text-xs font-bold transition-colors disabled:opacity-40 {{ $block->is_active
@@ -580,6 +646,48 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
                                     {{ $block->is_active ? 'ظاهر' : 'مخفي' }}
                                 </button>
                             </li>
+
+                            @if ($block->key !== 'hero')
+                                <li hidden class="py-4 ps-8">
+                                    <div class="grid gap-3 sm:grid-cols-2">
+                                        <label class="block">
+                                            <span class="block mb-1.5 text-xs font-bold text-ink-700 dark:text-ink-300">العنوان</span>
+                                            <input
+                                                type="text"
+                                                wire:model="blockText.{{ $block->id }}.title"
+                                                placeholder="{{ $block->heading() ?? '—' }}"
+                                                class="w-full px-3 py-2 text-sm bg-white border rounded-xl border-ink-300 text-ink-900 placeholder:text-ink-400 focus:border-brand-400 focus:outline-none dark:border-ink-700 dark:bg-ink-950 dark:text-ink-100"
+                                            >
+                                        </label>
+
+                                        <label class="block">
+                                            <span class="block mb-1.5 text-xs font-bold text-ink-700 dark:text-ink-300">المقدّمة</span>
+                                            <input
+                                                type="text"
+                                                wire:model="blockText.{{ $block->id }}.subtitle"
+                                                placeholder="{{ $block->intro() ?? 'بلا مقدّمة' }}"
+                                                class="w-full px-3 py-2 text-sm bg-white border rounded-xl border-ink-300 text-ink-900 placeholder:text-ink-400 focus:border-brand-400 focus:outline-none dark:border-ink-700 dark:bg-ink-950 dark:text-ink-100"
+                                            >
+                                        </label>
+                                    </div>
+
+                                    <div class="flex flex-wrap items-center gap-3 mt-3">
+                                        <x-ui.button wire:click="saveBlockText({{ $block->id }})" size="sm" icon="check">حفظ النصّ</x-ui.button>
+
+                                        <p class="text-xs text-ink-500 dark:text-ink-400">
+                                            اتركه فارغًا ليعود إلى النصّ الأصلي.
+                                            <span class="font-bold">‎:city‎</span> تُستبدل باسم المدينة و<span class="font-bold">‎:owner‎</span> باسمك.
+                                        </p>
+                                    </div>
+
+                                    @error('blockText.'.$block->id.'.title')
+                                        <p class="mt-2 text-xs font-bold text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    @enderror
+                                    @error('blockText.'.$block->id.'.subtitle')
+                                        <p class="mt-2 text-xs font-bold text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    @enderror
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
                 </x-admin.card>

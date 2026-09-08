@@ -2,9 +2,9 @@
 @if ($this->latestReading->isNotEmpty())
     <section data-block="reading" class="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-20">
         <div class="max-w-2xl">
-            <h2 class="text-2xl font-extrabold text-ink-900 sm:text-3xl dark:text-ink-50">اقرأ وتعلّم</h2>
+            <h2 class="text-2xl font-extrabold text-ink-900 sm:text-3xl dark:text-ink-50">{{ $block->heading() }}</h2>
             <p class="mt-3 text-base leading-8 text-ink-600 dark:text-ink-400">
-                مقالات معمّقة ومنشورات تعليمية قصيرة — خلاصة تجربة ميدانية.
+                {{ $block->intro() }}
             </p>
         </div>
 

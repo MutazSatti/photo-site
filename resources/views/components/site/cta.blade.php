@@ -1,8 +1,19 @@
 @props([
-    'title' => 'جاهز لتوثيق مناسبتك؟',
+    'title' => null,
     'description' => null,
     'compact' => false,
 ])
+
+{{--
+    النصّ الافتراضي يأتي من عنصر «دعوة للحجز» في الصفحة الرئيسية لا من هنا:
+    الشريط يظهر في أسفل كل صفحة، فتحريره من اللوحة مرة واحدة يسري عليها كلها.
+    والصفحات التي تمرّر عنوانًا خاصًّا بها تبقى على عنوانها.
+--}}
+@php
+    $block = App\Models\HomeBlock::for('cta');
+    $title ??= $block->heading();
+    $description ??= $block->intro();
+@endphp
 
 <section {{ $attributes->class(['px-4 mx-auto max-w-7xl sm:px-6 lg:px-8', 'py-16' => ! $compact, 'py-10' => $compact]) }}>
     <div class="relative overflow-hidden bg-ink-900 rounded-3xl dark:bg-ink-900">

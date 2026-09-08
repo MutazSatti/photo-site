@@ -43,14 +43,14 @@ new class extends Component
     }
 
     /**
-     * مفاتيح العناصر المعروضة بترتيبها كما ضبطه المالك.
+     * العناصر المعروضة بترتيبها كما ضبطه المالك، بعناوينها ومقدّماتها.
      *
-     * @return array<int, string>
+     * @return \Illuminate\Support\Collection<int, HomeBlock>
      */
     #[Computed]
-    public function blocks(): array
+    public function blocks()
     {
-        return HomeBlock::visibleKeys();
+        return HomeBlock::visible();
     }
 
     /** صورة واجهة الصفحة الرئيسية — تُرفع من إعدادات لوحة التحكم. */
@@ -160,6 +160,6 @@ new class extends Component
         ذلك أن استعلام كل عنصر لا ينفَّذ إلا إذا كان العنصر معروضًا فعلًا.
     --}}
     @foreach ($this->blocks as $block)
-        @includeIf('home.'.$block)
+        @includeIf('home.'.$block->key, ['block' => $block])
     @endforeach
 </div>

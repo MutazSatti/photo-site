@@ -2,7 +2,7 @@
 @if ($this->testimonials->isNotEmpty())
     <section data-block="testimonials" class="border-y border-ink-200 bg-ink-50 dark:border-ink-800 dark:bg-ink-900">
         <div class="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-extrabold text-ink-900 sm:text-3xl dark:text-ink-50">آراء العملاء</h2>
+            <h2 class="text-2xl font-extrabold text-ink-900 sm:text-3xl dark:text-ink-50">{{ $block->heading() }}</h2>
 
             {{--
                 الآراء تتبدّل من نفسها فلا يحتاج الزائر إلى تحريكها ولا إلى مغادرة
