@@ -89,6 +89,7 @@ new class extends Component
         :tagline="$category->tagline"
         :description="$category->description"
         :icon="$category->icon"
+        :photo="header_photo($category->slug)"
         :breadcrumbs="[
             ['label' => $section->name, 'url' => $section->url()],
             ['label' => $category->name],
@@ -98,7 +99,7 @@ new class extends Component
             <x-ui.button href="{{ whatsapp_url('السلام عليكم، أرغب في الاستفسار عن خدمة ' . $category->name) }}" variant="whatsapp" icon="whatsapp" :navigate="false" target="_blank" rel="noopener">
                 اطلب عرض سعر
             </x-ui.button>
-            <x-ui.button href="{{ route('contact') }}" variant="outline" icon="send">نموذج الحجز</x-ui.button>
+            <x-ui.button href="{{ route('contact') }}" :variant="header_photo($category->slug) ? 'outline-light' : 'outline'" icon="send">نموذج الحجز</x-ui.button>
         </x-slot:actions>
     </x-site.page-header>
 

@@ -63,3 +63,36 @@ if (! function_exists('accreditations')) {
         }, $items);
     }
 }
+
+if (! function_exists('header_photo')) {
+    /**
+     * صورة ترويسة الصفحة إن وُجدت لهذا المفتاح، وإلا null.
+     *
+     * الصور ملفات ثابتة في public/images/headers باسم مفتاح الصفحة — قسمًا كان
+     * أو قسمًا فرعيًا أو صفحة ثابتة. اخترتها ملفات لا وسائط في قاعدة البيانات
+     * لأنها زينة الصفحة لا محتواها: تُرفع مع الشيفرة فتصل مع أول نشر، ولا
+     * تحتاج هجرة ولا بذرة ولا لوحة تحكم — إضافة صورة لصفحة إسقاطُ ملف باسمها.
+     *
+     * الاستدعاء يتكرر في الصفحة الواحدة (مرة للترويسة ومرة لاختيار شكل الأزرار)
+     * فتُحفظ النتيجة لطلب واحد بدل فحص القرص مرتين.
+     */
+    function header_photo(?string $key): ?string
+    {
+        /** @var array<string, string|null> $cache */
+        static $cache = [];
+
+        // المفتاح يأتي من slug في قاعدة البيانات، والحصر هنا يمنع أن يتحوّل
+        // أي مفتاح غريب إلى مسار يخرج من المجلد
+        if ($key === null || preg_match('/^[a-z0-9-]+$/', $key) !== 1) {
+            return null;
+        }
+
+        if (! array_key_exists($key, $cache)) {
+            $file = 'images/headers/'.$key.'.webp';
+
+            $cache[$key] = file_exists(public_path($file)) ? asset($file) : null;
+        }
+
+        return $cache[$key];
+    }
+}

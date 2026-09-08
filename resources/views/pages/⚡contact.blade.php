@@ -94,6 +94,7 @@ new class extends Component
         tagline="الرد خلال وقت قصير"
         :description="setting('contact_note')"
         icon="phone"
+        :photo="header_photo('contact')"
         :breadcrumbs="[['label' => 'التواصل والحجز']]"
     />
 

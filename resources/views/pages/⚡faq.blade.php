@@ -51,6 +51,7 @@ new class extends Component
         tagline="إجابات مباشرة قبل الحجز"
         :description="'كل ما يُسأل عنه عادة قبل حجز مصور في ' . config('site.location.city') . ' — الأسعار، التسليم، نطاق التغطية، وطريقة الحجز.'"
         icon="help"
+        :photo="header_photo('faq')"
         :breadcrumbs="[['label' => 'الأسئلة الشائعة']]"
     />
 

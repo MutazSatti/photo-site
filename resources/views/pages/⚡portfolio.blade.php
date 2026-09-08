@@ -116,6 +116,7 @@ new class extends Component
         tagline="كل ما صوّرته في مكان واحد"
         description="تغطيات المناسبات والفعاليات والمعارض والعقارات، والورش التدريبية، والمقالات والمنشورات التعليمية."
         icon="images"
+        :photo="header_photo('portfolio')"
         :breadcrumbs="[['label' => 'المعرض']]"
     />
 

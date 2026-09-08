@@ -65,11 +65,12 @@ new class extends Component
         :tagline="$section->tagline"
         :description="$section->description"
         :icon="$section->icon"
+        :photo="header_photo($section->slug)"
         :breadcrumbs="[['label' => $section->name]]"
     >
         <x-slot:actions>
-            <x-ui.button href="{{ route('contact') }}" variant="primary" icon="send">تواصل للحجز</x-ui.button>
-            <x-ui.button href="{{ whatsapp_url('السلام عليكم، أرغب في الاستفسار عن ' . $section->name) }}" variant="outline" icon="whatsapp" :navigate="false" target="_blank" rel="noopener">
+            <x-ui.button href="{{ route('contact') }}" :variant="header_photo($section->slug) ? 'brand' : 'primary'" icon="send">تواصل للحجز</x-ui.button>
+            <x-ui.button href="{{ whatsapp_url('السلام عليكم، أرغب في الاستفسار عن ' . $section->name) }}" :variant="header_photo($section->slug) ? 'outline-light' : 'outline'" icon="whatsapp" :navigate="false" target="_blank" rel="noopener">
                 واتساب
             </x-ui.button>
         </x-slot:actions>
