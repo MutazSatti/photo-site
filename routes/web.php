@@ -106,6 +106,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::livewire('/faqs', 'pages::admin.faqs')->name('faqs');
     Route::livewire('/testimonials', 'pages::admin.testimonials')->name('testimonials');
     Route::livewire('/clients', 'pages::admin.clients')->name('clients');
+    Route::livewire('/headers', 'pages::admin.headers')->name('headers');
     Route::livewire('/messages', 'pages::admin.messages')->name('messages');
     Route::livewire('/google', 'pages::admin.google')->name('google');
 

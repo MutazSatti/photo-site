@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Media;
 use App\Models\Setting;
 use App\Support\Seo;
 
@@ -68,18 +69,44 @@ if (! function_exists('header_photo')) {
     /**
      * صورة ترويسة الصفحة إن وُجدت لهذا المفتاح، وإلا null.
      *
-     * الصور ملفات ثابتة في public/images/headers باسم مفتاح الصفحة — قسمًا كان
-     * أو قسمًا فرعيًا أو صفحة ثابتة. اخترتها ملفات لا وسائط في قاعدة البيانات
-     * لأنها زينة الصفحة لا محتواها: تُرفع مع الشيفرة فتصل مع أول نشر، ولا
-     * تحتاج هجرة ولا بذرة ولا لوحة تحكم — إضافة صورة لصفحة إسقاطُ ملف باسمها.
+     * مصدران بترتيب أولوية:
      *
-     * الاستدعاء يتكرر في الصفحة الواحدة (مرة للترويسة ومرة لاختيار شكل الأزرار)
-     * فتُحفظ النتيجة لطلب واحد بدل فحص القرص مرتين.
+     * ١. ما رفعه المالك من اللوحة — سجلّ Media بـ usage = header:{المفتاح}.
+     * ٢. الملف المشحون مع الشيفرة في public/images/headers/{المفتاح}.webp.
+     *
+     * الملف هو الافتراضي لا القاعدة: يرحل مع المستودع فيصل مع أول نشر بلا
+     * هجرة ولا بذرة، ويبقى شبكةَ أمان يعود إليها الموقع إن حذف المالك رفعه.
+     * والرفع يعلو عليه لأنه قرار صاحب الموقع لا قرارنا.
+     *
+     * الاستدعاء يتكرر في الصفحة الواحدة (مرة للترويسة ومرة لاختيار شكل
+     * الأزرار)، والرفع يُقرأ من ذاكرة Media::headers لا من ذاكرة هنا: تلك
+     * يُبطلها حذفُ الصورة من اللوحة، وذاكرةٌ محلية هنا كانت ستبقى بعده
+     * فتعرض صورةً محذوفة. والمحفوظ هنا وجودُ الملف وحده — وهو لا يتغيّر
+     * أثناء تنفيذ الطلب.
      */
     function header_photo(?string $key): ?string
     {
-        /** @var array<string, string|null> $cache */
-        static $cache = [];
+        if ($key === null || preg_match('/^[a-z0-9-]+$/', $key) !== 1) {
+            return null;
+        }
+
+        $uploaded = Media::headers()[$key] ?? null;
+
+        return $uploaded?->url('full') ?? header_photo_default($key);
+    }
+}
+
+if (! function_exists('header_photo_default')) {
+    /**
+     * الصورة المشحونة مع الشيفرة لهذا المفتاح، بصرف النظر عمّا رُفع فوقها.
+     *
+     * تحتاجها اللوحة وحدها: لتقول للمالك إن لهذه الصفحة صورةً أصلية يعود
+     * إليها الموقع لو حذف رفعه — فيحذف وهو مطمئنّ أن الصفحة لن تفرغ.
+     */
+    function header_photo_default(?string $key): ?string
+    {
+        /** @var array<string, bool> $exists */
+        static $exists = [];
 
         // المفتاح يأتي من slug في قاعدة البيانات، والحصر هنا يمنع أن يتحوّل
         // أي مفتاح غريب إلى مسار يخرج من المجلد
@@ -87,12 +114,10 @@ if (! function_exists('header_photo')) {
             return null;
         }
 
-        if (! array_key_exists($key, $cache)) {
-            $file = 'images/headers/'.$key.'.webp';
+        $file = 'images/headers/'.$key.'.webp';
 
-            $cache[$key] = file_exists(public_path($file)) ? asset($file) : null;
-        }
+        $exists[$key] ??= file_exists(public_path($file));
 
-        return $cache[$key];
+        return $exists[$key] ? asset($file) : null;
     }
 }

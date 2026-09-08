@@ -132,6 +132,40 @@ class Media extends Model
         self::$faviconLoaded = false;
     }
 
+    /** بادئة usage لصور واجهات الصفحات: header:{مفتاح الصفحة}. */
+    public const HEADER_USAGE_PREFIX = 'header:';
+
+    /** @var array<string, self>|null */
+    private static ?array $headerMemo = null;
+
+    /**
+     * صور واجهات الصفحات المرفوعة من اللوحة، مفهرسة بمفتاح الصفحة.
+     *
+     * تُحمَّل كلها باستعلام واحد لا استعلامًا لكل صفحة: الترويسة تسأل عن
+     * مفتاحها مرّتين في الصفحة الواحدة (للصورة ولشكل الأزرار)، والعدد كلّه
+     * صفٌّ لكل صفحة في الموقع — أرخص من فحص وجود صفٍّ في كل مرة.
+     *
+     * @return array<string, self>
+     */
+    public static function headers(): array
+    {
+        if (self::$headerMemo === null) {
+            self::$headerMemo = static::query()
+                ->where('usage', 'like', self::HEADER_USAGE_PREFIX.'%')
+                ->get()
+                ->keyBy(fn (self $m) => substr((string) $m->usage, strlen(self::HEADER_USAGE_PREFIX)))
+                ->all();
+        }
+
+        return self::$headerMemo;
+    }
+
+    /** يُستدعى بعد كل رفع أو حذف لصورة واجهة. */
+    public static function forgetHeaders(): void
+    {
+        self::$headerMemo = null;
+    }
+
     /** @return BelongsTo<Post, $this> */
     public function post(): BelongsTo
     {
