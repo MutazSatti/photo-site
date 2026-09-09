@@ -10,14 +10,14 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-new #[Layout('layouts::admin', ['title' => 'واجهات الصفحات'])] class extends Component
+new #[Layout('layouts::admin', ['title' => 'صور الواجهة'])] class extends Component
 {
     use WithFileUploads;
 
     /**
-     * الملفات المختارة، مفهرسة بمفتاح الصفحة.
+     * الملفات المختارة، مفهرسة بمفتاح الخانة.
      *
-     * مصفوفة واحدة لا خاصيّة لكل صفحة: عدد الصفحات يتغيّر بتغيّر الأقسام في
+     * مصفوفة واحدة لا خاصيّة لكل خانة: عدد الخانات يتغيّر بتغيّر الأقسام في
      * القاعدة، فلا يمكن كتابته في الشيفرة.
      *
      * @var array<string, mixed>
@@ -25,113 +25,187 @@ new #[Layout('layouts::admin', ['title' => 'واجهات الصفحات'])] clas
     public array $uploads = [];
 
     /**
-     * صفحات الموقع التي لها ترويسة قابلة للتصوير.
+     * كل صورة ثابتة في الموقع، مجموعةً في مجموعاتها.
      *
-     * الأقسام والأقسام الفرعية تأتي من القاعدة لا من قائمة مكتوبة، فقسمٌ
-     * جديد يُنشأ من اللوحة يظهر هنا فورًا وله مكان لصورته.
+     * الخانة مفتاحها قيمة usage في جدول الوسائط، وهي العقد الوحيد بينها وبين
+     * الصفحة التي تعرضها. و«الافتراضية» ملفٌّ يرحل مع الشيفرة تعود إليه الصفحة
+     * إن حُذف المرفوع — لا تملكه إلا واجهات الصفحات.
      *
-     * @return array<int, array{key: string, label: string, note: string}>
+     * @return array<int, array{title: string, description: string, kind: string, slots: array<int, array{usage: string, label: string, note: string, default: string|null}>}>
      */
     #[Computed]
-    public function pages(): array
+    public function groups(): array
+    {
+        return array_values(array_filter([
+            [
+                'title' => 'واجهات الصفحات',
+                'description' => 'الصورة الكبيرة خلف عنوان كل صفحة. لكل صفحة صورة أصلية تصل مع الموقع، وما ترفعه يحلّ محلّها — وحذف رفعك يعيد الأصلية.',
+                'kind' => 'cover',
+                'slots' => $this->pageSlots(),
+            ],
+            [
+                'title' => 'صفحة التصوير العقاري',
+                'description' => 'صفحة الخدمة المخصّصة: صورة واجهتها، وزوج المقارنة «بالجوال / بالكاميرا»، وصور المبادئ الثلاثة.',
+                'kind' => 'cover',
+                'slots' => $this->fixedSlots([
+                    're_hero' => ['صورة الواجهة', 'أقوى لقطة في الملف — تُعرض بعرض الصفحة'],
+                    're_before' => ['المقارنة: بالجوال', 'اللقطة نفسها ملتقطة بالجوال قبل التصوير'],
+                    're_after' => ['المقارنة: بالكاميرا', 'المشهد نفسه بعد التصوير والمعالجة'],
+                    're_craft_verticals' => ['مبدأ: الخطوط الرأسية', 'مساحة بخطوط مستقيمة وتصحيح منظور'],
+                    're_craft_bluehour' => ['مبدأ: الساعة الزرقاء', 'لقطة خارجية عند الغروب'],
+                    're_craft_styling' => ['مبدأ: التنسيق قبل التصوير', 'ركن مرتَّب قبل اللقطة'],
+                ]),
+            ],
+            [
+                'title' => 'شعارات الاعتمادات',
+                'description' => 'شعارات الجهات المانحة كما تظهر في صفحة «نبذة». تُعرض على لوحة بيضاء، فالشعار الشفاف أنسبها.',
+                'kind' => 'logo',
+                'slots' => $this->fixedSlots(collect(accreditations())
+                    ->mapWithKeys(fn (array $a): array => [$a['key'] => [$a['authority'], $a['title']]])
+                    ->all()),
+            ],
+        ], fn (array $group): bool => $group['slots'] !== []));
+    }
+
+    /**
+     * خانات واجهات الصفحات — تُبنى من القاعدة لا من قائمة مكتوبة، فقسمٌ جديد
+     * يُنشأ من اللوحة يظهر هنا فورًا وله مكان لصورته.
+     *
+     * @return array<int, array{usage: string, label: string, note: string, default: string|null}>
+     */
+    private function pageSlots(): array
     {
         $pages = [
-            ['key' => 'portfolio', 'label' => 'معرض الأعمال', 'note' => 'صفحة ثابتة'],
-            ['key' => 'contact', 'label' => 'التواصل والحجز', 'note' => 'صفحة ثابتة'],
-            ['key' => 'faq', 'label' => 'الأسئلة الشائعة', 'note' => 'صفحة ثابتة'],
-            ['key' => 'about', 'label' => 'نبذة عني', 'note' => 'صفحة ثابتة'],
+            ['portfolio', 'معرض الأعمال', 'صفحة ثابتة'],
+            ['contact', 'التواصل والحجز', 'صفحة ثابتة'],
+            ['faq', 'الأسئلة الشائعة', 'صفحة ثابتة'],
+            ['about', 'نبذة عني', 'صفحة ثابتة'],
         ];
 
         foreach (Section::query()->ordered()->get() as $section) {
-            $pages[] = ['key' => $section->slug, 'label' => $section->name, 'note' => 'قسم رئيسي'];
+            $pages[] = [$section->slug, $section->name, 'قسم رئيسي'];
         }
 
         foreach (Category::query()->with('section:id,name')->ordered()->get() as $category) {
             // الأقسام الفرعية ذات الصفحات المخصّصة (كالتصوير العقاري) لا تمرّ
             // بمكوّن الترويسة العام، فصورةٌ ترفعها لها هنا لن تظهر في الموقع.
-            // إخفاؤها أصدق من عرض زرٍّ لا يفعل شيئًا.
+            // إخفاؤها أصدق من عرض زرٍّ لا يفعل شيئًا — ولتلك الصفحة مجموعتها.
             if (Route::has('services.'.$category->slug)) {
                 continue;
             }
 
-            $pages[] = [
-                'key' => $category->slug,
-                'label' => $category->name,
-                'note' => 'قسم فرعي — '.($category->section->name ?? ''),
-            ];
+            $pages[] = [$category->slug, $category->name, 'قسم فرعي — '.($category->section->name ?? '')];
         }
 
-        return $pages;
+        return array_map(fn (array $p): array => [
+            'usage' => Media::HEADER_USAGE_PREFIX.$p[0],
+            'label' => $p[1],
+            'note' => $p[2],
+            'default' => header_photo_default($p[0]),
+        ], $pages);
     }
 
     /**
-     * الصور المرفوعة، مفهرسة بمفتاح الصفحة.
+     * خانات ثابتة مكتوبة في الشيفرة — لا صورة أصلية لها، فحذفها يترك فراغًا
+     * تتعامل معه صفحتها (بإخفاء القسم غالبًا).
+     *
+     * @param  array<string, array{0: string, 1: string}>  $definitions
+     * @return array<int, array{usage: string, label: string, note: string, default: null}>
+     */
+    private function fixedSlots(array $definitions): array
+    {
+        $slots = [];
+
+        foreach ($definitions as $usage => [$label, $note]) {
+            $slots[] = ['usage' => $usage, 'label' => $label, 'note' => $note, 'default' => null];
+        }
+
+        return $slots;
+    }
+
+    /**
+     * الصور المرفوعة لكل الخانات، باستعلام واحد.
      *
      * @return array<string, Media>
      */
     #[Computed]
     public function uploaded(): array
     {
-        return Media::headers();
+        return Media::query()
+            ->whereIn('usage', $this->usages())
+            ->get()
+            ->keyBy(fn (Media $m): string => (string) $m->usage)
+            ->all();
     }
 
-    public function save(string $key, ImageService $images): void
+    /** @return array<int, string> */
+    private function usages(): array
     {
-        $this->authorizeKey($key);
+        return array_merge(...array_map(
+            fn (array $group): array => array_column($group['slots'], 'usage'),
+            $this->groups,
+        ));
+    }
+
+    public function save(string $usage, ImageService $images): void
+    {
+        $slot = $this->slot($usage);
 
         $this->validate([
-            'uploads.'.$key => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.config('site.images.max_upload_kb')],
+            'uploads.'.$usage => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.config('site.images.max_upload_kb')],
         ], [
-            'uploads.'.$key.'.required' => 'اختر صورة أولًا.',
-            'uploads.'.$key.'.image' => 'الملف يجب أن يكون صورة.',
-            'uploads.'.$key.'.max' => 'حجم الصورة أكبر من المسموح.',
+            'uploads.'.$usage.'.required' => 'اختر صورة أولًا.',
+            'uploads.'.$usage.'.image' => 'الملف يجب أن يكون صورة.',
+            'uploads.'.$usage.'.max' => 'حجم الصورة أكبر من المسموح.',
         ]);
 
         $images->replaceForUsage(
-            file: $this->uploads[$key],
-            usage: Media::HEADER_USAGE_PREFIX.$key,
-            alt: 'صورة واجهة صفحة '.$this->labelFor($key),
+            file: $this->uploads[$usage],
+            usage: $usage,
+            alt: $slot['label'],
         );
 
-        unset($this->uploads[$key]);
+        unset($this->uploads[$usage]);
         $this->refresh();
 
-        $this->dispatch('notify', message: 'حُدّثت صورة الواجهة.');
+        $this->dispatch('notify', message: 'حُدّثت الصورة.');
     }
 
-    public function remove(string $key): void
+    public function remove(string $usage): void
     {
-        $this->authorizeKey($key);
+        $slot = $this->slot($usage);
 
-        Media::where('usage', Media::HEADER_USAGE_PREFIX.$key)->get()->each->delete();
+        Media::where('usage', $usage)->get()->each->delete();
 
         $this->refresh();
 
-        $this->dispatch('notify', message: header_photo_default($key)
+        $this->dispatch('notify', message: $slot['default']
             ? 'حُذفت الصورة المرفوعة، وعادت الصفحة إلى صورتها الأصلية.'
-            : 'حُذفت صورة الواجهة.');
+            : 'حُذفت الصورة.');
     }
 
-    public function clearPick(string $key): void
+    public function clearPick(string $usage): void
     {
-        unset($this->uploads[$key]);
+        unset($this->uploads[$usage]);
     }
 
-    /** المفتاح يأتي من الواجهة، فلا يُقبل إلا إن كان صفحةً معروفة فعلًا. */
-    private function authorizeKey(string $key): void
+    /**
+     * الخانة بمفتاحها — والمفتاح يأتي من الواجهة، فلا يُقبل إلا إن كان خانةً
+     * معروفة فعلًا.
+     *
+     * @return array{usage: string, label: string, note: string, default: string|null}
+     */
+    private function slot(string $usage): array
     {
-        abort_unless(in_array($key, array_column($this->pages, 'key'), true), 404);
-    }
-
-    private function labelFor(string $key): string
-    {
-        foreach ($this->pages as $page) {
-            if ($page['key'] === $key) {
-                return $page['label'];
+        foreach ($this->groups as $group) {
+            foreach ($group['slots'] as $slot) {
+                if ($slot['usage'] === $usage) {
+                    return $slot;
+                }
             }
         }
 
-        return $key;
+        abort(404);
     }
 
     private function refresh(): void
@@ -147,8 +221,8 @@ new #[Layout('layouts::admin', ['title' => 'واجهات الصفحات'])] clas
 
 <div>
     <x-admin.page-header
-        title="واجهات الصفحات"
-        description="الصورة الكبيرة خلف عنوان كل صفحة. لكل صفحة صورة أصلية تصل مع الموقع، وما ترفعه هنا يحلّ محلّها — وحذف رفعك يعيد الأصلية."
+        title="صور الواجهة"
+        description="كل صورة ثابتة في الموقع: واجهات الصفحات، وصور صفحة التصوير العقاري، وشعارات الاعتمادات."
     >
         <x-slot:actions>
             {{-- خلفية الرئيسية ليست ترويسةَ صفحة بل واجهةُ الموقع، ومكانها الإعدادات --}}
@@ -158,85 +232,104 @@ new #[Layout('layouts::admin', ['title' => 'واجهات الصفحات'])] clas
         </x-slot:actions>
     </x-admin.page-header>
 
-    <div class="grid gap-5 lg:grid-cols-2">
-        @foreach ($this->pages as $page)
-            @php
-                $key = $page['key'];
-                $uploaded = $this->uploaded[$key] ?? null;
-                $default = header_photo_default($key);
-                $current = $uploaded?->url('md') ?? $default;
-            @endphp
+    @foreach ($this->groups as $group)
+        <section class="mb-10 last:mb-0">
+            <h2 class="text-base font-extrabold text-ink-900 dark:text-ink-100">{{ $group['title'] }}</h2>
+            <p class="mt-1 mb-5 text-sm leading-7 text-ink-500 dark:text-ink-400">{{ $group['description'] }}</p>
 
-            <x-admin.card :title="$page['label']" :description="$page['note']">
-                <x-slot:actions>
-                    @if ($uploaded)
-                        <x-ui.badge variant="brand">مرفوعة</x-ui.badge>
-                    @elseif ($default)
-                        <x-ui.badge>الأصلية</x-ui.badge>
-                    @else
-                        <x-ui.badge variant="warning">بلا صورة</x-ui.badge>
-                    @endif
-                </x-slot:actions>
+            <div class="grid gap-5 lg:grid-cols-2">
+                @foreach ($group['slots'] as $slot)
+                    @php
+                        $usage = $slot['usage'];
+                        $uploaded = $this->uploaded[$usage] ?? null;
+                        $current = $uploaded?->url('md') ?? $slot['default'];
+                    @endphp
 
-                {{--
-                    المعاينة بالتعتيم والتدرّجين أنفسهما اللذين في الترويسة، وبنصّ
-                    أبيض في موضعه: الصورة الجميلة قد تبتلع العنوان، ولا يُعرف ذلك
-                    من معاينة نظيفة — يُعرف من معاينة تكذب أقلّ ما يمكن.
-                --}}
-                <div class="relative overflow-hidden border rounded-2xl border-ink-200 bg-ink-950 aspect-21/9 dark:border-ink-800">
-                    @if ($current)
-                        <img src="{{ $current }}" alt="" class="absolute inset-0 object-cover size-full opacity-65">
-                        <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/70 to-ink-950/25"></div>
-                        <div class="absolute inset-0 bg-gradient-to-l from-ink-950/60 to-transparent"></div>
-                        <div class="absolute inset-y-0 flex items-center px-5 end-0 max-w-[70%]">
-                            <p class="text-base font-extrabold leading-tight text-white text-balance sm:text-lg">{{ $page['label'] }}</p>
-                        </div>
-                    @else
-                        <div class="flex flex-col items-center justify-center gap-2 size-full text-ink-500">
-                            <x-icon name="image" :size="26" />
-                            <span class="text-xs">لا صورة لهذه الصفحة — تظهر بالرسم المولَّد</span>
-                        </div>
-                    @endif
-                </div>
+                    <x-admin.card :title="$slot['label']" :description="$slot['note']">
+                        <x-slot:actions>
+                            @if ($uploaded)
+                                <x-ui.badge variant="brand">مرفوعة</x-ui.badge>
+                            @elseif ($slot['default'])
+                                <x-ui.badge>الأصلية</x-ui.badge>
+                            @else
+                                <x-ui.badge variant="warning">بلا صورة</x-ui.badge>
+                            @endif
+                        </x-slot:actions>
 
-                <div class="flex flex-wrap items-start gap-3 mt-4">
-                    <label class="flex flex-col items-center justify-center px-5 py-4 transition-colors border border-dashed cursor-pointer grow basis-52 rounded-2xl border-ink-300 hover:border-brand-400 dark:border-ink-700">
-                        <input type="file" wire:model="uploads.{{ $key }}" accept="image/*" class="sr-only">
-                        <span class="mb-1.5 text-ink-500 dark:text-ink-400"><x-icon name="upload" :size="20" /></span>
-                        <span class="text-sm font-bold text-ink-800 dark:text-ink-200">اختر صورة</span>
-                        <span class="mt-1 text-xs text-ink-500 dark:text-ink-400">أفقية وعريضة، 1600 بكسل فأكثر</span>
-                    </label>
-
-                    <div class="flex flex-col gap-2">
-                        @if (! empty($uploads[$key]))
-                            <x-ui.button wire:click="save('{{ $key }}')" icon="check" wire:loading.attr="disabled" wire:target="save('{{ $key }}')">
-                                <span wire:loading.remove wire:target="save('{{ $key }}')">حوّل واحفظ</span>
-                                <span wire:loading wire:target="save('{{ $key }}')">جارٍ التحويل…</span>
-                            </x-ui.button>
-
-                            <x-ui.button wire:click="clearPick('{{ $key }}')" variant="ghost" size="sm" icon="close">
-                                إلغاء الاختيار
-                            </x-ui.button>
+                        @if ($group['kind'] === 'logo')
+                            {{-- الشعار يُعرض في الموقع على لوحة بيضاء، فالمعاينة كذلك --}}
+                            <div class="flex items-center justify-center p-6 bg-white border rounded-2xl border-ink-200 aspect-21/9 dark:border-ink-700">
+                                @if ($current)
+                                    <img src="{{ $current }}" alt="" class="object-contain max-w-full max-h-full">
+                                @else
+                                    <span class="text-xs text-ink-400">لا شعار — يظهر مكانه إطار فارغ</span>
+                                @endif
+                            </div>
+                        @else
+                            {{--
+                                المعاينة بالتعتيم والتدرّجين أنفسهما اللذين في الترويسة، وبنصّ
+                                أبيض في موضعه: الصورة الجميلة قد تبتلع العنوان، ولا يُعرف ذلك
+                                من معاينة نظيفة — يُعرف من معاينة تكذب أقلّ ما يمكن.
+                            --}}
+                            <div class="relative overflow-hidden border rounded-2xl border-ink-200 bg-ink-950 aspect-21/9 dark:border-ink-800">
+                                @if ($current)
+                                    <img src="{{ $current }}" alt="" class="absolute inset-0 object-cover size-full opacity-65">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/70 to-ink-950/25"></div>
+                                    <div class="absolute inset-0 bg-gradient-to-l from-ink-950/60 to-transparent"></div>
+                                    <div class="absolute inset-y-0 flex items-center px-5 end-0 max-w-[70%]">
+                                        <p class="text-base font-extrabold leading-tight text-white text-balance sm:text-lg">{{ $slot['label'] }}</p>
+                                    </div>
+                                @else
+                                    <div class="flex flex-col items-center justify-center gap-2 size-full text-ink-500">
+                                        <x-icon name="image" :size="26" />
+                                        <span class="text-xs">لا صورة لهذه الخانة</span>
+                                    </div>
+                                @endif
+                            </div>
                         @endif
 
-                        @if ($uploaded)
-                            <x-ui.button
-                                wire:click="remove('{{ $key }}')"
-                                wire:confirm="{{ $default ? 'حذف الصورة المرفوعة والعودة إلى الأصلية؟' : 'حذف صورة الواجهة؟' }}"
-                                variant="ghost"
-                                icon="trash"
-                                class="text-red-600 dark:text-red-400"
-                            >
-                                {{ $default ? 'استعد الأصلية' : 'حذف الصورة' }}
-                            </x-ui.button>
-                        @endif
-                    </div>
-                </div>
+                        <div class="flex flex-wrap items-start gap-3 mt-4">
+                            <label class="flex flex-col items-center justify-center px-5 py-4 transition-colors border border-dashed cursor-pointer grow basis-52 rounded-2xl border-ink-300 hover:border-brand-400 dark:border-ink-700">
+                                <input type="file" wire:model="uploads.{{ $usage }}" accept="image/*" class="sr-only">
+                                <span class="mb-1.5 text-ink-500 dark:text-ink-400"><x-icon name="upload" :size="20" /></span>
+                                <span class="text-sm font-bold text-ink-800 dark:text-ink-200">اختر صورة</span>
+                                <span class="mt-1 text-xs text-ink-500 dark:text-ink-400">
+                                    {{ $group['kind'] === 'logo' ? 'PNG شفاف يُفضَّل' : 'أفقية وعريضة، 1600 بكسل فأكثر' }}
+                                </span>
+                            </label>
 
-                @error('uploads.'.$key)
-                    <p class="mt-3 text-sm font-bold text-red-600 dark:text-red-400">{{ $message }}</p>
-                @enderror
-            </x-admin.card>
-        @endforeach
-    </div>
+                            <div class="flex flex-col gap-2">
+                                @if (! empty($uploads[$usage]))
+                                    <x-ui.button wire:click="save('{{ $usage }}')" icon="check" wire:loading.attr="disabled" wire:target="save('{{ $usage }}')">
+                                        <span wire:loading.remove wire:target="save('{{ $usage }}')">حوّل واحفظ</span>
+                                        <span wire:loading wire:target="save('{{ $usage }}')">جارٍ التحويل…</span>
+                                    </x-ui.button>
+
+                                    <x-ui.button wire:click="clearPick('{{ $usage }}')" variant="ghost" size="sm" icon="close">
+                                        إلغاء الاختيار
+                                    </x-ui.button>
+                                @endif
+
+                                @if ($uploaded)
+                                    <x-ui.button
+                                        wire:click="remove('{{ $usage }}')"
+                                        wire:confirm="{{ $slot['default'] ? 'حذف الصورة المرفوعة والعودة إلى الأصلية؟' : 'حذف هذه الصورة؟' }}"
+                                        variant="ghost"
+                                        icon="trash"
+                                        class="text-red-600 dark:text-red-400"
+                                    >
+                                        {{ $slot['default'] ? 'استعد الأصلية' : 'حذف الصورة' }}
+                                    </x-ui.button>
+                                @endif
+                            </div>
+                        </div>
+
+                        @error('uploads.'.$usage)
+                            <p class="mt-3 text-sm font-bold text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </x-admin.card>
+                @endforeach
+            </div>
+        </section>
+    @endforeach
 </div>

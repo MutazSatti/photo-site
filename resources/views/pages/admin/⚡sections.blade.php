@@ -33,6 +33,13 @@ new #[Layout('layouts::admin', ['title' => 'الأقسام'])] class extends Com
     /** لون القسم الرئيسي — الأقسام الفرعية ترثه فلا حقل لون لها. */
     public string $color = 'brand';
 
+    /** مفتاح يدلّ على أن اللون مكتوب لا مختار من اللوحة الجاهزة. */
+    public const CUSTOM_COLOR = 'custom';
+
+    public string $color_light = '#c06915';
+
+    public string $color_dark = '#e6a333';
+
     public string $sort_order = '0';
 
     public bool $is_active = true;
@@ -95,7 +102,10 @@ new #[Layout('layouts::admin', ['title' => 'الأقسام'])] class extends Com
         $this->name = $section->name;
         $this->slug = $section->slug;
         $this->icon = $section->icon;
-        $this->color = $section->color;
+        $this->color = $section->hasCustomColor() ? self::CUSTOM_COLOR : $section->color;
+        [$light, $dark] = $section->colorPair();
+        $this->color_light = $light;
+        $this->color_dark = $dark;
         $this->name_en = (string) $section->name_en;
         $this->tagline = (string) $section->tagline;
         $this->description = (string) $section->description;
@@ -187,11 +197,27 @@ new #[Layout('layouts::admin', ['title' => 'الأقسام'])] class extends Com
     private function saveSection(array $payload): bool
     {
         // اللون خاص بالقسم الرئيسي وحده — القسم الفرعي يرثه، فلا يُتحقَّق منه إلا هنا
-        $this->validate([
-            'color' => ['required', 'string', Rule::in(array_keys(config('site.section_colors')))],
-        ], [], ['color' => 'اللون']);
+        $custom = $this->color === self::CUSTOM_COLOR;
 
-        $payload['color'] = $this->color;
+        $this->validate([
+            'color' => ['required', 'string', Rule::in([...array_keys(config('site.section_colors')), self::CUSTOM_COLOR])],
+            // اللونان مطلوبان معًا عند اختيار المخصّص: قسمٌ بلون واحد يقرأ في
+            // وضع ويختفي في الآخر
+            'color_light' => [Rule::requiredIf($custom), 'nullable', 'regex:/^#[0-9a-fA-F]{6}$/'],
+            'color_dark' => [Rule::requiredIf($custom), 'nullable', 'regex:/^#[0-9a-fA-F]{6}$/'],
+        ], [
+            'color_light.regex' => 'اللون يجب أن يكون سُداسيًّا مثل ‎#c06915‎.',
+            'color_dark.regex' => 'اللون يجب أن يكون سُداسيًّا مثل ‎#e6a333‎.',
+        ], [
+            'color' => 'اللون',
+            'color_light' => 'لون الوضع الفاتح',
+            'color_dark' => 'لون الوضع الداكن',
+        ]);
+
+        // اللوحة الجاهزة تمسح المخصّص، فلا يبقى صفٌّ يحمل الاثنين ويلتبس أيّهما يفوز
+        $payload['color'] = $custom ? 'brand' : $this->color;
+        $payload['color_light'] = $custom ? $this->color_light : null;
+        $payload['color_dark'] = $custom ? $this->color_dark : null;
 
         // رابط القسم الرئيسي هو المقطع الأول في العنوان، فلا يصح أن يحجب صفحة ثابتة
         if (in_array($this->slug, SectionRoutes::RESERVED_SLUGS, true)) {
@@ -360,6 +386,8 @@ new #[Layout('layouts::admin', ['title' => 'الأقسام'])] class extends Com
 
         $this->icon = 'camera';
         $this->color = 'brand';
+        $this->color_light = '#c06915';
+        $this->color_dark = '#e6a333';
         $this->is_active = true;
         $this->resetErrorBag();
         unset($this->parentSection);
@@ -588,7 +616,54 @@ new #[Layout('layouts::admin', ['title' => 'الأقسام'])] class extends Com
                                                 @endif
                                             </button>
                                         @endforeach
+
+                                        {{-- المخصّص آخر الصفّ: اللوحة الجاهزة تكفي غالبًا، وهذا لمن لا تكفيه --}}
+                                        <button
+                                            type="button"
+                                            wire:click="$set('color', 'custom')"
+                                            title="لون مخصّص"
+                                            aria-label="لون مخصّص"
+                                            aria-pressed="{{ $color === 'custom' ? 'true' : 'false' }}"
+                                            class="relative flex items-center justify-center transition-transform rounded-full size-9 ring-offset-2 ring-offset-white dark:ring-offset-ink-900 {{ $color === 'custom' ? 'ring-2 ring-ink-900 dark:ring-ink-100' : 'hover:scale-110' }}"
+                                            style="background: conic-gradient(#c06915, #0f766e, #6d28d9, #be123c, #c06915)"
+                                        >
+                                            @if ($color === 'custom')
+                                                <span class="text-white"><x-icon name="check" :size="15" /></span>
+                                            @endif
+                                        </button>
                                     </div>
+
+                                    @if ($color === 'custom')
+                                        {{--
+                                            لونان لأن الموقع وضعان: لونٌ يقرأ على
+                                            الأبيض قد يذوب في الأسود. والمعاينة
+                                            تحت كل حقل تُري القرار قبل الحفظ.
+                                        --}}
+                                        <div class="grid gap-4 mt-4 sm:grid-cols-2">
+                                            @foreach ([['color_light', 'الوضع الفاتح', '#ffffff', $color_light], ['color_dark', 'الوضع الداكن', '#1c1b1a', $color_dark]] as [$field, $label, $bg, $value])
+                                                <div>
+                                                    <span class="block mb-1.5 text-xs font-bold text-ink-700 dark:text-ink-300">{{ $label }}</span>
+
+                                                    <div class="flex items-center gap-2">
+                                                        <input
+                                                            type="color"
+                                                            wire:model.live="{{ $field }}"
+                                                            aria-label="{{ $label }}"
+                                                            class="border rounded-lg cursor-pointer size-10 shrink-0 border-ink-300 bg-transparent dark:border-ink-700"
+                                                        >
+                                                        <x-ui.input wire:model.live="{{ $field }}" dir="ltr" class="font-mono" placeholder="#c06915" />
+                                                    </div>
+
+                                                    <p class="flex items-center gap-2 px-3 py-2 mt-2 text-xs font-bold rounded-lg" style="background: {{ $bg }}; color: {{ $value }}">
+                                                        نموذج نصّ بهذا اللون
+                                                    </p>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        @error('color_light')<p class="mt-2 text-xs font-bold text-red-600 dark:text-red-400">{{ $message }}</p>@enderror
+                                        @error('color_dark')<p class="mt-2 text-xs font-bold text-red-600 dark:text-red-400">{{ $message }}</p>@enderror
+                                    @endif
                                 </x-ui.field>
                             @endif
 

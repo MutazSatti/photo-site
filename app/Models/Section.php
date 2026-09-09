@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property string|null $description
  * @property string $icon
  * @property string $color
+ * @property string|null $color_light
+ * @property string|null $color_dark
  * @property int $sort_order
  * @property bool $is_active
  * @property bool $has_categories
@@ -115,16 +117,58 @@ class Section extends Model
      */
     public function colorStyle(): string
     {
-        $palette = config('site.section_colors');
-        $color = $palette[$this->color] ?? $palette['brand'];
+        [$light, $dark] = $this->colorPair();
 
-        return sprintf('--sec:%s;--sec-dark:%s', $color['light'], $color['dark']);
+        return sprintf('--sec:%s;--sec-dark:%s', $light, $dark);
     }
 
     public function colorLabel(): string
     {
+        if ($this->hasCustomColor()) {
+            return 'لون مخصّص';
+        }
+
         return config('site.section_colors.'.$this->color.'.label')
             ?? config('site.section_colors.brand.label');
+    }
+
+    /** هل اختار المالك لونًا خارج اللوحة الجاهزة؟ */
+    public function hasCustomColor(): bool
+    {
+        return $this->isHex($this->color_light) && $this->isHex($this->color_dark);
+    }
+
+    /**
+     * لونا القسم: الفاتح للوضع الفاتح والداكن للداكن.
+     *
+     * المخصّص يعلو على اللوحة الجاهزة، واللوحة تعلو على الافتراضي. ولا يُقبل
+     * المخصّص إلا لونين معًا: لونٌ واحد يعني قسمًا يقرأ في وضع ويختفي في الآخر.
+     *
+     * @return array{0: string, 1: string}
+     */
+    public function colorPair(): array
+    {
+        if ($this->hasCustomColor()) {
+            return [(string) $this->color_light, (string) $this->color_dark];
+        }
+
+        /** @var array<string, array{light: string, dark: string}> $palette */
+        $palette = config('site.section_colors');
+        $color = $palette[$this->color] ?? $palette['brand'];
+
+        return [$color['light'], $color['dark']];
+    }
+
+    /**
+     * لونٌ سُداسيّ صالح.
+     *
+     * القيمة تُطبع داخل سمة style، والحصر هنا يمنع أن تخرج منها إلى بقية
+     * التنسيق — لا يكفي التحقّق في النموذج وحده لأن الصفوف قد تأتي من بذرة
+     * أو من تعديل مباشر على القاعدة.
+     */
+    private function isHex(?string $value): bool
+    {
+        return $value !== null && preg_match('/^#[0-9a-fA-F]{6}$/', $value) === 1;
     }
 
     /**

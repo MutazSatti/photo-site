@@ -64,10 +64,43 @@ class PageHeadersTest extends TestCase
      */
     public function test_a_category_with_its_own_page_is_not_offered_a_header(): void
     {
-        $keys = array_column(Livewire::test('pages::admin.headers')->get('pages'), 'key');
+        $keys = array_column(Livewire::test('pages::admin.headers')->get('groups')[0]['slots'], 'usage');
 
-        $this->assertContains('events', $keys);
-        $this->assertNotContains('real-estate', $keys);
+        $this->assertContains(Media::HEADER_USAGE_PREFIX.'events', $keys);
+        $this->assertNotContains(Media::HEADER_USAGE_PREFIX.'real-estate', $keys);
+    }
+
+    /** صفحة العقارات وشعارات الاعتمادات لها خاناتها، فلا تبقى صورًا لا تُبدَّل. */
+    public function test_the_fixed_slots_of_other_pages_are_offered_too(): void
+    {
+        $groups = Livewire::test('pages::admin.headers')->get('groups');
+
+        $usages = array_merge(...array_map(
+            fn (array $g): array => array_column($g['slots'], 'usage'),
+            $groups,
+        ));
+
+        foreach (['re_hero', 're_before', 're_after', 're_craft_verticals', 'accr_etec', 'accr_gaca', 'accr_gamr'] as $usage) {
+            $this->assertContains($usage, $usages, $usage.' يجب أن تكون له خانة.');
+        }
+    }
+
+    /** خانة بلا صورة أصلية: حذفها يترك فراغًا تتعامل معه صفحتها. */
+    public function test_a_fixed_slot_has_no_shipped_default(): void
+    {
+        Media::create([
+            'usage' => 're_hero',
+            'disk' => 'public',
+            'path' => 'media/test/re.webp',
+            'variants' => ['full' => 'media/test/re.webp'],
+            'width' => 2400,
+            'height' => 1600,
+            'original_name' => 're.webp',
+        ]);
+
+        Livewire::test('pages::admin.headers')->call('remove', 're_hero');
+
+        $this->assertDatabaseMissing('media', ['usage' => 're_hero']);
     }
 
     public function test_the_shipped_file_is_used_when_nothing_was_uploaded(): void
@@ -89,7 +122,7 @@ class PageHeadersTest extends TestCase
         $this->uploadedHeader('events');
         Media::forgetHeaders();
 
-        Livewire::test('pages::admin.headers')->call('remove', 'events');
+        Livewire::test('pages::admin.headers')->call('remove', Media::HEADER_USAGE_PREFIX.'events');
 
         $this->assertDatabaseMissing('media', ['usage' => Media::HEADER_USAGE_PREFIX.'events']);
         $this->assertStringContainsString('images/headers/events.webp', (string) header_photo('events'));
@@ -101,7 +134,7 @@ class PageHeadersTest extends TestCase
         Media::forgetHeaders();
 
         Livewire::test('pages::admin.headers')
-            ->call('remove', 'wp-admin')
+            ->call('remove', Media::HEADER_USAGE_PREFIX.'wp-admin')
             ->assertNotFound();
 
         $this->assertDatabaseHas('media', ['usage' => Media::HEADER_USAGE_PREFIX.'wp-admin']);
@@ -114,13 +147,13 @@ class PageHeadersTest extends TestCase
         }
 
         Livewire::test('pages::admin.headers')
-            ->set('uploads.events', UploadedFile::fake()->image('first.jpg', 1600, 900))
-            ->call('save', 'events')
+            ->set('uploads.header:events', UploadedFile::fake()->image('first.jpg', 1600, 900))
+            ->call('save', Media::HEADER_USAGE_PREFIX.'events')
             ->assertHasNoErrors();
 
         Livewire::test('pages::admin.headers')
-            ->set('uploads.events', UploadedFile::fake()->image('second.jpg', 1600, 900))
-            ->call('save', 'events')
+            ->set('uploads.header:events', UploadedFile::fake()->image('second.jpg', 1600, 900))
+            ->call('save', Media::HEADER_USAGE_PREFIX.'events')
             ->assertHasNoErrors();
 
         // replaceForUsage يحذف السابق، فلا يتراكم صفّان على مفتاح واحد
@@ -130,9 +163,9 @@ class PageHeadersTest extends TestCase
     public function test_a_non_image_upload_is_rejected(): void
     {
         Livewire::test('pages::admin.headers')
-            ->set('uploads.events', UploadedFile::fake()->create('notes.pdf', 40, 'application/pdf'))
-            ->call('save', 'events')
-            ->assertHasErrors('uploads.events');
+            ->set('uploads.header:events', UploadedFile::fake()->create('notes.pdf', 40, 'application/pdf'))
+            ->call('save', Media::HEADER_USAGE_PREFIX.'events')
+            ->assertHasErrors('uploads.header:events');
 
         $this->assertDatabaseMissing('media', ['usage' => Media::HEADER_USAGE_PREFIX.'events']);
     }
