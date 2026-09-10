@@ -232,7 +232,8 @@ new #[Layout('layouts::admin', ['title' => 'تقييمات Google'])] class exte
             </p>
 
             <div class="mt-5">
-                <x-ui.button href="{{ route('admin.google.connect') }}" icon="google">
+                {{-- الوجهة خارج الموقع؛ wire:navigate يجلبها بـfetch فيمنعها CORS --}}
+                <x-ui.button href="{{ route('admin.google.connect') }}" icon="google" :navigate="false">
                     الربط بحساب Google
                 </x-ui.button>
             </div>
