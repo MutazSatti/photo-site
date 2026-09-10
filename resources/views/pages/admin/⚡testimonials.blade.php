@@ -37,6 +37,8 @@ new #[Layout('layouts::admin', ['title' => 'آراء العملاء'])] class ex
         $this->resetForm();
         $this->creating = true;
         $this->sort_order = (string) (Testimonial::max('sort_order') + 1);
+
+        $this->dispatch('testimonial-form-opened');
     }
 
     public function edit(int $id): void
@@ -52,6 +54,8 @@ new #[Layout('layouts::admin', ['title' => 'آراء العملاء'])] class ex
         $this->rating = $item->rating;
         $this->sort_order = (string) $item->sort_order;
         $this->is_active = $item->is_active;
+
+        $this->dispatch('testimonial-form-opened');
     }
 
     public function save(): void
@@ -134,6 +138,7 @@ new #[Layout('layouts::admin', ['title' => 'آراء العملاء'])] class ex
     </x-admin.page-header>
 
     @if ($creating || $editingId)
+        <x-admin.reveal on="testimonial-form-opened">
         <x-admin.card :title="$editingId ? 'تعديل الرأي' : 'رأي جديد'" class="mb-6">
             <form wire:submit="save" class="grid gap-5">
                 <div class="grid gap-4 sm:grid-cols-2">
@@ -202,6 +207,7 @@ new #[Layout('layouts::admin', ['title' => 'آراء العملاء'])] class ex
                 </div>
             </form>
         </x-admin.card>
+        </x-admin.reveal>
     @endif
 
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

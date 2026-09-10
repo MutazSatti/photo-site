@@ -227,11 +227,7 @@ new #[Layout('layouts::admin', ['title' => 'الجهات والعملاء'])] cl
     @endunless
 
     @if ($creating || $editingId)
-        {{--
-            التمرير يقع على الحدث لا على ظهور العنصر: النموذج قد يكون مفتوحًا
-            أصلًا حين يُضغط تعديل جهة أخرى، فلا يُعاد إنشاؤه ولا يكفي x-init.
-        --}}
-        <div x-data x-on:client-form-opened.window="$el.scrollIntoView({ behavior: 'smooth', block: 'start' })">
+        <x-admin.reveal on="client-form-opened">
         <x-admin.card :title="$editingId ? 'تعديل الجهة' : 'جهة جديدة'" class="mb-6">
             <form wire:submit="save" class="grid gap-5">
                 <div class="grid gap-4 sm:grid-cols-2">
@@ -315,7 +311,7 @@ new #[Layout('layouts::admin', ['title' => 'الجهات والعملاء'])] cl
                 </div>
             </form>
         </x-admin.card>
-        </div>
+        </x-admin.reveal>
     @endif
 
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -39,6 +39,8 @@ new #[Layout('layouts::admin', ['title' => 'الأسئلة الشائعة'])] cl
         $this->resetForm();
         $this->creating = true;
         $this->sort_order = (string) (Faq::max('sort_order') + 1);
+
+        $this->dispatch('faq-form-opened');
     }
 
     public function edit(int $id): void
@@ -52,6 +54,8 @@ new #[Layout('layouts::admin', ['title' => 'الأسئلة الشائعة'])] cl
         $this->section_id = $faq->section_id;
         $this->sort_order = (string) $faq->sort_order;
         $this->is_active = $faq->is_active;
+
+        $this->dispatch('faq-form-opened');
     }
 
     public function save(): void
@@ -129,6 +133,7 @@ new #[Layout('layouts::admin', ['title' => 'الأسئلة الشائعة'])] cl
     </x-admin.page-header>
 
     @if ($creating || $editingId)
+        <x-admin.reveal on="faq-form-opened">
         <x-admin.card :title="$editingId ? 'تعديل السؤال' : 'سؤال جديد'" class="mb-6">
             <form wire:submit="save" class="grid gap-5">
                 <x-ui.field label="السؤال" required :error="$errors->first('question')"
@@ -170,6 +175,7 @@ new #[Layout('layouts::admin', ['title' => 'الأسئلة الشائعة'])] cl
                 </div>
             </form>
         </x-admin.card>
+        </x-admin.reveal>
     @endif
 
     <x-admin.card :padded="false">

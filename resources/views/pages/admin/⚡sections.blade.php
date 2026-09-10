@@ -89,6 +89,8 @@ new #[Layout('layouts::admin', ['title' => 'الأقسام'])] class extends Com
         $this->editingType = 'section';
         $this->editingId = null;
         $this->sort_order = (string) (($this->sections->max('sort_order') ?? -1) + 1);
+
+        $this->dispatch('section-form-opened');
     }
 
     public function editSection(int $id): void
@@ -113,6 +115,8 @@ new #[Layout('layouts::admin', ['title' => 'الأقسام'])] class extends Com
         $this->seo_description = (string) $section->seo_description;
         $this->sort_order = (string) $section->sort_order;
         $this->is_active = $section->is_active;
+
+        $this->dispatch('section-form-opened');
     }
 
     public function newCategory(int $sectionId): void
@@ -124,6 +128,8 @@ new #[Layout('layouts::admin', ['title' => 'الأقسام'])] class extends Com
 
         $siblings = $this->sections->firstWhere('id', $sectionId)?->categories;
         $this->sort_order = (string) (($siblings?->max('sort_order') ?? -1) + 1);
+
+        $this->dispatch('section-form-opened');
     }
 
     public function editCategory(int $id): void
@@ -144,6 +150,8 @@ new #[Layout('layouts::admin', ['title' => 'الأقسام'])] class extends Com
         $this->is_active = $category->is_active;
         $this->seo_title = (string) $category->seo_title;
         $this->seo_description = (string) $category->seo_description;
+
+        $this->dispatch('section-form-opened');
     }
 
     /** الاسم الإنجليزي هو أقرب مصدر لرابط لاتيني، فالاسم العربي لا يصلح له. */
@@ -537,7 +545,7 @@ new #[Layout('layouts::admin', ['title' => 'الأقسام'])] class extends Com
         </div>
 
         {{-- ================= نموذج التحرير ================= --}}
-        <div>
+        <x-admin.reveal on="section-form-opened">
             <div class="lg:sticky lg:top-20">
                 @if ($editingType)
                     @php
@@ -703,6 +711,6 @@ new #[Layout('layouts::admin', ['title' => 'الأقسام'])] class extends Com
                     </x-admin.card>
                 @endif
             </div>
-        </div>
+        </x-admin.reveal>
     </div>
 </div>

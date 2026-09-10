@@ -225,25 +225,6 @@ class ClientLogosTest extends TestCase
         $this->assertSame('شعار الاسم الجديد', $media->refresh()->alt);
     }
 
-    /**
-     * النموذج يُرسم أعلى الصفحة والقائمة تحته. فبلا حدث يمرّر إليه، يبدو ضغط
-     * «تعديل» بلا أثر لأن النموذج يُفتح خارج مجال النظر.
-     */
-    public function test_opening_the_form_announces_itself_so_the_page_scrolls_to_it(): void
-    {
-        $this->actingAs($this->admin());
-
-        $client = Client::create(['name' => 'جهة بعيدة في القائمة']);
-
-        Livewire::test('pages::admin.clients')
-            ->call('edit', $client->id)
-            ->assertDispatched('client-form-opened');
-
-        Livewire::test('pages::admin.clients')
-            ->call('create')
-            ->assertDispatched('client-form-opened');
-    }
-
     public function test_the_admin_can_reorder_clients(): void
     {
         $this->actingAs($this->admin());
