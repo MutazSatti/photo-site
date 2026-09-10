@@ -52,6 +52,8 @@ new #[Layout('layouts::admin', ['title' => 'الجهات والعملاء'])] cl
         $this->resetForm();
         $this->creating = true;
         $this->sort_order = (string) (Client::max('sort_order') + 1);
+
+        $this->dispatch('client-form-opened');
     }
 
     public function edit(int $id): void
@@ -65,6 +67,10 @@ new #[Layout('layouts::admin', ['title' => 'الجهات والعملاء'])] cl
         $this->url = (string) $client->url;
         $this->sort_order = (string) $client->sort_order;
         $this->is_active = $client->is_active;
+
+        // النموذج يُرسم أعلى الصفحة والقائمة طويلة، فزرّ التعديل قد يبعد عنه
+        // شاشات. بلا تمرير يبدو الضغط بلا أثر، والنموذج مفتوح خارج النظر.
+        $this->dispatch('client-form-opened');
     }
 
     public function save(ImageService $images): void
@@ -221,6 +227,11 @@ new #[Layout('layouts::admin', ['title' => 'الجهات والعملاء'])] cl
     @endunless
 
     @if ($creating || $editingId)
+        {{--
+            التمرير يقع على الحدث لا على ظهور العنصر: النموذج قد يكون مفتوحًا
+            أصلًا حين يُضغط تعديل جهة أخرى، فلا يُعاد إنشاؤه ولا يكفي x-init.
+        --}}
+        <div x-data x-on:client-form-opened.window="$el.scrollIntoView({ behavior: 'smooth', block: 'start' })">
         <x-admin.card :title="$editingId ? 'تعديل الجهة' : 'جهة جديدة'" class="mb-6">
             <form wire:submit="save" class="grid gap-5">
                 <div class="grid gap-4 sm:grid-cols-2">
@@ -304,6 +315,7 @@ new #[Layout('layouts::admin', ['title' => 'الجهات والعملاء'])] cl
                 </div>
             </form>
         </x-admin.card>
+        </div>
     @endif
 
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
