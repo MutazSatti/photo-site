@@ -495,7 +495,7 @@ class Schema
     {
         $areas = [];
 
-        foreach ((array) config('site.service_areas') as $area) {
+        foreach (service_areas() as $area) {
             $areas[] = ['@type' => 'City', 'name' => (string) $area];
         }
 

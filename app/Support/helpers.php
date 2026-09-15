@@ -39,6 +39,45 @@ if (! function_exists('whatsapp_url')) {
     }
 }
 
+if (! function_exists('service_areas')) {
+    /**
+     * المدن التي تُعرض كنطاق خدمة، مرتّبةً كما كتبها المالك.
+     *
+     * تُحرَّر من لوحة التحكم لا من ملف الشيفرة: نطاق العمل يتغيّر بتغيّر
+     * ارتباطات المصوّر، ووعدٌ بمدينة لا يغطّيها يجلب طلبات يرفضها.
+     *
+     * الفواصل الثلاث مقبولة — سطر جديد، وفاصلة عربية، ولاتينية — فلا يضطرّ
+     * المالك إلى تذكّر صيغة. والرجوع إلى قائمة الشيفرة عند فراغ الإعداد
+     * يمنع أن تخلو صفحة التواصل من نطاق خدمة بسبب حقل مُسح سهوًا.
+     *
+     * @return array<int, string>
+     */
+    function service_areas(): array
+    {
+        $raw = setting('service_areas');
+
+        if ($raw !== null) {
+            // preg_split ترجع false عند فشل النمط، وهو ما يعامَل هنا كقائمة
+            // فارغة فترجع الدالة إلى قائمة الشيفرة بدل أن تنشر false نصًّا
+            $parts = preg_split('/[\r\n،,]+/u', (string) $raw) ?: [];
+
+            $areas = array_values(array_filter(
+                array_map(trim(...), $parts),
+                static fn (string $area): bool => $area !== '',
+            ));
+
+            if ($areas !== []) {
+                return $areas;
+            }
+        }
+
+        /** @var array<int, string> $fallback */
+        $fallback = (array) config('site.service_areas', []);
+
+        return $fallback;
+    }
+}
+
 if (! function_exists('accreditations')) {
     /**
      * الاعتمادات الرسمية بأوصافها جاهزةً للعرض.

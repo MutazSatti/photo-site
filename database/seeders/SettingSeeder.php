@@ -85,6 +85,9 @@ class SettingSeeder extends Seeder
                 'value' => null],
             ['key' => 'contact_note', 'group' => 'contact', 'type' => 'textarea', 'label' => 'ملاحظة صفحة التواصل', 'sort_order' => 5,
                 'value' => 'الواتساب هو أسرع وسيلة للوصول إليّ. أرجو ذكر نوع المناسبة وتاريخها ومكانها في أول رسالة ليصلك عرض دقيق مباشرة.'],
+            ['key' => 'service_areas', 'group' => 'contact', 'type' => 'textarea', 'label' => 'نطاق الخدمة', 'sort_order' => 6,
+                'hint' => 'المدن التي تغطّيها، مدينة في كل سطر أو مفصولة بفواصل. تظهر في صفحتي التواصل ونبذة وفي شريط الحجز، وتُنشر في البيانات المهيكلة التي تقرؤها Google. لا تذكر مدينة لا تغطّيها: الوعد بها يجلب طلبات ترفضها.',
+                'value' => $city],
 
             // ---------- التواصل الاجتماعي ----------
             ['key' => 'social_instagram', 'group' => 'social', 'type' => 'url', 'label' => 'إنستقرام', 'sort_order' => 1,
@@ -109,7 +112,17 @@ class SettingSeeder extends Seeder
         ];
 
         foreach ($settings as $data) {
-            Setting::updateOrCreate(['key' => $data['key']], $data);
+            // القيمة تُكتب عند الإنشاء وحده. البذرة تُشغَّل مع كل نشر، وكتابتها
+            // في كل مرة كانت تمسح ما حرّره المالك من اللوحة وتعيده إلى نصّ
+            // الشيفرة بصمت — أما الوصف والتلميح والترتيب فتُحدَّث دائمًا لأنها
+            // شرحُ الحقل لا محتواه.
+            $value = $data['value'] ?? null;
+            unset($data['value']);
+
+            Setting::updateOrCreate(
+                ['key' => $data['key']],
+                [...$data, ...(Setting::where('key', $data['key'])->exists() ? [] : ['value' => $value])],
+            );
         }
 
         Setting::flush();

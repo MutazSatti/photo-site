@@ -182,7 +182,7 @@ new class extends Component
                                 {{ config('site.location.city') }}، {{ config('site.location.country_name') }}
                             </p>
                             <p class="mt-1 text-xs leading-6 text-ink-500 dark:text-ink-400">
-                                التغطية متاحة في {{ implode('، ', config('site.service_areas')) }}.
+                                التغطية متاحة في {{ implode('، ', service_areas()) }}.
                             </p>
                         </div>
                     </div>

@@ -125,7 +125,7 @@ class FeedController extends Controller
             }
 
             $lines[] = '- الموقع: '.$city.'، '.config('site.location.region').'، '.config('site.location.country_name');
-            $lines[] = '- نطاق الخدمة: '.implode('، ', config('site.service_areas'));
+            $lines[] = '- نطاق الخدمة: '.implode('، ', service_areas());
             $lines[] = '';
 
             $lines[] = '## الخدمات';

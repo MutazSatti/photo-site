@@ -200,7 +200,7 @@ new class extends Component
                             <div class="flex items-start justify-between gap-4">
                                 <dt class="text-ink-500 dark:text-ink-400 shrink-0">نطاق الخدمة</dt>
                                 <dd class="font-bold text-left text-ink-900 dark:text-ink-100">
-                                    {{ implode('، ', config('site.service_areas')) }}
+                                    {{ implode('، ', service_areas()) }}
                                 </dd>
                             </div>
                         </dl>
