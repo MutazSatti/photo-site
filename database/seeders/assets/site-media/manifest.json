@@ -2137,5 +2137,435 @@
   "caption": null,
   "sort_order": 0,
   "is_cover": true
+ },
+ {
+  "file": "zawaj-burtreh-01-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس بالبشت الذهبي تحت ثريّات القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "zawaj-burtreh-02-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "بورتريه العريس على خلفية داكنة بإضاءة جانبية — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-03-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس ممسكًا بعصا التشريفة أمام ثريّات القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-04-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس يعدّل بشته على خلفية سوداء — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-05-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس بالبشت البنّي أمام خلفية ذهبية — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-06-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس إلى جانب سيارة الزفاف وباقة الورد — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-07-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس يرفع بشته وصالة الاحتفال خلفه — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 6,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-08-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس بالبشت الأسود على خلفية داكنة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 7,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-09-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس بالشماغ الأحمر تحت ثريّا القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 8,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-10-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس أمام عمود ذهبي بإضاءة دافئة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 9,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-11-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس بالبشت النحاسي وخلفه لوحة خطّ عربي — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 10,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-12-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس ببدلة رسمية سوداء ووردة في الجيب — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 11,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-13-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس يعدّل عقاله وخلفه صالة الاحتفال — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 12,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-14-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس بالبشت العنّابي تحت إضاءة القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 13,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-15-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس بالبشت البنّي أمام شمعدانات القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 14,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-16-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس جالسًا على مقعد مذهّب في القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 15,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-17-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "بورتريه قريب للعريس بإضاءة ناعمة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 16,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-18-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس مبتسمًا بالبشت الذهبي — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 17,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-burtreh-19-lg.webp",
+  "post": "burtreh-alaris",
+  "alt": "العريس أمام لوحة خطّ عربي بإضاءة دافئة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 18,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-01-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "ضيف بالزيّ التقليدي في بهو القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "zawaj-qaa-02-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس ووالده يتقبّلان التهاني — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-03-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس واقفًا أمام لوحة الخطّ العربي في القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-04-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس تحت الثريّات الذهبية وسط القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-05-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "ضيف بالعمامة في صالة الاحتفال — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-06-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس يصافح ضيوفه عند مدخل القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-07-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس أمام العلم السعودي في مناسبة وطنية — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 6,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-08-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس بالشماغ الأحمر تحت إضاءة القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 7,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-09-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس بالبشت الأسود بين الضيوف — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 8,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-10-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس جالسًا في صدر القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 9,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-11-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس يتحدّث إلى ضيوفه أثناء الحفل — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 10,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-12-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس مبتسمًا تحت ثريّات القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 11,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-13-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس واقفًا وسط القاعة بإضاءة دافئة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 12,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-14-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس بالبشت الرمادي في صالة الاحتفال — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 13,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-qaa-15-lg.webp",
+  "post": "fi-alqaa",
+  "alt": "العريس أمام لوحة الخطّ العربي وسط الضيوف — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 14,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-maqad-01-lg.webp",
+  "post": "maqad-alaris",
+  "alt": "العريس جالسًا يتلقّى التهاني تحت إضاءة القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "zawaj-maqad-02-lg.webp",
+  "post": "maqad-alaris",
+  "alt": "العريس على مقعده المذهّب في صالة الاحتفال — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-maqad-03-lg.webp",
+  "post": "maqad-alaris",
+  "alt": "العريس بالسيف وقلادة الورد أثناء التهاني — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-maqad-04-lg.webp",
+  "post": "maqad-alaris",
+  "alt": "العريس بطوق الورد الأحمر بين المهنّئين — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-maqad-05-lg.webp",
+  "post": "maqad-alaris",
+  "alt": "العريس في صدر القاعة تحت الثريّا — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-bakhur-01-lg.webp",
+  "post": "albakhur-waldiyafa",
+  "alt": "مبخرة تتصاعد منها أعمدة الدخان أمام العريس — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "zawaj-bakhur-02-lg.webp",
+  "post": "albakhur-waldiyafa",
+  "alt": "تقديم البخور للعريس في القاعة — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-bakhur-03-lg.webp",
+  "post": "albakhur-waldiyafa",
+  "alt": "المبخرة الفضّية في يد العريس ودخانها يتصاعد — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-tafasil-01-lg.webp",
+  "post": "tafasil-laylat-alzawaj",
+  "alt": "خاتم الزواج في راحة اليد أمام إضاءة ذهبية — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "zawaj-tafasil-02-lg.webp",
+  "post": "tafasil-laylat-alzawaj",
+  "alt": "العريس يعدّل ساعته قبل بدء الحفل — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-sayara-01-lg.webp",
+  "post": "sayarat-alaris",
+  "alt": "العريس إلى جانب سيارة الزفاف وباقة الورد على غطاء المحرّك — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "zawaj-sayara-02-lg.webp",
+  "post": "sayarat-alaris",
+  "alt": "سيارة الزفاف بكشّافاتها المضاءة والعريس بجانبها ليلًا — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-sayara-03-lg.webp",
+  "post": "sayarat-alaris",
+  "alt": "العريس أمام سيارة الزفاف تحت أضواء الليل — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-muassasiya-01-lg.webp",
+  "post": "alfaaliyat-almuassasiya",
+  "alt": "صورة جماعية لفريق العمل في فعالية مؤسسية — تصوير مناسبات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 0,
+  "is_cover": true
+ },
+ {
+  "file": "zawaj-muassasiya-02-lg.webp",
+  "post": "alfaaliyat-almuassasiya",
+  "alt": "قصاصات ذهبية تتناثر أثناء الاحتفال بإطلاق المشروع — تصوير مناسبات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 1,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-muassasiya-03-lg.webp",
+  "post": "alfaaliyat-almuassasiya",
+  "alt": "فريق الضيافة يقدّم التمر والقهوة في حفل الافتتاح — تصوير مناسبات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 2,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-muassasiya-04-lg.webp",
+  "post": "alfaaliyat-almuassasiya",
+  "alt": "ركن تعريفي في حملة مجتمعية — تصوير مناسبات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 3,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-muassasiya-05-lg.webp",
+  "post": "alfaaliyat-almuassasiya",
+  "alt": "زوّار عند ركن حملة مجتمعية في الهواء الطلق — تصوير مناسبات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 4,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-muassasiya-06-lg.webp",
+  "post": "alfaaliyat-almuassasiya",
+  "alt": "صورة تذكارية أمام خلفية الحدث الرسمية — تصوير مناسبات في جدة بعدسة معتز ساتي",
+  "caption": null,
+  "sort_order": 5,
+  "is_cover": false
+ },
+ {
+  "file": "zawaj-hero-lg.webp",
+  "usage": "ev_hero",
+  "alt": "العريس أمام سيارة الزفاف تحت أضواء الليل — تصوير زواجات في جدة بعدسة معتز ساتي",
+  "caption": null
  }
 ]
