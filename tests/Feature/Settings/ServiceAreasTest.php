@@ -105,6 +105,34 @@ class ServiceAreasTest extends TestCase
         $this->assertSame(['الطائف'], service_areas());
     }
 
+    /**
+     * البيانات المهيكلة لا تعلن نطاقًا أوسع ممّا تقوله الصفحة.
+     *
+     * نقطة التواصل كانت تنشر «SA» أي المملكة كلها، فيقرأ محرّك البحث وعدًا لم
+     * يقطعه المالك ويصله طلب من مدينة لا يغطّيها.
+     */
+    public function test_no_entity_publishes_a_wider_scope_than_the_owner_set(): void
+    {
+        $json = json_encode([
+            Schema::contactPage(),
+            Schema::business(),
+        ], JSON_UNESCAPED_UNICODE);
+
+        $this->assertStringNotContainsString('"areaServed":"SA"', (string) $json);
+        $this->assertStringContainsString('جدة', (string) $json);
+    }
+
+    /** وتغيير النطاق من اللوحة يصل إلى البيانات المهيكلة كما يصل إلى الصفحة. */
+    public function test_the_published_scope_follows_the_setting(): void
+    {
+        Setting::put('service_areas', 'ينبع');
+
+        $json = (string) json_encode(Schema::contactPage(), JSON_UNESCAPED_UNICODE);
+
+        $this->assertStringContainsString('ينبع', $json);
+        $this->assertStringNotContainsString('جدة', $json);
+    }
+
     /** أما شرح الحقل فيُحدَّث دائمًا: هو وصفُه لا محتواه. */
     public function test_reseeding_still_refreshes_the_field_description(): void
     {

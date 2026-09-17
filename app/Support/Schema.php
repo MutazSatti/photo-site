@@ -215,7 +215,7 @@ class Schema
                     'serviceType' => $category->name_en ?: $category->name,
                     'url' => $category->url(),
                     'provider' => ['@id' => self::businessId()],
-                    'areaServed' => ['@type' => 'City', 'name' => config('site.location.city')],
+                    'areaServed' => self::serviceAreas(),
                 ],
             ])->all(),
         ];
@@ -480,14 +480,19 @@ class Schema
                 'telephone' => config('site.phone'),
                 'email' => Setting::get('contact_email', config('site.email')),
                 'contactType' => 'حجز وتصوير',
-                'areaServed' => 'SA',
+                'areaServed' => self::serviceAreas(),
                 'availableLanguage' => ['ar', 'en'],
             ],
         ];
     }
 
     /**
-     * المدن التي تُغطّى — تُنشر ضمن areaServed في أكثر من كيان.
+     * المدن التي تُغطّى — تُنشر ضمن areaServed في كل كيان بلا استثناء.
+     *
+     * مصدرٌ واحد لا اثنان: نقطة التواصل كانت تعلن «SA» أي المملكة كلها،
+     * وبطاقات الخدمات كانت تقرأ مدينة المالك من إعداداته. فيقرأ محرّك البحث
+     * نطاقًا أوسع ممّا تقوله الصفحة نفسها، ويصل الموقعَ طلبٌ من مدينة لا
+     * تُغطّى. والنطاق يُحرَّر من اللوحة، فما يُنشر هو ما قرّره المالك.
      *
      * @return array<int, array<string, string>>
      */
