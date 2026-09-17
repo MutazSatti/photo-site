@@ -160,3 +160,22 @@ if (! function_exists('header_photo_default')) {
         return $exists[$key] ? asset($file) : null;
     }
 }
+
+if (! function_exists('photo_count')) {
+    /**
+     * عدد الصور بصيغته الصحيحة في العربية.
+     *
+     * «6 صورة» خطأ يقرؤه كل زائر: العدد من ثلاثة إلى عشرة يُميَّز بجمع القلة،
+     * وما فوقها بالمفرد. والصفحة التي تعتني بتصحيح المنظور في الصور أولى بأن
+     * تعتني بجملة تحتها.
+     */
+    function photo_count(int $count): string
+    {
+        return match (true) {
+            $count === 1 => 'صورة واحدة',
+            $count === 2 => 'صورتان',
+            $count >= 3 && $count <= 10 => $count.' صور',
+            default => $count.' صورة',
+        };
+    }
+}

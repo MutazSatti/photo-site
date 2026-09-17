@@ -7,6 +7,7 @@
         ['route' => 'admin.dashboard', 'label' => 'لوحة المعلومات', 'icon' => 'dashboard'],
         ['route' => 'admin.posts', 'label' => 'الأعمال والمحتوى', 'icon' => 'images'],
         ['route' => 'admin.sections', 'label' => 'الأقسام', 'icon' => 'layers'],
+        ['route' => 'admin.pages', 'label' => 'محتوى الصفحات', 'icon' => 'document'],
         ['route' => 'admin.faqs', 'label' => 'الأسئلة الشائعة', 'icon' => 'help'],
         ['route' => 'admin.testimonials', 'label' => 'آراء العملاء', 'icon' => 'star'],
         ['route' => 'admin.clients', 'label' => 'الجهات والعملاء', 'icon' => 'building'],

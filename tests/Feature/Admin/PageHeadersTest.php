@@ -66,8 +66,9 @@ class PageHeadersTest extends TestCase
     {
         $keys = array_column(Livewire::test('pages::admin.headers')->get('groups')[0]['slots'], 'usage');
 
-        $this->assertContains(Media::HEADER_USAGE_PREFIX.'events', $keys);
+        $this->assertContains(Media::HEADER_USAGE_PREFIX.'aerial', $keys);
         $this->assertNotContains(Media::HEADER_USAGE_PREFIX.'real-estate', $keys);
+        $this->assertNotContains(Media::HEADER_USAGE_PREFIX.'events', $keys);
     }
 
     /** صفحة العقارات وشعارات الاعتمادات لها خاناتها، فلا تبقى صورًا لا تُبدَّل. */
@@ -80,7 +81,7 @@ class PageHeadersTest extends TestCase
             $groups,
         ));
 
-        foreach (['re_hero', 're_before', 're_after', 're_craft_verticals', 'accr_etec', 'accr_gaca', 'accr_gamr'] as $usage) {
+        foreach (['re_hero', 're_before', 're_after', 're_craft_verticals', 'ev_hero', 'accr_etec', 'accr_gaca', 'accr_gamr'] as $usage) {
             $this->assertContains($usage, $usages, $usage.' يجب أن تكون له خانة.');
         }
     }
@@ -105,27 +106,27 @@ class PageHeadersTest extends TestCase
 
     public function test_the_shipped_file_is_used_when_nothing_was_uploaded(): void
     {
-        $this->assertNotNull(header_photo('events'), 'الصورة المشحونة مع الشيفرة يجب أن تُستعمل افتراضيًا.');
-        $this->assertStringContainsString('images/headers/events.webp', (string) header_photo('events'));
+        $this->assertNotNull(header_photo('aerial'), 'الصورة المشحونة مع الشيفرة يجب أن تُستعمل افتراضيًا.');
+        $this->assertStringContainsString('images/headers/aerial.webp', (string) header_photo('aerial'));
     }
 
     public function test_an_upload_takes_precedence_over_the_shipped_file(): void
     {
-        $this->uploadedHeader('events');
+        $this->uploadedHeader('aerial');
         Media::forgetHeaders();
 
-        $this->assertStringContainsString('media/test/events.webp', (string) header_photo('events'));
+        $this->assertStringContainsString('media/test/aerial.webp', (string) header_photo('aerial'));
     }
 
     public function test_removing_an_upload_falls_back_to_the_shipped_file(): void
     {
-        $this->uploadedHeader('events');
+        $this->uploadedHeader('aerial');
         Media::forgetHeaders();
 
-        Livewire::test('pages::admin.headers')->call('remove', Media::HEADER_USAGE_PREFIX.'events');
+        Livewire::test('pages::admin.headers')->call('remove', Media::HEADER_USAGE_PREFIX.'aerial');
 
-        $this->assertDatabaseMissing('media', ['usage' => Media::HEADER_USAGE_PREFIX.'events']);
-        $this->assertStringContainsString('images/headers/events.webp', (string) header_photo('events'));
+        $this->assertDatabaseMissing('media', ['usage' => Media::HEADER_USAGE_PREFIX.'aerial']);
+        $this->assertStringContainsString('images/headers/aerial.webp', (string) header_photo('aerial'));
     }
 
     public function test_an_unknown_page_key_is_rejected(): void
@@ -147,27 +148,27 @@ class PageHeadersTest extends TestCase
         }
 
         Livewire::test('pages::admin.headers')
-            ->set('uploads.header:events', UploadedFile::fake()->image('first.jpg', 1600, 900))
-            ->call('save', Media::HEADER_USAGE_PREFIX.'events')
+            ->set('uploads.header:aerial', UploadedFile::fake()->image('first.jpg', 1600, 900))
+            ->call('save', Media::HEADER_USAGE_PREFIX.'aerial')
             ->assertHasNoErrors();
 
         Livewire::test('pages::admin.headers')
-            ->set('uploads.header:events', UploadedFile::fake()->image('second.jpg', 1600, 900))
-            ->call('save', Media::HEADER_USAGE_PREFIX.'events')
+            ->set('uploads.header:aerial', UploadedFile::fake()->image('second.jpg', 1600, 900))
+            ->call('save', Media::HEADER_USAGE_PREFIX.'aerial')
             ->assertHasNoErrors();
 
         // replaceForUsage يحذف السابق، فلا يتراكم صفّان على مفتاح واحد
-        $this->assertSame(1, Media::where('usage', Media::HEADER_USAGE_PREFIX.'events')->count());
+        $this->assertSame(1, Media::where('usage', Media::HEADER_USAGE_PREFIX.'aerial')->count());
     }
 
     public function test_a_non_image_upload_is_rejected(): void
     {
         Livewire::test('pages::admin.headers')
-            ->set('uploads.header:events', UploadedFile::fake()->create('notes.pdf', 40, 'application/pdf'))
-            ->call('save', Media::HEADER_USAGE_PREFIX.'events')
-            ->assertHasErrors('uploads.header:events');
+            ->set('uploads.header:aerial', UploadedFile::fake()->create('notes.pdf', 40, 'application/pdf'))
+            ->call('save', Media::HEADER_USAGE_PREFIX.'aerial')
+            ->assertHasErrors('uploads.header:aerial');
 
-        $this->assertDatabaseMissing('media', ['usage' => Media::HEADER_USAGE_PREFIX.'events']);
+        $this->assertDatabaseMissing('media', ['usage' => Media::HEADER_USAGE_PREFIX.'aerial']);
     }
 
     public function test_a_guest_cannot_reach_the_page(): void

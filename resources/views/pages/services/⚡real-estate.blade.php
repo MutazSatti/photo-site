@@ -475,7 +475,7 @@ new class extends Component
                     <h2 id="work-heading" class="text-xl font-extrabold text-ink-900 sm:text-2xl dark:text-ink-50">
                         من الأعمال
                     </h2>
-                    <p class="text-sm text-ink-500 shrink-0 dark:text-ink-400">{{ $this->photoCount }} صورة</p>
+                    <p class="text-sm text-ink-500 shrink-0 dark:text-ink-400">{{ photo_count($this->photoCount) }}</p>
                 </div>
 
                 <div class="space-y-16 mt-10">

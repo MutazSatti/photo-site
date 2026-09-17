@@ -83,7 +83,7 @@ class RealEstatePageTest extends TestCase
             ->assertOk()
             ->assertSee('المرافق الخارجية واللاند سكيب')
             ->assertSee('المجالس والمعيشة')
-            ->assertSee('5 صورة')
+            ->assertSee('5 صور')
             ->assertSee('صورة المرافق الخارجية واللاند سكيب رقم 1');
     }
 
