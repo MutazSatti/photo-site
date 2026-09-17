@@ -62,14 +62,17 @@ Route::get('/robots.txt', [FeedController::class, 'robots'])->name('robots');
 $patterns = SectionRoutes::patterns();
 
 /*
- * صفحة خدمة بتصميم خاص تسبق النمط العام.
+ * صفحتا خدمة بتصميم خاص تسبقان النمط العام.
  *
- * التصوير العقاري يصله ثلاثة عملاء بأسئلة مختلفة، فصفحته صفحة مبيعات لا قائمة
- * أعمال. الرابط هو نفسه الذي يولّده Category::url()، والأسبقية في المطابقة
- * لترتيب التسجيل لا للاسم.
+ * التصوير العقاري يصله ثلاثة عملاء بأسئلة مختلفة، والزواجات والمناسبات كذلك:
+ * عريس وعائلة وجهة. فصفحتاهما صفحتا مبيعات لا قائمتَي أعمال. والرابط هو نفسه
+ * الذي يولّده Category::url()، والأسبقية في المطابقة لترتيب التسجيل لا للاسم.
  */
 Route::livewire('/services/real-estate', 'pages::services.real-estate')
     ->name('services.real-estate');
+
+Route::livewire('/services/events', 'pages::services.events')
+    ->name('services.events');
 
 Route::livewire('/{section}', 'pages::section')
     ->where('section', $patterns['sections'])
@@ -103,6 +106,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::livewire('/posts/create', 'pages::admin.post-edit')->name('posts.create');
     Route::livewire('/posts/{post}/edit', 'pages::admin.post-edit')->name('posts.edit');
     Route::livewire('/sections', 'pages::admin.sections')->name('sections');
+    Route::livewire('/pages', 'pages::admin.pages')->name('pages');
     Route::livewire('/faqs', 'pages::admin.faqs')->name('faqs');
     Route::livewire('/testimonials', 'pages::admin.testimonials')->name('testimonials');
     Route::livewire('/clients', 'pages::admin.clients')->name('clients');
