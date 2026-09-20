@@ -109,6 +109,14 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
         Setting::put($keys['title'], $this->seoValues['title'] ?? '');
         Setting::put($keys['description'], $this->seoValues['description'] ?? '');
 
+        // مفتاحا الرئيسية من مجموعة seo، وهي ضمن values — فلولا هذا لكتب
+        // زرّ الحفظ العام فوقهما القيمة التي قُرئت عند فتح الصفحة
+        foreach ($keys as $field => $key) {
+            if (array_key_exists($key, $this->values)) {
+                $this->values[$key] = (string) ($this->seoValues[$field] ?? '');
+            }
+        }
+
         $this->flushCaches();
 
         $this->dispatch('notify', message: 'حُفظ سيو الصفحة.');
@@ -163,10 +171,24 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
             ->all();
     }
 
+    /**
+     * قيم كل تبويبات هذه الشاشة، لا تبويبها الظاهر وحده.
+     *
+     * كانت تُحمَّل للتبويب الظاهر ثم تُستبدل عند الانتقال إلى غيره، فما كُتب في
+     * حقلٍ ولم يُحفظ يُمحى بلا إنذار: يكتب المالك بريدًا جديدًا في «التواصل»،
+     * ثم ينتقل إلى «نبذة وأرقام» ليعدّل سنوات الخبرة ويحفظ، فيجد البريد وقد
+     * عاد إلى ما كان — ويبدو كأن تعديل السنوات هو الذي غيّره.
+     *
+     * والتحميل مرّة واحدة يجعل الشاشة نموذجًا واحدًا كما يراها المالك: زرّ
+     * الحفظ يحفظ ما كتبه في أي تبويب.
+     *
+     * ومجموعتا الشعار وسيو الصفحات مستثناتان: لهما نموذجاهما وزرّاهما، وضمّهما
+     * هنا يعني أن حفظًا لاحقًا يكتب فوقهما قيمًا قديمة قُرئت عند فتح الصفحة.
+     */
     private function loadValues(): void
     {
         $this->values = Setting::query()
-            ->where('group', $this->tab)
+            ->whereIn('group', array_keys($this->tabs))
             ->orderBy('sort_order')
             ->pluck('value', 'key')
             ->map(fn ($v) => (string) $v)
@@ -175,7 +197,6 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
 
     public function updatedTab(): void
     {
-        $this->loadValues();
         $this->resetErrorBag();
     }
 
@@ -312,7 +333,10 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
     {
         $rules = [];
 
-        foreach ($this->fields as $field) {
+        // التحقق يشمل كل ما حُمِّل لا التبويب الظاهر وحده، فالحفظ يشملها كلها
+        $fields = Setting::query()->whereIn('group', array_keys($this->tabs))->get();
+
+        foreach ($fields as $field) {
             $rules["values.{$field->key}"] = match ($field->type) {
                 'number' => ['nullable', 'numeric', 'min:0'],
                 'url' => ['nullable', 'url', 'max:300'],
@@ -326,11 +350,27 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
             'values.*.numeric' => 'أدخل رقمًا صحيحًا.',
         ]);
 
+        /*
+         * الكتابة عبر النموذج لا عبر باني الاستعلام.
+         *
+         * update() على الباني لا يحرّك updated_at، وبصمة المزامنة مع قاعدة
+         * بيانات المتصفح تُبنى من MAX(updated_at) في كل جدول — فكان تعديل أي
+         * إعداد لا يغيّر البصمة، ويبقى ما في المتصفح قديمًا بلا انتهاء.
+         */
+        $stored = Setting::query()
+            ->whereIn('key', array_keys($this->values))
+            ->pluck('value', 'key');
+
         foreach ($this->values as $key => $value) {
-            Setting::where('key', $key)->update(['value' => $value]);
+            // ما لم يتغيّر لا يُكتب: كتابته تحرّك طابعه الزمني بلا سبب، وتحوّل
+            // الحقل الفارغ من null إلى سلسلة فارغة فيبدو محرَّرًا وهو لم يُمسّ
+            if ((string) ($stored[$key] ?? '') === (string) $value) {
+                continue;
+            }
+
+            Setting::put($key, $value);
         }
 
-        Setting::flush();
         $this->flushCaches();
 
         $this->dispatch('notify', message: 'حُفظت الإعدادات.');
