@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Media;
 use App\Models\Setting;
 use App\Support\Seo;
@@ -177,5 +178,27 @@ if (! function_exists('photo_count')) {
             $count >= 3 && $count <= 10 => $count.' صور',
             default => $count.' صورة',
         };
+    }
+}
+
+if (! function_exists('category_anchor')) {
+    /**
+     * نصّ الرابط العائد من عملٍ إلى قسمه.
+     *
+     * يدور على نصوص القسم بمعرّف العمل، فلا يتكرّر النصّ نفسه في كل صفحة —
+     * وتكرارُه حرفيًا في عشرات الصفحات إشارةٌ آلية لا تفيد القسم المقصود.
+     */
+    function category_anchor(Category $category, int $seed = 0): string
+    {
+        /** @var array<int, string> $anchors */
+        $anchors = (array) config('site.category_anchors.'.$category->slug, []);
+
+        if ($anchors === []) {
+            $anchors = [$category->metaTitle()];
+        }
+
+        $text = (string) $anchors[abs($seed) % count($anchors)];
+
+        return strtr($text, [':city' => (string) config('site.location.city')]);
     }
 }

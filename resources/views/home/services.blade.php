@@ -40,6 +40,16 @@
 
                         <p class="mt-1 text-sm font-bold sec-text">{{ $category->tagline }}</p>
                         <p class="mt-2 text-sm leading-7 text-ink-600 line-clamp-2 dark:text-ink-400">{{ $category->description }}</p>
+
+                        {{--
+                            نصّ الرابط يسمّي الخدمة لا التصنيف: البطاقة كلها رابط،
+                            و«الفعاليات» وحدها لا تقول إلى أين تمضي. وكل قسم يأخذ
+                            عنوانه في نتائج البحث، فلا يتكرّر النصّ نفسه في البطاقات.
+                        --}}
+                        <span class="inline-flex items-center gap-1.5 mt-3 text-xs font-bold sec-text">
+                            {{ $category->metaTitle() }}
+                            <x-icon name="arrow-left" :size="13" />
+                        </span>
                     </div>
                 </a>
             @endforeach

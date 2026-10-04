@@ -231,6 +231,26 @@ new class extends Component
             </section>
         @endif
 
+        {{--
+            رابط عائد إلى القسم بنصٍّ يصف الخدمة لا باسم التصنيف.
+
+            الزائر الذي أعجبه عملٌ بعينه يريد بقية مثله، ومحرّك البحث يقرأ من
+            نصّ الرابط ما تتحدّث عنه الصفحة المقصودة. و«الفعاليات» وحدها لا
+            تقول شيئًا للاثنين.
+        --}}
+        @if ($post->category)
+            <section class="px-4 pb-10 mx-auto max-w-3xl sm:px-6 lg:px-8">
+                <p class="text-sm leading-8 text-ink-600 dark:text-ink-400">
+                    هذا العمل ضمن
+                    <a
+                        href="{{ $post->category->url() }}"
+                        wire:navigate
+                        class="font-bold text-brand-700 hover:underline dark:text-brand-400"
+                    >{{ category_anchor($post->category, $post->id) }}</a>.
+                </p>
+            </section>
+        @endif
+
         {{-- ================= التذييل ================= --}}
         <footer class="px-4 pb-12 mx-auto max-w-3xl sm:px-6 lg:px-8">
             <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-ink-200 dark:border-ink-800">

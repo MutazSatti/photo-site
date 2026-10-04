@@ -74,6 +74,9 @@ Route::livewire('/services/real-estate', 'pages::services.real-estate')
 Route::livewire('/services/events', 'pages::services.events')
     ->name('services.events');
 
+Route::livewire('/services/activities', 'pages::services.activities')
+    ->name('services.activities');
+
 Route::livewire('/{section}', 'pages::section')
     ->where('section', $patterns['sections'])
     ->name('section.show');
