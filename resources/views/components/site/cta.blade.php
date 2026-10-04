@@ -2,6 +2,9 @@
     'title' => null,
     'description' => null,
     'compact' => false,
+    // صفحات الخدمات تطلب عرض سعر لا محادثة عامة، والنصّ يفرق في النقر
+    'action' => 'تواصل عبر الواتساب',
+    'message' => null,
 ])
 
 {{--
@@ -52,8 +55,8 @@
                 </p>
 
                 <div class="flex flex-wrap gap-3 mt-8">
-                    <x-ui.button href="{{ whatsapp_url() }}" variant="whatsapp" size="lg" icon="whatsapp" :navigate="false" target="_blank" rel="noopener">
-                        تواصل عبر الواتساب
+                    <x-ui.button href="{{ whatsapp_url($message) }}" variant="whatsapp" size="lg" icon="whatsapp" :navigate="false" target="_blank" rel="noopener">
+                        {{ $action }}
                     </x-ui.button>
 
                     <x-ui.button href="{{ route('contact') }}" variant="brand" size="lg" icon="send">
