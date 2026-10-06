@@ -64,23 +64,65 @@
                 </x-ui.button>
             </div>
 
-            {{-- أرقام سريعة --}}
-            <dl class="grid max-w-2xl grid-cols-2 gap-6 pt-8 mt-12 border-t border-white/15 sm:grid-cols-4">
-                @foreach ([
-                    ['value' => setting('about_years', 10), 'label' => 'سنوات خبرة', 'suffix' => '+'],
-                    ['value' => setting('stat_projects', 450), 'label' => 'مشروع مصوَّر', 'suffix' => '+'],
-                    ['value' => setting('stat_clients', 180), 'label' => 'عميل', 'suffix' => '+'],
-                    ['value' => setting('stat_workshops', 35), 'label' => 'ورشة تدريبية', 'suffix' => '+'],
-                ] as $stat)
-                    <div>
-                        <dt class="sr-only">{{ $stat['label'] }}</dt>
-                        <dd class="text-3xl font-extrabold text-brand-400" dir="ltr">
-                            {{ number_format((int) $stat['value']) }}{{ $stat['suffix'] }}
-                        </dd>
-                        <p class="mt-1 text-sm text-ink-300">{{ $stat['label'] }}</p>
-                    </div>
-                @endforeach
-            </dl>
+            {{--
+                أرقام سريعة وشريط ثقة — نصّهما كله من «محتوى الصفحات».
+
+                الرقم وسطرُه بطاقةٌ واحدة يحرّرها المالك، فلا رقمٌ في شاشة
+                وعنوانه في القالب. وعدد البطاقات يقرّره هو، والشبكة تتبعه:
+                صنفٌ مكتوب لكل عدد لأن ماسح Tailwind يقرأ النصّ كما هو ولا
+                يرى صنفًا يُركَّب في PHP.
+            --}}
+            @php
+                $stats = App\Models\PageBlock::for(App\Models\PageBlock::HOME, 'stats');
+                $trust = App\Models\PageBlock::for(App\Models\PageBlock::HOME, 'trust');
+
+                $statColumns = match (min($stats->items->count(), 4)) {
+                    1 => '',
+                    2 => 'grid-cols-2',
+                    4 => 'grid-cols-2 sm:grid-cols-4',
+                    default => 'grid-cols-3',
+                };
+            @endphp
+
+            @if ($stats->is_active && $stats->items->isNotEmpty())
+                <dl class="grid max-w-2xl gap-4 pt-8 mt-12 border-t sm:gap-6 border-white/15 {{ $statColumns }}">
+                    @foreach ($stats->items as $stat)
+                        {{--
+                            عمودٌ مرن وسطرٌ سفليّ ملتصق بالقاع: رقمٌ أطول من
+                            جاره ينكسر سطرين على الجوال، فتهبط سطور الشرح
+                            متفاوتة ويبدو الصفّ مائلًا. وmt-auto يحاذيها كلها
+                            مهما طال الرقم، بلا ارتفاع مكتوب بالأرقام.
+                        --}}
+                        <div class="flex flex-col h-full">
+                            <dt class="sr-only">{{ $stat->line() ?: $stat->heading() }}</dt>
+
+                            {{-- bdi يعزل الرقم عن اتجاه الفقرة فلا تقفز علامة الزائد --}}
+                            <dd class="text-lg font-extrabold leading-tight text-brand-400 sm:text-3xl sm:leading-tight">
+                                <bdi>{{ $stat->heading() }}</bdi>
+                            </dd>
+
+                            @if ($stat->line())
+                                <p class="pt-1 mt-auto text-xs leading-6 text-ink-300 sm:text-sm">{{ $stat->line() }}</p>
+                            @endif
+                        </div>
+                    @endforeach
+                </dl>
+            @endif
+
+            @if ($trust->is_active && $trust->items->isNotEmpty())
+                {{--
+                    أهدأ من الأرقام عمدًا: ما فيه مذكور بتفصيله ورقم رخصته في
+                    صفحة «نبذة»، فدوره هنا الإشارة لا المزاحمة.
+                --}}
+                <ul class="flex flex-wrap items-center max-w-2xl mt-6 gap-x-5 gap-y-2 text-xs text-white/65">
+                    @foreach ($trust->items as $item)
+                        <li class="inline-flex items-center gap-1.5">
+                            <span class="text-brand-400/80"><x-icon :name="$item->icon ?? 'check'" :size="13" /></span>
+                            {{ $item->heading() }}
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
     </div>
 </section>

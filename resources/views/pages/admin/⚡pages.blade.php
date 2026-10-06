@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 /**
@@ -22,7 +23,15 @@ use Livewire\Component;
  */
 new #[Layout('layouts::admin', ['title' => 'محتوى الصفحات'])] class extends Component
 {
-    public string $page = PageBlock::EVENTS;
+    /**
+     * الصفحة الظاهرة.
+     *
+     * كانت مثبّتة على صفحة واحدة، فصفحةٌ تُضاف إلى PageBlock::pages() لا
+     * يصل إليها المالك وإن كان نصّها في القاعدة. وحفظها في الرابط يجعل
+     * تبويبًا بعينه قابلًا للمشاركة والعودة إليه.
+     */
+    #[Url(as: 'page')]
+    public string $page = PageBlock::HOME;
 
     /**
      * نصوص الأقسام، مفهرسة بالمعرّف.
@@ -51,6 +60,29 @@ new #[Layout('layouts::admin', ['title' => 'محتوى الصفحات'])] class 
 
     public function mount(): void
     {
+        // رابطٌ يحمل صفحة غير معروفة يعود إلى أولى الصفحات لا إلى شاشة فارغة
+        if (! array_key_exists($this->page, PageBlock::pages())) {
+            $this->page = (string) array_key_first(PageBlock::pages());
+        }
+
+        $this->load();
+    }
+
+    /** رابط معاينة الصفحة الظاهرة — زرّ «عرض الصفحة» يتبع التبويب. */
+    public function previewUrl(): string
+    {
+        return match ($this->page) {
+            PageBlock::EVENTS => route('services.events'),
+            PageBlock::ACTIVITIES => route('services.activities'),
+            default => route('home'),
+        };
+    }
+
+    public function updatedPage(): void
+    {
+        unset($this->blocks);
+
+        $this->cancelItem();
         $this->load();
     }
 
@@ -418,11 +450,29 @@ new #[Layout('layouts::admin', ['title' => 'محتوى الصفحات'])] class 
         description="نصوص الصفحات المصمَّمة وترتيب أقسامها. الحقل الفارغ يعود إلى نصّه الأصلي، وإخفاء القسم له زرّه."
     >
         <x-slot:actions>
-            <x-ui.button :href="route('services.events')" variant="outline" icon="external-link" :navigate="false" target="_blank">
+            <x-ui.button :href="$this->previewUrl()" variant="outline" icon="external-link" :navigate="false" target="_blank">
                 عرض الصفحة
             </x-ui.button>
         </x-slot:actions>
     </x-admin.page-header>
+
+    {{-- تبويبات الصفحات — تظهر حين تكون أكثر من واحدة --}}
+    @if (count(App\Models\PageBlock::pages()) > 1)
+        <nav class="flex gap-2 mb-6 overflow-x-auto scrollbar-none" aria-label="الصفحات">
+            @foreach (App\Models\PageBlock::pages() as $key => $label)
+                <button
+                    type="button"
+                    wire:click="$set('page', '{{ $key }}')"
+                    class="shrink-0 rounded-xl px-4 py-2.5 text-sm font-bold transition-colors {{ $page === $key
+                        ? 'bg-ink-900 text-white dark:bg-brand-500 dark:text-ink-950'
+                        : 'text-ink-700 hover:bg-ink-100 dark:text-ink-300 dark:hover:bg-ink-800' }}"
+                    @if ($page === $key) aria-current="page" @endif
+                >
+                    {{ $label }}
+                </button>
+            @endforeach
+        </nav>
+    @endif
 
     <div class="space-y-4">
         @foreach ($this->blocks as $index => $block)

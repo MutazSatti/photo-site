@@ -43,6 +43,9 @@ class PageBlock extends Model
     /** صفحة تصوير الفعاليات والمؤتمرات. */
     public const ACTIVITIES = 'activities';
 
+    /** الصفحة الرئيسية — أرقامها وشريط ثقتها. */
+    public const HOME = 'home';
+
     protected function casts(): array
     {
         return [
@@ -82,6 +85,36 @@ class PageBlock extends Model
         return $query->where('page', $page);
     }
 
+    /** @var array<string, EloquentCollection<int, self>> */
+    private static array $memo = [];
+
+    /**
+     * قسمٌ بمفتاحه، أو نموذجًا غير محفوظ يرجع إلى تعريفه المبدئي.
+     *
+     * تحتاجه القوالب الجزئية التي لا مكوّن Livewire لها — كواجهة الصفحة
+     * الرئيسية — فتقرأ نصّها بلا استعلام لكل قسم. والقراءة لا تُنشئ صفًّا أبدًا.
+     *
+     * ويعود بالقسم المخفيّ كما هو ليقرّر القالب: إخفاؤه قرار المالك، وإرجاع
+     * المبدئي مكانه يُعيد إظهار ما أخفاه.
+     */
+    public static function for(string $page, string $key): self
+    {
+        self::$memo[$page] ??= self::query()
+            ->onPage($page)
+            ->with(['items' => fn ($q) => $q->where('is_active', true)->orderBy('sort_order')->orderBy('id')])
+            ->get()
+            ->keyBy('key');
+
+        return self::$memo[$page]->get($key)
+            ?? self::fromDefinition($page, self::definitionFor($page, $key));
+    }
+
+    /** يُستدعى بعد كل تعديل على الأقسام داخل الطلب نفسه. */
+    public static function forget(): void
+    {
+        self::$memo = [];
+    }
+
     /**
      * الصفحات التي تُحرَّر من اللوحة، بأسمائها كما تظهر فيها.
      *
@@ -90,6 +123,7 @@ class PageBlock extends Model
     public static function pages(): array
     {
         return [
+            self::HOME => 'الصفحة الرئيسية',
             self::EVENTS => 'الزواجات والمناسبات',
             self::ACTIVITIES => 'الفعاليات والمؤتمرات',
         ];
@@ -107,10 +141,61 @@ class PageBlock extends Model
     public static function definitions(string $page): array
     {
         return match ($page) {
+            self::HOME => self::homeDefinitions(),
             self::EVENTS => self::eventsDefinitions(),
             self::ACTIVITIES => self::activitiesDefinitions(),
             default => [],
         };
+    }
+
+    /**
+     * أرقام الصفحة الرئيسية وشريط الثقة تحتها.
+     *
+     * كانت الأرقام أربعة، ثلاثة منها في جدول الإعدادات وعناوينها مكتوبة في
+     * القالب — فالرقم يُحرَّر في شاشة وعنوانه لا يُحرَّر أصلًا. وصارت بطاقةً
+     * كاملة في صفّ واحد: نصُّها كله هنا، وإضافتها وحذفها وترتيبها من اللوحة.
+     *
+     * وشريط الثقة نصٌّ لا شارات: ما فيه مذكور بتفصيله ورقم رخصته في صفحة
+     * «نبذة»، فيكفي هنا سطرٌ هادئ يشير إليه دون أن يزاحم الأرقام.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    private static function homeDefinitions(): array
+    {
+        return [
+            [
+                'key' => 'stats',
+                'label' => 'أرقام الواجهة',
+                'hint' => 'البطاقات أسفل الصورة الكبيرة في الصفحة الرئيسية — ثلاث تملأ الصفّ',
+                'fields' => [],
+                'item_label' => 'بطاقة',
+                'item_fields' => [
+                    'title' => 'الرقم كما يظهر',
+                    'subtitle' => 'السطر تحته',
+                ],
+                'items' => [
+                    ['title' => '+450 مشروع', 'subtitle' => 'مشاريع تصوير متنوعة'],
+                    ['title' => '+180 عميل', 'subtitle' => 'عملاء أفراد وجهات'],
+                    ['title' => '+35 ورشة', 'subtitle' => 'ورش وبرامج تدريبية'],
+                ],
+            ],
+            [
+                'key' => 'trust',
+                'label' => 'شريط الثقة',
+                'hint' => 'سطر الرخص أسفل الأرقام — تفصيلها وأرقامها في صفحة «نبذة»',
+                'fields' => [],
+                'item_label' => 'عنصر',
+                'item_fields' => [
+                    'icon' => 'الأيقونة',
+                    'title' => 'النصّ',
+                ],
+                'items' => [
+                    ['icon' => 'camera', 'title' => 'مصوّر مرخّص'],
+                    ['icon' => 'drone', 'title' => 'مشغّل درون مرخّص'],
+                    ['icon' => 'academic', 'title' => 'مدرّب معتمد'],
+                ],
+            ],
+        ];
     }
 
     /**
@@ -535,6 +620,7 @@ class PageBlock extends Model
             'label' => $definition['label'],
             'hint' => $definition['hint'] ?? null,
             'is_locked' => (bool) ($definition['locked'] ?? false),
+            'is_active' => true,
         ]);
 
         $items = array_map(

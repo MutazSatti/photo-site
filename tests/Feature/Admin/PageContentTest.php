@@ -11,6 +11,7 @@ use Database\Seeders\FaqSeeder;
 use Database\Seeders\SectionSeeder;
 use Database\Seeders\SettingSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Features\SupportTesting\Testable;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -35,6 +36,12 @@ class PageContentTest extends TestCase
         $this->actingAs(User::factory()->create());
     }
 
+    /** الشاشة مفتوحةً على تبويب الزواجات — الافتراضي هو الرئيسية. */
+    private function screen(): Testable
+    {
+        return Livewire::test('pages::admin.pages')->set('page', PageBlock::EVENTS);
+    }
+
     private function block(string $key): PageBlock
     {
         return PageBlock::query()->onPage(PageBlock::EVENTS)->where('key', $key)->firstOrFail();
@@ -42,7 +49,7 @@ class PageContentTest extends TestCase
 
     public function test_the_screen_lists_the_page_blocks(): void
     {
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->assertOk()
             ->assertSee('الواجهة')
             ->assertSee('شريط الأرقام')
@@ -53,7 +60,7 @@ class PageContentTest extends TestCase
     {
         $block = $this->block('timeline');
 
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->set("blockText.{$block->id}.title", 'ترتيب التغطية')
             ->set("blockText.{$block->id}.subtitle", 'أربع مراحل لا أكثر.')
             ->call('saveBlockText', $block->id)
@@ -72,7 +79,7 @@ class PageContentTest extends TestCase
         $block = $this->block('timeline');
         $block->update(['title' => 'عنوان مؤقّت']);
 
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->set("blockText.{$block->id}.title", '   ')
             ->call('saveBlockText', $block->id)
             ->assertHasNoErrors();
@@ -84,13 +91,13 @@ class PageContentTest extends TestCase
     {
         $block = $this->block('figures');
 
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->call('toggleBlock', $block->id)
             ->assertOk();
 
         $this->assertFalse($block->fresh()->is_active);
 
-        Livewire::test('pages::admin.pages')->call('toggleBlock', $block->id);
+        $this->screen()->call('toggleBlock', $block->id);
 
         $this->assertTrue($block->fresh()->is_active);
     }
@@ -100,7 +107,7 @@ class PageContentTest extends TestCase
     {
         $hero = $this->block('hero');
 
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->call('toggleBlock', $hero->id)
             ->call('moveBlock', $hero->id, 'down');
 
@@ -113,7 +120,7 @@ class PageContentTest extends TestCase
         $tracks = $this->block('tracks');
         $timeline = $this->block('timeline');
 
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->call('moveBlock', $tracks->id, 'down');
 
         $this->assertGreaterThan($timeline->fresh()->sort_order, $tracks->fresh()->sort_order);
@@ -123,7 +130,7 @@ class PageContentTest extends TestCase
     {
         $block = $this->block('figures');
 
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->call('startItem', $block->id)
             ->set('newItem.icon', 'drone')
             ->set('newItem.title', 'تصوير جوي')
@@ -136,14 +143,14 @@ class PageContentTest extends TestCase
         $this->assertSame('drone', $item->icon);
         $this->assertSame($block->id, $item->page_block_id);
 
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->set("itemText.{$item->id}.subtitle", 'عند الحاجة')
             ->call('saveItem', $item->id)
             ->assertHasNoErrors();
 
         $this->assertSame('عند الحاجة', $item->fresh()->subtitle);
 
-        Livewire::test('pages::admin.pages')->call('deleteItem', $item->id);
+        $this->screen()->call('deleteItem', $item->id);
 
         $this->assertDatabaseMissing('page_block_items', ['id' => $item->id]);
     }
@@ -152,7 +159,7 @@ class PageContentTest extends TestCase
     {
         $block = $this->block('figures');
 
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->call('startItem', $block->id)
             ->set('newItem.icon', 'skull')
             ->set('newItem.title', 'عنصر')
@@ -165,7 +172,7 @@ class PageContentTest extends TestCase
         $block = $this->block('tracks');
         $track = $block->items()->orderBy('sort_order')->firstOrFail();
 
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->call('startItem', $block->id, $track->id)
             ->set('newItem.title', 'تسليم متّفق عليه')
             ->set('newItem.subtitle', 'يُكتب في الاتفاق لا بعده.')
@@ -183,7 +190,7 @@ class PageContentTest extends TestCase
         $block = $this->block('timeline');
         $items = $block->items()->orderBy('sort_order')->get();
 
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->call('moveItem', $items[0]->id, 'down');
 
         $this->assertGreaterThan($items[1]->fresh()->sort_order, $items[0]->fresh()->sort_order);
@@ -194,14 +201,14 @@ class PageContentTest extends TestCase
         $block = $this->block('corporate');
         $post = Post::where('slug', 'burtreh-alaris')->firstOrFail();
 
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->set("newGroup.{$block->id}", (string) $post->id)
             ->call('addGroup', $block->id)
             ->assertHasNoErrors();
 
         $item = PageBlockItem::where('page_block_id', $block->id)->where('post_id', $post->id)->firstOrFail();
 
-        Livewire::test('pages::admin.pages')->call('deleteItem', $item->id);
+        $this->screen()->call('deleteItem', $item->id);
 
         $this->assertDatabaseMissing('page_block_items', ['id' => $item->id]);
 
@@ -222,7 +229,7 @@ class PageContentTest extends TestCase
         $post = Post::where('slug', 'burtreh-alaris')->firstOrFail();
         $faq = Faq::where('question', 'كيف أحجز؟')->firstOrFail();
 
-        Livewire::test('pages::admin.pages')
+        $this->screen()
             ->set("blockText.{$block->id}.title", 'احجز ليلتك')
             ->call('saveBlockText', $block->id)
             ->call('toggleBlock', $block->id);
