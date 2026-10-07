@@ -112,7 +112,7 @@
                     wire:navigate
                     class="hidden rounded-xl bg-ink-900 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-ink-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 sm:inline-flex dark:bg-brand-500 dark:text-ink-950 dark:hover:bg-brand-400"
                 >
-                    احجز موعد
+                    {{ setting('header_cta', 'احجز موعد') }}
                 </a>
 
                 <button
