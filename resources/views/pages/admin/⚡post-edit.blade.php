@@ -268,7 +268,7 @@ new #[Layout('layouts::admin', ['title' => 'تحرير عنصر'])] class extend
 
         $this->validate([
             'uploads' => ['required', 'array', 'max:30'],
-            'uploads.*' => ['image', 'mimes:jpg,jpeg,png,webp,gif,bmp', 'max:'.config('site.images.max_upload_kb')],
+            'uploads.*' => ['image', 'mimes:jpg,jpeg,png,webp,gif,bmp', 'max:'.max_upload_kb()],
         ], [
             'uploads.*.image' => 'الملف يجب أن يكون صورة.',
             'uploads.*.max' => 'حجم الصورة يتجاوز الحد المسموح.',
@@ -276,22 +276,58 @@ new #[Layout('layouts::admin', ['title' => 'تحرير عنصر'])] class extend
 
         $isFirstBatch = $this->media->isEmpty();
 
-        foreach ($this->uploads as $index => $file) {
-            $images->store(
-                file: $file,
-                post: $this->post,
-                isCover: $isFirstBatch && $index === 0,
-            );
-        }
+        /*
+         * كل صورة وحدها.
+         *
+         * كانت الحلقة بلا حماية: صورةٌ واحدة تتعثّر — تتجاوز حدّ الخادم، أو
+         * تستنفد الذاكرة في التحويل — فيسقط الطلب كله. فلا تُحفظ الصور التي
+         * سبقتها، ولا يعرف المالك أيّ ملفٍ كان ولا لماذا. وهذا ما يجعل مشروعًا
+         * يخرج بلا صورة واحدة ولا رسالة تفسّر.
+         *
+         * والغلاف يُعلَّق بأوّل ما نجح لا بأوّل ما حاول، وإلا بقي العمل بلا غلاف
+         * لأن الصورة الأولى وحدها هي التي سقطت.
+         */
+        $saved = 0;
+        $failed = [];
 
-        $count = count($this->uploads);
+        foreach ($this->uploads as $file) {
+            try {
+                $images->store(
+                    file: $file,
+                    post: $this->post,
+                    isCover: $isFirstBatch && $saved === 0,
+                );
+
+                $saved++;
+            } catch (Throwable $e) {
+                $failed[] = $file->getClientOriginalName();
+
+                // السبب يُسجَّل كاملًا: الرسالة للمالك مختصرة، والسجلّ للتشخيص
+                report($e);
+            }
+        }
 
         $this->reset('uploads');
         unset($this->media);
 
         $this->flushCaches();
 
-        $this->dispatch('notify', message: "حُوّلت {$count} صورة إلى WebP وأُضيفت.");
+        if ($failed === []) {
+            $this->dispatch('notify', message: "حُوّلت {$saved} صورة إلى WebP وأُضيفت.");
+
+            return;
+        }
+
+        $names = implode('، ', array_slice($failed, 0, 3)).(count($failed) > 3 ? ' وغيرها' : '');
+        $limit = max_upload_mb();
+
+        $this->dispatch(
+            'notify',
+            variant: 'danger',
+            message: $saved > 0
+                ? "أُضيفت {$saved} صورة، وتعذّر رفع: {$names}. تأكّد أن حجم الصورة لا يتجاوز {$limit} ميجابايت."
+                : "تعذّر رفع: {$names}. تأكّد أن حجم الصورة لا يتجاوز {$limit} ميجابايت.",
+        );
     }
 
     public function makeCover(int $mediaId, ImageService $images): void
@@ -470,7 +506,7 @@ new #[Layout('layouts::admin', ['title' => 'تحرير عنصر'])] class extend
                                 اسحب الصور هنا أو اضغط للاختيار
                             </span>
                             <span class="mt-1 text-xs text-ink-500 dark:text-ink-400">
-                                JPG أو PNG أو WebP — حتى {{ (int) (config('site.images.max_upload_kb') / 1024) }} ميجابايت للصورة
+                                JPG أو PNG أو WebP — حتى {{ max_upload_mb() }} ميجابايت للصورة
                             </span>
                         </label>
 

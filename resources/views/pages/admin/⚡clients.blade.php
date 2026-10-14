@@ -80,7 +80,7 @@ new #[Layout('layouts::admin', ['title' => 'الجهات والعملاء'])] cl
             'name_en' => ['nullable', 'string', 'max:120'],
             'url' => ['nullable', 'url', 'max:300'],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:999'],
-            'logo' => ['nullable', 'image', 'mimes:png,webp,jpg,jpeg', 'max:'.config('site.images.max_upload_kb')],
+            'logo' => ['nullable', 'image', 'mimes:png,webp,jpg,jpeg', 'max:'.max_upload_kb()],
         ], [
             'logo.image' => 'الملف يجب أن يكون صورة.',
             'logo.mimes' => 'الصيغ المقبولة: PNG أو WebP أو JPG.',

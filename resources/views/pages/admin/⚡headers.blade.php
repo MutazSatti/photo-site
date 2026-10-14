@@ -168,7 +168,7 @@ new #[Layout('layouts::admin', ['title' => 'صور الواجهة'])] class exte
         $slot = $this->slot($usage);
 
         $this->validate([
-            'uploads.'.$usage => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.config('site.images.max_upload_kb')],
+            'uploads.'.$usage => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.max_upload_kb()],
         ], [
             'uploads.'.$usage.'.required' => 'اختر صورة أولًا.',
             'uploads.'.$usage.'.image' => 'الملف يجب أن يكون صورة.',

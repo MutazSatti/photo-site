@@ -131,7 +131,7 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
     public function saveOgImage(ImageService $images): void
     {
         $this->validate([
-            'ogImage' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.config('site.images.max_upload_kb')],
+            'ogImage' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.max_upload_kb()],
         ], [
             'ogImage.required' => 'اختر صورة أولًا.',
             'ogImage.image' => 'الملف يجب أن يكون صورة.',
@@ -379,7 +379,7 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
     public function savePortrait(ImageService $images): void
     {
         $this->validate([
-            'portrait' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.config('site.images.max_upload_kb')],
+            'portrait' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.max_upload_kb()],
         ], [
             'portrait.required' => 'اختر صورة أولًا.',
             'portrait.image' => 'الملف يجب أن يكون صورة.',
@@ -401,7 +401,7 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
     public function saveHero(ImageService $images): void
     {
         $this->validate([
-            'hero' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.config('site.images.max_upload_kb')],
+            'hero' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.max_upload_kb()],
         ], [
             'hero.required' => 'اختر صورة أولًا.',
             'hero.image' => 'الملف يجب أن يكون صورة.',
@@ -443,7 +443,7 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
     public function saveLogo(ImageService $images): void
     {
         $this->validate([
-            'logo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:'.config('site.images.max_upload_kb')],
+            'logo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:'.max_upload_kb()],
         ], [
             'logo.required' => 'اختر صورة أولًا.',
             'logo.image' => 'الملف يجب أن يكون صورة.',
@@ -505,7 +505,7 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
     public function saveFavicon(ImageService $images): void
     {
         $this->validate([
-            'favicon' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.config('site.images.max_upload_kb')],
+            'favicon' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:'.max_upload_kb()],
         ], [
             'favicon.required' => 'اختر صورة أولًا.',
             'favicon.image' => 'الملف يجب أن يكون صورة.',
