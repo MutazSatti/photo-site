@@ -186,4 +186,36 @@ class UploadResilienceTest extends TestCase
             ->assertSee('أكبر صورة')
             ->assertSee(max_upload_mb().' ميجابايت');
     }
+
+    /**
+     * الرفع المؤقّت في Livewire يفحص الملف قبل الشاشة، فحدّه هو حدّ الموقع.
+     *
+     * لولا ذلك لرُفضت الصورة هناك صامتةً: لا تُرفَق، ولا تعمل قاعدة التحقّق
+     * التي تشرح، ويقول الزرّ «الحقل مطلوب».
+     */
+    public function test_livewire_rejects_at_the_same_limit_as_the_site(): void
+    {
+        $this->assertSame(
+            ['required', 'file', 'max:'.max_upload_kb()],
+            config('livewire.temporary_file_upload.rules'),
+        );
+    }
+
+    /** وحين لا تصل صورة تقول الرسالة لماذا، لا «الحقل مطلوب». */
+    public function test_an_oversized_image_explains_itself(): void
+    {
+        $project = $this->project();
+
+        $component = Livewire::test('pages::admin.post-edit', ['post' => $project])
+            ->set('uploads', [
+                UploadedFile::fake()->create('DJI_0431.jpg', max_upload_kb() + 5000, 'image/jpeg'),
+            ])
+            ->call('saveUploads');
+
+        $messages = implode(' ', $component->errors()->all());
+
+        $this->assertStringNotContainsString('حقل uploads مطلوب', $messages);
+        $this->assertStringContainsString('لم تصل أي صورة', $messages);
+        $this->assertStringContainsString((string) max_upload_mb(), $messages);
+    }
 }

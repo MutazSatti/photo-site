@@ -30,6 +30,24 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureDefaults();
         $this->configureBlade();
+        $this->configureUploads();
+    }
+
+    /**
+     * حدّ الرفع المؤقّت في Livewire يتبع حدّ الموقع.
+     *
+     * Livewire يفحص الملف عند وصوله المؤقّت قبل أن يبلغ الشاشة، وحدّه الافتراضي
+     * اثنا عشر ميجابايت. فصورة الكاميرا أو الدرون تُرفض هناك صامتةً: لا تُرفَق،
+     * ولا تعمل قاعدة التحقّق التي تشرح السبب، ويقول الزرّ «الحقل مطلوب» — وهي
+     * رسالة لا تدلّ على شيء، وتجعل المالك يظنّ العطل في الزرّ لا في حجم الصورة.
+     *
+     * والحدّ هنا هو max_upload_kb نفسه، فمصدرٌ واحد يحكم الطرفين.
+     */
+    protected function configureUploads(): void
+    {
+        config([
+            'livewire.temporary_file_upload.rules' => ['required', 'file', 'max:'.max_upload_kb()],
+        ]);
     }
 
     /**
