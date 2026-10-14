@@ -270,8 +270,11 @@ new #[Layout('layouts::admin', ['title' => 'تحرير عنصر'])] class extend
             'uploads' => ['required', 'array', 'max:30'],
             'uploads.*' => ['image', 'mimes:jpg,jpeg,png,webp,gif,bmp', 'max:'.max_upload_kb()],
         ], [
+            // «الحقل مطلوب» لا تدلّ على شيء: الصور تكون مختارة فعلًا وقد
+            // رفضها الرفع المؤقّت لحجمها قبل أن تصل إلى هنا
+            'uploads.required' => 'لم تصل أي صورة. تأكّد أن حجم كل صورة لا يتجاوز '.max_upload_mb().' ميجابايت.',
             'uploads.*.image' => 'الملف يجب أن يكون صورة.',
-            'uploads.*.max' => 'حجم الصورة يتجاوز الحد المسموح.',
+            'uploads.*.max' => 'حجم الصورة يتجاوز '.max_upload_mb().' ميجابايت.',
         ]);
 
         $isFirstBatch = $this->media->isEmpty();
