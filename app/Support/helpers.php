@@ -202,3 +202,54 @@ if (! function_exists('category_anchor')) {
         return strtr($text, [':city' => (string) config('site.location.city')]);
     }
 }
+
+if (! function_exists('max_upload_kb')) {
+    /**
+     * أكبر حجم صورة يصل فعلًا: أصغرُ ما يقبله التطبيق وما يقبله الخادم.
+     *
+     * الحدّ المكتوب في الإعدادات وعدٌ لا يملك التطبيق الوفاء به. الملف الأكبر
+     * من upload_max_filesize لا يبلغ لارافيل أصلًا — يرفضه PHP قبله — فلا تعمل
+     * قاعدة التحقّق ولا تظهر رسالة، ويسقط الطلب صامتًا فيظنّ المالك أن الصور
+     * رُفعت. وأن نقول له الرقم الذي يقبله خادمه أصدق من رقم نتمنّاه.
+     *
+     * post_max_size محسوب معه لأن الرفع طلبٌ يحمل الملف وترويسته، فالحدّ
+     * الأدنى بينهما هو ما يمرّ.
+     */
+    function max_upload_kb(): int
+    {
+        $limits = [(int) config('site.images.max_upload_kb', 12288)];
+
+        foreach (['upload_max_filesize', 'post_max_size'] as $directive) {
+            $raw = trim((string) ini_get($directive));
+
+            if ($raw === '') {
+                continue;
+            }
+
+            $unit = strtolower(substr($raw, -1));
+            $number = (float) $raw;
+
+            $bytes = match ($unit) {
+                'g' => $number * 1024 ** 3,
+                'm' => $number * 1024 ** 2,
+                'k' => $number * 1024,
+                default => $number,
+            };
+
+            // صفر أو سالب يعني «بلا حدّ» في PHP، فلا يُحسب قيدًا
+            if ($bytes > 0) {
+                $limits[] = (int) ($bytes / 1024);
+            }
+        }
+
+        return max(1, min($limits));
+    }
+}
+
+if (! function_exists('max_upload_mb')) {
+    /** الحدّ نفسه بالميجابايت، للعرض لا للتحقّق. */
+    function max_upload_mb(): int
+    {
+        return max(1, (int) floor(max_upload_kb() / 1024));
+    }
+}

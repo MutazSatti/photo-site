@@ -25,6 +25,57 @@ new #[Layout('layouts::admin', ['title' => 'لوحة المعلومات'])] clas
         ];
     }
 
+    /**
+     * ما يحتاجه الرفع ليعمل، مقروءًا من الخادم لا من ملف الإعدادات.
+     *
+     * عطل الرفع يظهر متأخّرًا ومُربِكًا: مشروعٌ يخرج بلا صورة ولا رسالة تفسّر.
+     * وأسبابه ثلاثة لا رابع لها في الغالب — رابط تخزين مكسور، أو ملف أكبر
+     * ممّا يقبله الخادم، أو غياب دعم WebP. فعرضها هنا يسبق اكتشافها بمشروع
+     * ناقص.
+     *
+     * @return array<int, array{label: string, value: string, ok: bool, hint: string}>
+     */
+    #[Computed]
+    public function uploadHealth(): array
+    {
+        $link = public_path('storage');
+        $linked = file_exists($link);
+        $files = (int) ini_get('max_file_uploads');
+
+        return [
+            [
+                'label' => 'رابط التخزين',
+                'value' => $linked ? 'موصول' : 'مكسور',
+                'ok' => $linked,
+                'hint' => $linked
+                    ? 'الصور المرفوعة تُعرض على الموقع'
+                    : 'الصور تُرفع ولا تُعرض — شغّل php artisan storage:link على الخادم',
+            ],
+            [
+                'label' => 'أكبر صورة',
+                'value' => max_upload_mb().' ميجابايت',
+                'ok' => max_upload_mb() >= 8,
+                'hint' => max_upload_kb() < (int) config('site.images.max_upload_kb')
+                    ? 'الخادم هو من يفرض هذا الحدّ لا الموقع'
+                    : 'ما يتجاوزه يُرفض قبل أن يصل',
+            ],
+            [
+                'label' => 'صور في المرّة',
+                'value' => $files > 0 ? (string) min($files, 30) : '30',
+                'ok' => $files === 0 || $files >= 10,
+                'hint' => 'ارفع على دفعات إن كانت أكثر',
+            ],
+            [
+                'label' => 'تحويل WebP',
+                'value' => ImageService::webpSupported() ? 'يعمل' : 'معطّل',
+                'ok' => ImageService::webpSupported(),
+                'hint' => ImageService::webpSupported()
+                    ? 'كل صورة تُحوَّل وتُصغَّر تلقائيًا'
+                    : 'إضافة GD أو Imagick غير مفعّلة على الخادم',
+            ],
+        ];
+    }
+
     #[Computed]
     public function sectionCounts()
     {
@@ -213,5 +264,34 @@ new #[Layout('layouts::admin', ['title' => 'لوحة المعلومات'])] clas
         @else
             <p class="px-5 py-10 text-sm text-center text-ink-500 dark:text-ink-400">لم يُضف محتوى بعد.</p>
         @endif
+    </x-admin.card>
+
+    {{-- ================= حالة الرفع والتخزين ================= --}}
+    <x-admin.card
+        class="mt-6"
+        title="حالة الرفع والتخزين"
+        description="ما يحتاجه رفع الصور ليعمل، مقروءًا من الخادم. راجعها إن خرج عمل بلا صور."
+    >
+        <dl class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            @foreach ($this->uploadHealth as $item)
+                <div class="p-4 border rounded-xl border-ink-200 dark:border-ink-800">
+                    <dt class="text-xs text-ink-500 dark:text-ink-400">{{ $item['label'] }}</dt>
+
+                    <dd class="flex items-center gap-2 mt-1.5">
+                        <span @class([
+                            'flex size-5 shrink-0 items-center justify-center rounded-full',
+                            'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400' => $item['ok'],
+                            'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400' => ! $item['ok'],
+                        ])>
+                            <x-icon :name="$item['ok'] ? 'check' : 'alert'" :size="12" />
+                        </span>
+
+                        <span class="text-sm font-extrabold text-ink-900 dark:text-ink-100">{{ $item['value'] }}</span>
+                    </dd>
+
+                    <p class="mt-2 text-xs leading-6 text-ink-500 dark:text-ink-400">{{ $item['hint'] }}</p>
+                </div>
+            @endforeach
+        </dl>
     </x-admin.card>
 </div>
