@@ -373,6 +373,23 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
 
         $this->flushCaches();
 
+        $images = app(ImageService::class);
+        if ($this->hero) {
+            $this->saveHero($images);
+        }
+        if ($this->portrait) {
+            $this->savePortrait($images);
+        }
+        if ($this->logo) {
+            $this->saveLogo($images);
+        }
+        if ($this->favicon) {
+            $this->saveFavicon($images);
+        }
+        if ($this->ogImage) {
+            $this->saveOgImage($images);
+        }
+
         $this->dispatch('notify', message: 'حُفظت الإعدادات.');
     }
 

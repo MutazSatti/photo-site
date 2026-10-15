@@ -186,8 +186,13 @@ class Media extends Model
     public function url(string $variant = 'lg'): string
     {
         $path = $this->variantPaths()[$variant] ?? $this->path;
+        $diskName = $this->disk ?: 'public';
 
-        return Storage::disk($this->disk ?: 'public')->url($path);
+        if ($diskName === 'public') {
+            return asset('storage/'.ltrim($path, '/'));
+        }
+
+        return Storage::disk($diskName)->url($path);
     }
 
     /**
@@ -210,7 +215,8 @@ class Media extends Model
         ];
 
         $paths = $this->variantPaths();
-        $disk = Storage::disk($this->disk ?: 'public');
+        $isPublic = ! $this->disk || $this->disk === 'public';
+        $disk = $isPublic ? null : Storage::disk($this->disk);
 
         $entries = [];
 
@@ -220,8 +226,11 @@ class Media extends Model
             }
 
             $width = $this->width ? min($target, $this->width) : $target;
+            $url = $isPublic
+                ? asset('storage/'.ltrim($paths[$variant], '/'))
+                : $disk->url($paths[$variant]);
 
-            $entries[$width] = $disk->url($paths[$variant])." {$width}w";
+            $entries[$width] = "{$url} {$width}w";
         }
 
         ksort($entries);

@@ -234,6 +234,11 @@ new #[Layout('layouts::admin', ['title' => 'تحرير عنصر'])] class extend
             $this->post = Post::create($payload);
         }
 
+        // إذا كانت هناك صور مختارة ولم يُضغط «حوّل وأضف»، تُحفظ مع العنصر تلقائيًا
+        if (! empty($this->uploads)) {
+            $this->saveUploads(app(ImageService::class));
+        }
+
         $this->flushCaches();
 
         $this->dispatch('notify', message: 'حُفظ العنصر.');

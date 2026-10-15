@@ -23,6 +23,9 @@ npm run build
 echo "==> الترحيلات"
 php artisan migrate --force
 
+echo "==> ربط مجلد التخزين"
+php artisan storage:link || true
+
 echo "==> إعادة بناء الكاش"
 php artisan optimize:clear
 php artisan config:cache

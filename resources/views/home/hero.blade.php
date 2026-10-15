@@ -49,7 +49,7 @@
             </p>
 
             <div class="flex flex-wrap gap-3 mt-9">
-                <x-ui.button href="{{ route('contact') }}" variant="brand" size="lg" icon="camera">
+                <x-ui.button href="{{ whatsapp_url() }}" variant="brand" size="lg" icon="whatsapp" :navigate="false" target="_blank" rel="noopener">
                     {{ setting('hero_cta', 'احجز موعد تصوير') }}
                 </x-ui.button>
 
