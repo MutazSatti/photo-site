@@ -589,42 +589,48 @@ new #[Layout('layouts::admin', ['title' => 'الإعدادات'])] class extends
         {{-- ================= الحقول ================= --}}
         <div class="space-y-6 lg:col-span-3">
             <x-admin.card :title="$tabs[$tab]['label']">
-                <form wire:submit="save" class="grid gap-5">
+                <form wire:submit="save" wire:key="settings-form-{{ $tab }}" class="grid gap-5">
                     @forelse ($this->fields as $field)
-                        <x-ui.field
-                            :label="$field->label ?: $field->key"
-                            :hint="$field->hint"
-                            :error="$errors->first('values.' . $field->key)"
-                        >
-                            @if ($field->type === 'textarea')
-                                <x-ui.textarea
-                                    wire:model="values.{{ $field->key }}"
-                                    rows="5"
-                                    :invalid="$errors->has('values.' . $field->key)"
-                                />
-                            @elseif ($field->type === 'number')
-                                <x-ui.input
-                                    wire:model="values.{{ $field->key }}"
-                                    type="number"
-                                    min="0"
-                                    dir="ltr"
-                                    :invalid="$errors->has('values.' . $field->key)"
-                                />
-                            @elseif ($field->type === 'url')
-                                <x-ui.input
-                                    wire:model="values.{{ $field->key }}"
-                                    type="url"
-                                    dir="ltr"
-                                    :invalid="$errors->has('values.' . $field->key)"
-                                />
-                            @else
-                                <x-ui.input
-                                    wire:model="values.{{ $field->key }}"
-                                    :dir="str_contains($field->key, 'phone') || str_contains($field->key, 'email') || str_contains($field->key, 'whatsapp') ? 'ltr' : 'rtl'"
-                                    :invalid="$errors->has('values.' . $field->key)"
-                                />
-                            @endif
-                        </x-ui.field>
+                        <div wire:key="field-wrapper-{{ $tab }}-{{ $field->key }}">
+                            <x-ui.field
+                                :label="$field->label ?: $field->key"
+                                :hint="$field->hint"
+                                :error="$errors->first('values.' . $field->key)"
+                            >
+                                @if ($field->type === 'textarea')
+                                    <x-ui.textarea
+                                        wire:model="values.{{ $field->key }}"
+                                        wire:key="input-{{ $tab }}-{{ $field->key }}"
+                                        rows="5"
+                                        :invalid="$errors->has('values.' . $field->key)"
+                                    />
+                                @elseif ($field->type === 'number')
+                                    <x-ui.input
+                                        wire:model="values.{{ $field->key }}"
+                                        wire:key="input-{{ $tab }}-{{ $field->key }}"
+                                        type="number"
+                                        min="0"
+                                        dir="ltr"
+                                        :invalid="$errors->has('values.' . $field->key)"
+                                    />
+                                @elseif ($field->type === 'url')
+                                    <x-ui.input
+                                        wire:model="values.{{ $field->key }}"
+                                        wire:key="input-{{ $tab }}-{{ $field->key }}"
+                                        type="url"
+                                        dir="ltr"
+                                        :invalid="$errors->has('values.' . $field->key)"
+                                    />
+                                @else
+                                    <x-ui.input
+                                        wire:model="values.{{ $field->key }}"
+                                        wire:key="input-{{ $tab }}-{{ $field->key }}"
+                                        :dir="str_contains($field->key, 'phone') || str_contains($field->key, 'email') || str_contains($field->key, 'whatsapp') ? 'ltr' : 'rtl'"
+                                        :invalid="$errors->has('values.' . $field->key)"
+                                    />
+                                @endif
+                            </x-ui.field>
+                        </div>
                     @empty
                         <p class="py-8 text-sm text-center text-ink-500 dark:text-ink-400">لا توجد إعدادات في هذا التبويب.</p>
                     @endforelse

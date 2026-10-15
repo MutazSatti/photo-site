@@ -48,9 +48,16 @@
                 {{ setting('hero_subtitle') }}
             </p>
 
+            @php
+                $heroCtaText = setting('hero_cta');
+                if (! $heroCtaText || str_contains($heroCtaText, '@')) {
+                    $heroCtaText = 'احجز موعد تصوير';
+                }
+            @endphp
+
             <div class="flex flex-wrap gap-3 mt-9">
                 <x-ui.button href="{{ whatsapp_url() }}" variant="brand" size="lg" icon="whatsapp" :navigate="false" target="_blank" rel="noopener">
-                    {{ setting('hero_cta', 'احجز موعد تصوير') }}
+                    {{ $heroCtaText }}
                 </x-ui.button>
 
                 <x-ui.button
